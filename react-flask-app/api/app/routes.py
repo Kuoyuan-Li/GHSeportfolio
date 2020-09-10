@@ -1,6 +1,6 @@
 from flask import request
 from flask import render_template, flash, redirect, url_for, jsonify
-from app import app, db
+from app import app, db, bcrypt, jwt
 #from app.login import LoginForm
 #from app.registration import RegistrationForm
 from flask_bcrypt import Bcrypt
@@ -15,7 +15,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login', methods=["POST"])
 def login():
     # login functionality
     # if already logged in, jump to profile
@@ -27,9 +27,12 @@ def login():
     password = request.get_json()['password']
     result = ""
     if username and password:
-        user = User.query.filter_by(username=username).first()
+        #Select user with his username in the databse, and set to user
+        #the selected user password set to rv
+
+        #user = User.query.filter_by(username=username).first()
         #if the username is not found in db or password incorrect, flash prompt and redirect to login
-        if (user is None) or (not user.check_password(password)):
+        if (user is None) or (not (bcrypt.check_password_hash(rv['password'],password))):
             result = jsonify({"Error":"Invalid username or password"})
         else:
             # login_user set the current_user (variable) to the current user(real people)
@@ -74,7 +77,7 @@ def logout():
     return redirect(url_for('login'))
 '''
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
     # if logged in, then jump to profile
     if current_user.is_authenticated:
@@ -83,12 +86,13 @@ def register():
 
     username = request.get_json()['username']
     email= request.get_json()['email']
-    password = request.get_json()['password']
-    password2 = request.get_json()['password2']
+    password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
+    #password = request.get_json()['password']
+    #password2 = request.get_json()['password2']
 
-    if username and email and password and password2:
-        if password != password2:
-            return jsonify({"Error":"Inconsistent password"})
+    if username and email and password :
+        #if password != password2:
+            #return jsonify({"Error":"Inconsistent password"})
 
         user = User.query.filter_by(username=username).first()
         if user is not None:
@@ -98,10 +102,15 @@ def register():
         if user is not None:
             return jsonify({"Error": "Please use a different email address."})
 
-        user = User(username=username, email=email)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
+        #insert the user into user db, with username, email and password
+
+
+
+
+        #user = User(username=username, email=email)
+        #user.set_password(password)
+        #db.session.add(user)
+        #db.session.commit()
 
         return jsonify ({"result": username + ', you successfully registered'})
     else:
