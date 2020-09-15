@@ -15,7 +15,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/login', methods=["POST"])
+@app.route('/users/login', methods=["POST"])
 def login():
     # login functionality
     # if already logged in, jump to profile
@@ -79,40 +79,45 @@ def logout():
 
 @app.route('/register', methods=['POST'])
 def register():
+
     # if logged in, then jump to profile
     if current_user.is_authenticated:
-        return jsonify({"redirect": url_for('profile', username=current_user.username)})
-        #return redirect(url_for('profile',username=current_user.username))
+        return jsonify( {"validity": True, 
+                    "nonValidMessage" : ""}
+                    )
 
     username = request.get_json()['username']
     email= request.get_json()['email']
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-    #password = request.get_json()['password']
-    #password2 = request.get_json()['password2']
+    password2 = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
 
-    if username and email and password :
-        #if password != password2:
-            #return jsonify({"Error":"Inconsistent password"})
+    if password != password2:
+            return jsonify( {"validity": False, 
+                    "nonValidMessage" : "Non consistent password"}
+                    )
 
-        user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first()
         if user is not None:
-            return jsonify({"Error":"Please use a different username."})
+            return jsonify( {"validity": False, 
+                    "nonValidMessage" : "Please use another username"}
+                    )
 
         user = User.query.filter_by(email=email).first()
-        if user is not None:
-            return jsonify({"Error": "Please use a different email address."})
+        # valid email? XXXX@ XXX.com
+        if user is not None and :
+            return jsonify( {"validity": False, 
+                    "nonValidMessage" : "Please use another email address"}
+                    )
 
         #insert the user into user db, with username, email and password
-
-
-
-
         #user = User(username=username, email=email)
         #user.set_password(password)
         #db.session.add(user)
         #db.session.commit()
 
-        return jsonify ({"result": username + ', you successfully registered'})
+        return return jsonify( {"validity":True, 
+                    "nonValidMessage" : ""}
+                    )
     else:
         return jsonify({"Error": "Please fill out all information."})
 

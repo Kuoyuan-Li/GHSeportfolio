@@ -7,7 +7,9 @@ export class Register extends React.Component {
         this.state = {
             username: '',
             email: '',
-            password: ''
+            password: '',
+            password2 :'',
+            message :''
         }
 
         this.onChange = this.onChange.bind(this)
@@ -20,18 +22,65 @@ export class Register extends React.Component {
 
     onSubmit (e) {
         e.preventDefault()
-
-        const newUser = {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        register(newUser).then(res => {
-            if (!res.error) {
-                this.props.history.push(`/profile`)
+        
+        if (this.state.username !== '' && this.state.email !== '' && this.state.password !== '' && this.state.password2 !== '')  {
+            
+            const newUser = {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                password2 : this.state.password2
             }
-        })
+            this.setState({message:''})
+            fetch ('http://localhost:5000/register',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: newUser.username,
+                    email: newUser.email,
+                    password: newUser.password,
+                    password2: newUser. password2
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                //console.log(response)
+                if (response.validity !== true) {
+                    this.setState({ message : response.nonValidMessage })
+                }
+                else {
+                   //redirect to login
+                }
+                /*if (!res.error) {                    
+                     this.props.history.push(`/profile`)
+                }
+                */
+            })
+
+            /*
+            register(newUser).then(response => {
+                if (response.Valid !== true) {
+                    this.setState({ message : response.Non-valid-message })
+                }
+                else {
+                    console.log("Redirect to login")
+                }
+                /*if (!res.error) {                    
+                     this.props.history.push(`/profile`)
+                }
+               
+            })*/
+
+         }else{
+            this.setState({message:'Please enter all required information'})
+         }
+         
+
+
     }
 
     render () {
@@ -39,7 +88,11 @@ export class Register extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
-
+                        <div> 
+                            <p>
+                                {this.state.message}
+                            </p>    
+                        </div>
                         <form noValidate onSubmit={this.onSubmit}>
 
                             <div className="form-group">
@@ -78,10 +131,21 @@ export class Register extends React.Component {
 
                             </div>
 
+                            <div className="form-group">
+                                <label htmlFor="password2">Re-enter Password  </label>
+
+                                <input type="password"
+                                    className="form-control"
+                                    name="password2"
+                                    placeholder="Re-enter password"
+                                    value={this.state.password2}
+                                    onChange={this.onChange} />
+
+                            </div>
+
                             <button type="submit" className="btn btn-lg btn-primary btn-block">
                                 Create account
                             </button>
-
                         </form>
                     </div>
                 </div>

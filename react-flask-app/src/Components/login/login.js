@@ -6,7 +6,8 @@ export class Login extends React.Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            message : ''
         }
 
         this.onChange = this.onChange.bind(this)
@@ -20,17 +21,22 @@ export class Login extends React.Component {
     onSubmit (e) {
         e.preventDefault()
 
-        const user = {
-            username: this.state.username,
-            password: this.state.password
-        }
-
-        login(user).then(res => {
-            if (!res.error) {
-                this.props.history.push(`/profile`)
+        if (this.state.username !== '' && this.state.password !== ''){
+            const user = {
+                username: this.state.username,
+                password: this.state.password
             }
-        })
+            this.setState({message:''})
+            //console.log("login success")
+            login(user).then(res => {               
+               if (!res.error) {              
+                    this.props.history.push(`/profile`)
+                }
+            })
+        }else{
+            this.setState({message:'Please enter all required information'})
 
+        }
     }
 
     render () {
@@ -38,7 +44,11 @@ export class Login extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
-
+                        <div> 
+                            <p>
+                                {this.state.message}
+                            </p>    
+                        </div>
                         <form noValidate onSubmit={this.onSubmit}>
 
                             <div className="form-group">
@@ -68,7 +78,6 @@ export class Login extends React.Component {
                             <button type="submit" className="btn btn-lg btn-primary btn-block">
                                 Log in
                             </button>
-
                         </form>
                     </div>
                 </div>
