@@ -42,7 +42,7 @@ export class Register extends React.Component {
                     username: newUser.username,
                     email: newUser.email,
                     password: newUser.password,
-                    password2: newUser. password2
+                    password2: newUser.password2
                 })
             }).then(response => response.json())
             .catch(error => console.error('Error:', error))

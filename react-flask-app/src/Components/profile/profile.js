@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
+
 class Profile extends Component {
     constructor() {
         super()
@@ -30,6 +30,7 @@ class Profile extends Component {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
+                    
                     <table className="table col-md-6 mx-auto">
                         {this.state.isLoading ?
                             <h1>Loading...</h1> :
@@ -41,6 +42,26 @@ class Profile extends Component {
                                 </tr>
                             </tbody>}
                     </table>
+
+
+                </div>
+
+                <div className="col-md-6 mt-5 mx-auto">
+                    <button onClick={this.jumpToView} className="btn btn-lg btn-primary btn-block">
+                        View your eportfolio
+                    </button>
+                </div>
+                
+                <div className="col-md-6 mt-5 mx-auto">
+                    <button onClick={this.jumpToEdit} className="btn btn-lg btn-primary btn-block">
+                        Edit your eportfolio
+                    </button>
+                </div>
+
+                <div className="col-md-6 mt-5 mx-auto">
+                    <button onClick={this.jump} className="btn btn-lg btn-primary btn-block">
+                        View others eportfolio
+                    </button>
                 </div>
             </div>
         )
