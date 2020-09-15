@@ -122,20 +122,6 @@ def register():
         return jsonify({"Error": "Please fill out all information."})
 
 
-    '''
-    # use RegistrationForm to instantiate a form
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        # if information is valid, add to db
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
-    '''
-
-
 
 @app.route('/profile/<username>')
 @login_required
