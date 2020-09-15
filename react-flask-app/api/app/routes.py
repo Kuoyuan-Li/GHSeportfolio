@@ -3,7 +3,6 @@ from flask import render_template, flash, redirect, url_for, jsonify
 from app import app, db, bcrypt, jwt
 #from app.login import LoginForm
 #from app.registration import RegistrationForm
-from flask_bcrypt import Bcrypt
 from app.models import User
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -19,34 +18,35 @@ def index():
 def login():
     # login functionality
     # if already logged in, jump to profile
-    #if current_user.is_authenticated:
-        #redirect to profile
-        #return redirect(url_for('profile',username=current_user.username))
+    if current_user.is_authenticated:
+        return jsonify({"validity": True,
+                        "nonValidMessage": ""}
+                       )
 
     username = request.get_json()['username']
     password = request.get_json()['password']
-    result = ""
-    if username and password:
-        #Select user with his username in the databse, and set to user
-        #the selected user password set to rv
 
-        #user = User.query.filter_by(username=username).first()
-        #if the username is not found in db or password incorrect, flash prompt and redirect to login
-        if (user is None) or (not (bcrypt.check_password_hash(rv['password'],password))):
-            result = jsonify({"Error":"Invalid username or password"})
-        else:
-            # login_user set the current_user (variable) to the current user(real people)
-            login_user(user)
-
-            # if user jump to the login page from other pages, redirect to original page
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('profile', username=current_user.username)
-            result = jsonify({"redirect":next_page})
-            #return redirect(next_page)
+    # Select user with his username in the database, and set to user
+    user = User.query.filter_by(username=username).first()
+    # if the username is not found in db or password incorrect, flash prompt and redirect to login
+    if (user is None) or (not (user.check_password(user.password_hash, password))):
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Invalid username or password"}
+                       )
     else:
-        result = jsonify({"Error":"Please enter username and password"})
+        # login_user set the current_user (variable) to the current user(real people)
+        login_user(user)
+        return jsonify({"validity": True,
+                        "nonValidMessage": ""})
 
+        '''
+        # if user jump to the login page from other pages, redirect to original page
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('profile', username=current_user.username)
+        result = jsonify({"redirect": next_page})
+        # return redirect(next_page)
+        '''
     ''' 
     # use Loginform class to instantiate a form
     form = LoginForm()
@@ -65,7 +65,6 @@ def login():
             next_page = url_for('profile',username=current_user.username)
         return redirect(next_page)
     '''
-    return result
 
 
 '''
@@ -86,41 +85,40 @@ def register():
                     "nonValidMessage" : ""}
                     )
 
+    # get register information from frontend
     username = request.get_json()['username']
-    email= request.get_json()['email']
-    password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-    password2 = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
+    email = request.get_json()['email']
+    password = request.get_json()['password']
+    password2 = request.get_json()['password2']
 
+    # The two passwords are different
     if password != password2:
             return jsonify( {"validity": False, 
                     "nonValidMessage" : "Non consistent password"}
                     )
 
+    # get data of user with the username from database
     user = User.query.filter_by(username=username).first()
-        if user is not None:
-            return jsonify( {"validity": False, 
-                    "nonValidMessage" : "Please use another username"}
-                    )
+    # The user name has been used
+    if user is not None:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Please use another username"}
+                       )
+    # get data of user with the email address from database
+    user = User.query.filter_by(email=email).first()
+    # The email address has been used or not invalid email? XXXX@ XXX.com
+    if user is not None:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Please use another email address"}
+                       )
 
-        user = User.query.filter_by(email=email).first()
-        # valid email? XXXX@ XXX.com
-        if user is not None and :
-            return jsonify( {"validity": False, 
-                    "nonValidMessage" : "Please use another email address"}
-                    )
-
-        #insert the user into user db, with username, email and password
-        #user = User(username=username, email=email)
-        #user.set_password(password)
-        #db.session.add(user)
-        #db.session.commit()
-
-        return return jsonify( {"validity":True, 
-                    "nonValidMessage" : ""}
-                    )
-    else:
-        return jsonify({"Error": "Please fill out all information."})
-
+    user = User(username=username, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"validity": True,
+                    "nonValidMessage": ""}
+                   )
 
 
 @app.route('/profile/<username>')
@@ -131,7 +129,7 @@ def profile(username):
         return redirect(url_for('profile',username = current_user.username))
     user = User.query.filter_by(username=username).first_or_404()
 
-    return render_template('profile.html', user = user)
+    return render_template('profile.html', user=user)
 
 
 @app.route('/eportfolio_edit/<username>')
