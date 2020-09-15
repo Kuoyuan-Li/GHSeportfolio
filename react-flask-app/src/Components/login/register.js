@@ -1,5 +1,4 @@
 import React from 'react';
-import { register } from './userfunction';
 
 export class Register extends React.Component {
     constructor() {
@@ -48,7 +47,6 @@ export class Register extends React.Component {
             }).then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                //console.log(response)
                 if (response.validity !== true) {
                     this.setState({ message : response.nonValidMessage })
                 }
@@ -57,20 +55,6 @@ export class Register extends React.Component {
                 }
 
             })
-
-            /*
-            register(newUser).then(response => {
-                if (response.Valid !== true) {
-                    this.setState({ message : response.Non-valid-message })
-                }
-                else {
-                    console.log("Redirect to login")
-                }
-                /*if (!res.error) {                    
-                     this.props.history.push(`/profile`)
-                }
-               
-            })*/
 
          }else{
             this.setState({message:'Please enter all required information'})

@@ -1,5 +1,5 @@
 import React from 'react';
-import { login } from './userfunction'
+
 
 export class Login extends React.Component {
     constructor() {
@@ -51,12 +51,6 @@ export class Login extends React.Component {
 
             })
 
-
-            /*login(user).then(res => {               
-                if (!res.error) {              
-                     this.props.history.push(`/profile`)
-                 }
-             })*/
 
         }else{
             this.setState({message:'Please enter all required information'})

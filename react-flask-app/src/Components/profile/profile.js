@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode'
-
 class Profile extends Component {
     constructor() {
         super()
         this.state = {
             loading : true,
-            username: ''
+            username: '',
+            
         }
         this.componentDidMount = this.componentDidMount.bind(this)
     }
@@ -37,6 +37,7 @@ class Profile extends Component {
                                 <tr>
                                 <td>Hi, {this.state.username},welcome to your profile page!</td>
                                 <p>You can edit your eportfolio by clicking "View profile",...</p>
+                                
                                 </tr>
                             </tbody>}
                     </table>

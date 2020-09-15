@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 //import { Login, Register } from './Components/login/index'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
-import Navbar from './Components/login/navbar'
-import Profile from  './Components/login/profile'
+import Profile from  './Components/profile/profile'
 
 /*
 import Home from './Components/login/home'
@@ -36,7 +35,7 @@ class App extends React.Component {
             <Router>            
 
             <div className="App">
-                <Navbar />
+              
                 <div className="container">
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
