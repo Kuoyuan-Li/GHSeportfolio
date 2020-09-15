@@ -53,12 +53,9 @@ export class Register extends React.Component {
                     this.setState({ message : response.nonValidMessage })
                 }
                 else {
-                   //redirect to login
+                    this.props.history.push(`/login`)
                 }
-                /*if (!res.error) {                    
-                     this.props.history.push(`/profile`)
-                }
-                */
+
             })
 
             /*

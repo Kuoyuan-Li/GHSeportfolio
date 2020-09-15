@@ -5,31 +5,40 @@ class Profile extends Component {
     constructor() {
         super()
         this.state = {
-            username: '',
+            loading : true,
+            username: ''
         }
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
 
     componentDidMount () {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-
-        this.setState({
-            username: decoded.identity.username,
+        fetch ('http://localhost:5000/profile')
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            this.setState({
+                loading : false,
+                username : response.uname
+            })
+            
         })
     }
+    
+
 
     render () {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
                     <table className="table col-md-6 mx-auto">
-
-                        <tbody>
-                            <tr>
-                                <td>username</td>
-                                <td>{this.state.username}</td>
-                            </tr>
-                        </tbody>
+                        {this.state.isLoading ?
+                            <h1>Loading...</h1> :
+                            <tbody>
+                                <tr>
+                                <td>Hi, {this.state.username},welcome to your profile page!</td>
+                                <p>You can edit your eportfolio by clicking "View profile",...</p>
+                                </tr>
+                            </tbody>}
                     </table>
                 </div>
             </div>

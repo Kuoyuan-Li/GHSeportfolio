@@ -27,12 +27,37 @@ export class Login extends React.Component {
                 password: this.state.password
             }
             this.setState({message:''})
-            //console.log("login success")
-            login(user).then(res => {               
-               if (!res.error) {              
+
+            fetch ('http://localhost:5000/login',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: user.username,
+                    password: user.password
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                if (response.validity !== true) {
+                    this.setState({ message : response.nonValidMessage })
+                }
+                else {
                     this.props.history.push(`/profile`)
                 }
+
             })
+
+
+            /*login(user).then(res => {               
+                if (!res.error) {              
+                     this.props.history.push(`/profile`)
+                 }
+             })*/
+
         }else{
             this.setState({message:'Please enter all required information'})
 
