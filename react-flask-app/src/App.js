@@ -7,6 +7,7 @@ import Home from './Components/login/index'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
 import Profile from  './Components/profile/profile'
+import NavBar from './Components/profile/navbar'
 
 /*
 import Home from './Components/login/home'
@@ -35,6 +36,7 @@ class App extends React.Component {
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/navbar" component={NavBar} />
                 </div>            
             </div>
 

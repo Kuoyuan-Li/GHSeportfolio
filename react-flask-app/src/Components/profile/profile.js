@@ -9,6 +9,9 @@ class Profile extends Component {
             
         }
         this.componentDidMount = this.componentDidMount.bind(this)
+        this.jump = this.jump.bind(this)
+        this.jumpToEdit= this.jumpToEdit.bind(this)
+        this.jumpToView = this.jumpToView.bind(this)
     }
 
     componentDidMount () {
@@ -20,9 +23,27 @@ class Profile extends Component {
                 loading : false,
                 username : response.uname
             })
+            if (this.state.username === ''){
+                this.props.history.push(`/`)
+            }
             
         })
     }
+
+
+    jumpToView (e){
+
+    }
+
+    jumpToEdit (e){
+            
+
+    }
+
+    jump(e){
+        
+    }
+
     
 
 
@@ -36,8 +57,7 @@ class Profile extends Component {
                             <h1>Loading...</h1> :
                             <tbody>
                                 <tr>
-                                <td>Hi, {this.state.username},welcome to your profile page!</td>
-                                <p>You can edit your eportfolio by clicking "View profile",...</p>
+                                <td>Hi, {this.state.username}, welcome to your profile page!</td>
                                 
                                 </tr>
                             </tbody>}
@@ -54,7 +74,7 @@ class Profile extends Component {
                 
                 <div className="col-md-6 mt-5 mx-auto">
                     <button onClick={this.jumpToEdit} className="btn btn-lg btn-primary btn-block">
-                        Edit your eportfolio
+                        Create/Edit your eportfolio
                     </button>
                 </div>
 

@@ -1,52 +1,24 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-
-
+import Logout from './logout'
+import {NavBar, Nav,NavDropdown} from 'react-bootstrap';
 
 class Navbar extends Component {
-/*
-    logOut (e) {
-        e.preventDefault()
-        this.props.history.push(`/`)
-    }
-    
-    <li className="nav-item">
-        <a href="#" onClick={this.logOut.bind(this)} className="nav-link">Logout</a>
-    </li>
-*/
 
     render () {
-        
-        const userLink = (
-            <ul className="navbar-nav">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link to="/profile" className="nav-link">User</Link>
-                    </li>
-
-                    
-                </ul>
-            </ul>
-        )
-
-
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-
-                <div className="collapse navbar-collapse justify-content-md-center"
-                    id="navbar1">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link">Home</Link>
-                        </li>
-                    </ul>
-
-                    {localStorage.usertoken ? userLink : loginRegLink}
-                </div>
-
-            </nav>
+            <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#link">Link</Nav.Link>
+                    </Nav>
+                    
+                </Navbar.Collapse>
+                </Navbar>
         )
     }
 }
 
-export default withRouter(Navbar)
+export default Navbar
