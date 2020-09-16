@@ -38,6 +38,7 @@ def login():
     else:
         # login_user set the current_user (variable) to the current user(real people)
         login_user(user)
+        alreadylogin = True
         return jsonify({"validity": True,
                         "nonValidMessage": ""})
 
@@ -87,13 +88,13 @@ def register():
                    )
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET','POST'])
 def profile():
     if current_user.is_authenticated:
-        uname = current_user.username
-        return jsonify({"uname": uname})
+        username = current_user.username
+        return jsonify({"currentUser": 'loggedin'})
     else:
-        return jsonify({"uname": ""})
+        return jsonify({"currentUser": "haha"})
     
 '''
 @app.route('/eportfolio_edit/<username>')
