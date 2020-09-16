@@ -1,5 +1,4 @@
 import React from 'react';
-import { register } from './userfunction';
 
 export class Register extends React.Component {
     constructor() {
@@ -43,37 +42,19 @@ export class Register extends React.Component {
                     username: newUser.username,
                     email: newUser.email,
                     password: newUser.password,
-                    password2: newUser. password2
+                    password2: newUser.password2
                 })
             }).then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                //console.log(response)
                 if (response.validity !== true) {
                     this.setState({ message : response.nonValidMessage })
                 }
                 else {
-                   //redirect to login
+                    this.props.history.push(`/login`)
                 }
-                /*if (!res.error) {                    
-                     this.props.history.push(`/profile`)
-                }
-                */
-            })
 
-            /*
-            register(newUser).then(response => {
-                if (response.Valid !== true) {
-                    this.setState({ message : response.Non-valid-message })
-                }
-                else {
-                    console.log("Redirect to login")
-                }
-                /*if (!res.error) {                    
-                     this.props.history.push(`/profile`)
-                }
-               
-            })*/
+            })
 
          }else{
             this.setState({message:'Please enter all required information'})

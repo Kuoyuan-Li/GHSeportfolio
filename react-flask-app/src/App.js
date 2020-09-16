@@ -2,11 +2,12 @@ import React from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-//import { Login, Register } from './Components/login/index'
+import {Switch} from 'react-router-dom'
+import Home from './Components/login/index'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
-import Navbar from './Components/login/navbar'
-
+import Profile from  './Components/profile/profile'
+import NavBar from './Components/profile/navbar'
 
 /*
 import Home from './Components/login/home'
@@ -22,13 +23,6 @@ let hashHistory = Router.hashHistory;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLoginActive: true
-        }
-    }
-
-    changeState= () => {
-        this.setState((prevState) => ({isLoginActive: !prevState.isLoginActive}));  
     }
     
     render() {
@@ -36,10 +30,13 @@ class App extends React.Component {
             <Router>            
 
             <div className="App">
-                <Navbar />
+            
                 <div className="container">
-                    <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/navbar" component={NavBar} />
                 </div>            
             </div>
 
