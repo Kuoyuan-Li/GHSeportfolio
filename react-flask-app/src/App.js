@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import {Switch} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import Home from './Components/login/index'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
 import Profile from  './Components/profile/profile'
 import NavBar from './Components/profile/navbar'
-
+import ResetPassword from './Components/profile/resetPassword'
+import 'bootstrap/dist/css/bootstrap.min.css';
 /*
 import Home from './Components/login/home'
 import Profile from './Components/login/profile'
@@ -36,6 +36,8 @@ class App extends React.Component {
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/navbar" component={NavBar} />
+						<Route exact path="/reset_your_password" component={ResetPassword} />
                 </div>            
             </div>
 

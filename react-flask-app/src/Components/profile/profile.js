@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Navbar from "./navbar.js"
+import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
 
 class Profile extends Component {
     constructor() {
@@ -8,11 +10,15 @@ class Profile extends Component {
             username: '',
             
         }
+		/*
         this.componentDidMount = this.componentDidMount.bind(this)
+		*/
         this.jump = this.jump.bind(this)
         this.jumpToEdit= this.jumpToEdit.bind(this)
         this.jumpToView = this.jumpToView.bind(this)
     }
+	
+	/*
 
     componentDidMount () {
         fetch ('http://localhost:5000/profile')
@@ -29,6 +35,8 @@ class Profile extends Component {
             
         })
     }
+	
+	*/
 
 
     jumpToView (e){
@@ -50,39 +58,67 @@ class Profile extends Component {
     render () {
         return (
             <div className="container">
-                <div className="jumbotron mt-5">
-                    
-                    <table className="table col-md-6 mx-auto">
-                        {this.state.isLoading ?
-                            <h1>Loading...</h1> :
-                            <tbody>
-                                <tr>
-                                <td>Hi, {this.state.username}, welcome to your profile page!</td>
-                                
-                                </tr>
-                            </tbody>}
-                    </table>
+                
+				<Navbar />
+				
+                {this.state.isLoading ? 
+				 <h1>Loading...</h1> : 
+				 <h1>Welcome to your profile page!</h1>
+				}
+                            
+					
+				
 
 
-                </div>
-
-                <div className="col-md-6 mt-5 mx-auto">
-                    <button onClick={this.jumpToView} className="btn btn-lg btn-primary btn-block">
-                        View your eportfolio
-                    </button>
+                
+				<div style = {{display:'flex', margin: 30}}>
+				    <Card className='card' style={{color: "#000", width: 600}}>
+					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/100" />
+					  <Card.Body>
+					    <Card.Title>
+						  View your eportfolio
+						</Card.Title>
+						<Card.Text>
+						  You can view your own eportfolio here
+						</Card.Text>
+                        <Button variant="primary" onClick={this.jumpToView}>
+                            Go
+                        </Button>
+					  </Card.Body>
+					</Card>
+					
+					<Card className='card' style={{color: "#000", width: 600}}>
+					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/300" />
+					  <Card.Body>
+					    <Card.Title>
+						  Edit your eportfolio
+						</Card.Title>
+						<Card.Text>
+						  You can edit your own eportfolio here
+						</Card.Text>
+                        <Button variant="primary" onClick={this.jumpToView}>
+                            Go
+                        </Button>
+					  </Card.Body>
+					</Card>
+					
+					<Card className='card' style={{color: "#000", width: 600}}>
+					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/200" />
+					  <Card.Body>
+					    <Card.Title>
+						  View others' eportfolio
+						</Card.Title>
+						<Card.Text>
+						  You can view others' eportfolios here
+						</Card.Text>
+                        <Button variant="primary" onClick={this.jumpToView}>
+                            Go
+                        </Button>
+					  </Card.Body>
+					</Card>
                 </div>
                 
-                <div className="col-md-6 mt-5 mx-auto">
-                    <button onClick={this.jumpToEdit} className="btn btn-lg btn-primary btn-block">
-                        Create/Edit your eportfolio
-                    </button>
-                </div>
-
-                <div className="col-md-6 mt-5 mx-auto">
-                    <button onClick={this.jump} className="btn btn-lg btn-primary btn-block">
-                        View others eportfolio
-                    </button>
-                </div>
+                
             </div>
         )
     }
