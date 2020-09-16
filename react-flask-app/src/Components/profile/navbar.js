@@ -13,8 +13,7 @@ class Navbar extends Component {
                     <Nav className="mr-auto">
                     <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#link">Link</Nav.Link>
-                    </Nav>
-                    
+                    </Nav>                    
                 </Navbar.Collapse>
                 </Navbar>
         )
@@ -22,3 +21,4 @@ class Navbar extends Component {
 }
 
 export default Navbar
+

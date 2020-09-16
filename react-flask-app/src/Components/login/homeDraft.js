@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Home extends Component {
+class HomeDraft extends Component {
 
     render () {
 
