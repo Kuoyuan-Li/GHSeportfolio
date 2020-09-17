@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class Home extends Component {
+class Index extends Component {
     constructor() {
         super();
         this.login = this.login.bind(this)
@@ -17,6 +17,34 @@ class Home extends Component {
     }
 
     render () {
+        return (
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                        <h3>
+                            Eportfolio System
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button onClick={this.login} className="btn btn-lg btn-primary btn-block">
+                                    Log in
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                <button onClick={this.register} className="btn btn-lg btn-primary btn-block">
+                                    New user? Register Now!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
 
         return (        
             <div className="container">
@@ -40,4 +68,4 @@ class Home extends Component {
 
 
 
-export default Home
+export default Index

@@ -6,37 +6,25 @@ class Profile extends Component {
     constructor() {
         super()
         this.state = {
-            loading : true,
-            username: '',
-            
-        }
-		/*
+         profileOwner :''
+      }
+
+
         this.componentDidMount = this.componentDidMount.bind(this)
-		*/
         this.jump = this.jump.bind(this)
         this.jumpToEdit= this.jumpToEdit.bind(this)
         this.jumpToView = this.jumpToView.bind(this)
     }
 	
-	/*
 
     componentDidMount () {
-        fetch ('http://localhost:5000/profile')
-        .then(response => response.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => {
-            this.setState({
-                loading : false,
-                username : response.uname
-            })
-            if (this.state.username === ''){
-                this.props.history.push(`/`)
-            }
-            
-        })
+      const loginguser = localStorage.getItem('user')
+      if (loginguser){
+        this.setState ({profileOwner : loginguser })
+      }else{
+        this.props.history.push(`/login`)
+      }
     }
-	
-	*/
 
 
     jumpToView (e){
@@ -59,18 +47,11 @@ class Profile extends Component {
         return (
             <div className="container">
                 
-				<Navbar />
+				<Navbar />           
+          <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
 				
-                {this.state.isLoading ? 
-				 <h1>Loading...</h1> : 
-				 <h1>Welcome to your profile page!</h1>
-				}
                             
-					
-				
-
-
-                
+              
 				<div style = {{display:'flex', margin: 30}}>
 				    <Card className='card' style={{color: "#000", width: 600}}>
 					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/100" />

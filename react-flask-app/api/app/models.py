@@ -4,13 +4,6 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-
-
-@loginMngr.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
 class User(UserMixin, db.Model):
     # user db model
     id = db.Column(db.Integer, primary_key=True) #fields
@@ -29,3 +22,6 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+@loginMngr.user_loader
+def load_user(id):
+    return User.query.get(int(id))

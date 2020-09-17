@@ -13,6 +13,7 @@ export class Register extends React.Component {
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.backIndex = this.backIndex.bind(this)
     }
 
     onChange (e) {
@@ -62,6 +63,11 @@ export class Register extends React.Component {
          
 
 
+    }
+
+
+    backIndex(e){
+        this.props.history.push(`/`)
     }
 
     render () {
@@ -128,6 +134,11 @@ export class Register extends React.Component {
                                 Create account
                             </button>
                         </form>
+                        <div>
+                            <button type = "button" onclick = {this.backIndex} className="btn btn-lg btn-primary btn-block">
+                                Back to Index Page
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
