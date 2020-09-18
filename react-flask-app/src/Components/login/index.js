@@ -6,6 +6,14 @@ class Index extends Component {
         super();
         this.login = this.login.bind(this)
         this.register = this.register.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+        }
+
+    componentDidMount () {
+        const loginguser = localStorage.getItem('user')
+        if (loginguser){
+            this.props.history.push(`/profile`)
+        }
     }
 
     login (e) {

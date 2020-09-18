@@ -12,6 +12,14 @@ export class Login extends React.Component {
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+    }
+
+    componentDidMount () {
+        const loginguser = localStorage.getItem('user')
+        if (loginguser){
+            this.props.history.push(`/profile`)
+        }
     }
 
     onChange (e) {

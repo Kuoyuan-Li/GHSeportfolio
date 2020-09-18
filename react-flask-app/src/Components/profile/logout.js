@@ -7,26 +7,9 @@ export class Logout extends React.Component {
     }
 
     handleClick (e) {
-        const logoutReq = 'Logout'
-        fetch ('http://localhost:5000/logout',{
-                mode: 'cors',
-                method : 'POST',
-                headers :{
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    request: logoutReq
-                })
-            }).then(response => response.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => {               
-                    this.props.history.push(`/login`)
-                }
-            )          
+        localStorage.clear();    
+        this.props.history.push(`/`)     
     }
-
-
     
 
     render () {
