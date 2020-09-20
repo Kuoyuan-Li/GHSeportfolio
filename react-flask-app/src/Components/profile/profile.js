@@ -22,7 +22,7 @@ class Profile extends Component {
       if (loginguser){
         this.setState ({profileOwner : loginguser })
       }else{
-        this.props.history.push(`/login`)
+        this.props.history.push('/login')
       }
     }
 
@@ -32,8 +32,7 @@ class Profile extends Component {
     }
 
     jumpToEdit (e){
-            
-
+      this.props.history.push('/eportfolioEdit')
     }
 
     jump(e){
@@ -77,7 +76,7 @@ class Profile extends Component {
 						<Card.Text>
 						  You can edit your own eportfolio here
 						</Card.Text>
-                        <Button variant="primary" onClick={this.jumpToView}>
+                        <Button variant="primary" onClick={this.jumpToEdit}>
                             Go
                         </Button>
 					  </Card.Body>

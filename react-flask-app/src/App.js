@@ -10,6 +10,9 @@ import ResetPassword from './Components/profile/resetPassword'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Index from './Components/login/index';
 import Logout from './Components/profile/logout'
+import EportfolioEdit from './Components/eportfolio/eportfolioEdit'
+import Module from './Components/eportfolio/module'
+import Section from './Components/eportfolio/section'
 /*
 import Home from './Components/login/home'
 import Profile from './Components/login/profile'
@@ -39,6 +42,9 @@ class App extends React.Component {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/navbar" component={NavBar} />
                         <Route exact path="/logout" component={Logout} />
+                        <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
+                        <Route exact path="/module" component={Module} />
+                        <Route exact path="/section" component={Section} />
 						<Route exact path="/reset_your_password" component={ResetPassword} />
                 </div>            
             </div>
