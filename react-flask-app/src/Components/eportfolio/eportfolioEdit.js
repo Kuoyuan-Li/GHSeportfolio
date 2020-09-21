@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from './section'
+import pseudoSections from './pseudoSection'
 
 class EportfolioEdit extends React.Component {
 
@@ -7,7 +8,9 @@ class EportfolioEdit extends React.Component {
         super()
         this.state = {
             eportfolioOwner : '',
-            sections : [],
+            //infoSection: '',
+            sectionNumber : pseudoSections.length,
+            sections : pseudoSections,
             currentSection : null,
             message : ''
         }
@@ -22,16 +25,41 @@ class EportfolioEdit extends React.Component {
           })
         
     }*/
+
+    addSectionHandler = () => {
+        const blankSection = {       
+            id: this.state.sectionNumber+1,
+            sectionTitle:'Please enter a title',
+            modules: []
+        
+    }
+    this.setState(prevState => {
+        return {
+            sectionNumber: prevState.sectionNumber +1,
+        }
+    })
+    this.setState({           
+        sections: [...this.state.sections , blankSection]
+     });
+
+    }
+    deleteSection (id){
+        this.setState(prevState => ({
+            sections: prevState.sections.filter(el => el.sectionID != id )
+        }));
+    }
     
     render() {
-        const sectionItems = this.state.sections.map(item => <Section key={item.id} item={item}/>)
+        const sectionItems = this.state.sections.map
+            (content => <Section key={content.sectionID} content={content} deleteHandler = {this.deleteSection.bind(this)}/>)
        
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
-                        <div className = "section-list">
-                            {/*conditional rendering: which section to section?*/}
+                        <div className = "section-list">                                      
+                            {sectionItems}
+                            <button type="button" onClick = {this.addSectionHandler}>Add new section</button>       
                         </div>
                     </div>
                 </div>

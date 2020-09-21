@@ -10,14 +10,13 @@ class Module extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            //id : '',
+            id : props.content.id,
             title: props.content.title,  
             year : props.content.year,
             text : props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
             image : props.content.image,
             file : props.content.file,
-            inputKey : Date.now()
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
         this.YearChangeHandler = this.YearChangeHandler.bind(this)
@@ -26,7 +25,7 @@ class Module extends React.Component{
         this.selectFileHandler = this.selectFileHandler.bind(this)
         this.saveModuleHandler = this.saveModuleHandler.bind(this)
 
-        //this.MonthChangeHandler = this.MonthChangeHandler.bind(this)
+        
     }
 
 
@@ -51,8 +50,7 @@ class Module extends React.Component{
 
     deleteImageHandler = () =>{
         this.setState({
-            image:null,
-            inputKey : Date.now()
+            image:null            
         })
     }
     
@@ -62,26 +60,37 @@ class Module extends React.Component{
 
     deleteFileHandler = () =>{
         this.setState({
-            file:null,
-            inputKey : Date.now()
+            file:null          
         })
     }
     
     saveModuleHandler = (event) =>{
-        //fetch api
-        console.log(this.state.file)
+        //fetch api and send data to backend
+        console.log(this.state.image)
 
+    }
+
+    deleteThisModuleHandler(id){
+        this.props.deleteHandler(id);
     }
    
 
-   
-    /*
-    MonthChangeHandler = (monthvalue) => {
-        this.setState({ month : monthvalue })
-        console.log(monthvalue)
-    }*/
-
     render (){
+
+        let imageName;
+        if (this.state.image) {
+            imageName =  <p>{this.state.image.name}</p> 
+        } else {
+            imageName = <p></p>;
+        }
+
+        let fileName;
+        if (this.state.file) {
+            fileName =  <p>{this.state.file.name}</p> 
+        } else {
+            fileName = <p></p>;
+            }
+
         return (
             <div>
                 
@@ -90,6 +99,7 @@ class Module extends React.Component{
                 value={this.state.title}
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
+
                 {this.state.year}
                 <YearPicker onChange={this.YearChangeHandler} >Change Year</YearPicker>
     
@@ -101,18 +111,27 @@ class Module extends React.Component{
                 {ReactHtmlParser(this.state.text)}
                 
                 <br/>
-                <input type = "file"  
+                <input style = {{display:'none'}} 
+                type = "file"                
                 accept="image/*" 
-                key={this.state.inputKey}
-                onChange = {this.selectImageHandler}/>
+                onChange = {this.selectImageHandler}
+                ref = {(imageInput) => {this.imageInput = imageInput}}/>
+                <button onClick = {() => this.imageInput.click()}>Choose image {imageName}</button>           
                 <button onClick = {this.deleteImageHandler}>Delete image</button> 
                 <br/>
-                <input type = "file"            
-                key={this.state.inputKey}
-                onChange = {this.selectFileHandler}/>
+
+                <input 
+                style = {{display:'none'}} 
+                type = "file"            
+                onChange = {this.selectFileHandler}
+                ref = {(fileInput) => this.fileInput = fileInput}/>
+                <button onClick = {() => this.fileInput.click()}>Choose file {fileName}</button>       
                 <button onClick = {this.deleteFileHandler}>Delete file</button> 
                 <br/>
+
                 <button onClick = {this.saveModuleHandler}>Save this module</button> 
+                <br/>
+                <button onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>Delete this module</button>
                               
             </div>
             
@@ -126,20 +145,3 @@ class Module extends React.Component{
 }
 
 export default Module
-
-
-/*<input type='text'
-                placeholder='Year'
-                pattern="[0-9]*"
-                value={this.state.year}
-                onChange = {this.YearChangeHandler}/>
-                
-                <YearPicker onChange={this.YearChangeHandler} /> 
-                
-                    
-                <input type='number'
-                placeholder='Month'
-                min="1"
-                max="12"
-                value={this.state.month}
-                onChange = {this.MonthChangeHandler}/> */

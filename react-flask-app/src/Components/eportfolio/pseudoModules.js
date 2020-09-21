@@ -6,7 +6,7 @@ const pseudoModules = [
         text : '<p>das213123 a</p><p>333</p>',
         image:null,
         file: null
-    },
+    }, 
     {
         id: 2,
         title:'titleB',

@@ -1,13 +1,16 @@
-/*const pseudoModules = [
-    {
-        {
+import Section from "./section"
+
+const pseudoSections = [
+    {   sectionID : 1,
+        sectionTitle : 'fake',
+        modules : [{
             id: 1,
             title:'titleA',
             year :2000,
             text : '<p>das213123 a</p><p>333</p>',
             image:null,
             file: null
-        },
+        }, 
         {
             id: 2,
             title:'titleB',
@@ -22,31 +25,37 @@
             text : 'txt3',
             image:null,
             file: null
-        }},
-        {{
+        }]
+
+    },
+    {sectionID : 2,
+        sectionTitle : 'second fake',
+        modules : [{
             id: 1,
-            title:'titleA',
+            title:'222A',
             year :2000,
-            text : '<p>das213123 a</p><p>333</p>',
+            text : '<p>secondsectionmoduleA a</p><p>222</p>',
             image:null,
             file: null
-        },
+        }, 
         {
             id: 2,
-            title:'titleB',
+            title:'222B',
             year :2000,
-            text : 'txt2',
+            text : 'section2222222',
             file: null
         },
         {
             id: 3,
-            title:'titleC',
+            title:'222C',
             year :2000,
-            text : 'txt3',
+            text : 'hahahah',
             image:null,
             file: null
-        }}
+        }]
+},
+    
 
 ]
 
-export default pseudoModules */
+export default pseudoSections
