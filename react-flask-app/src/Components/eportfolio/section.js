@@ -66,7 +66,7 @@ class Section extends React.Component {
 
     render() {
         const moduleItems = this.state.modules.map
-            (content => <Module key={content.id} content={content} deleteHandler = {this.deleteModule.bind(this)}/>)
+            (content => <Module key={content.id} content={content} parentSectionID = {this.state.sectionID} deleteHandler = {this.deleteModule.bind(this)}/>)
        
         return (
             <div className="container">
