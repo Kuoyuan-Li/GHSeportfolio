@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './style.scss'
 
 export class Login extends React.Component {
     constructor() {
@@ -13,6 +13,7 @@ export class Login extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
+        this.backIndex = this.backIndex.bind(this)
     }
 
     componentDidMount () {
@@ -68,35 +69,31 @@ export class Login extends React.Component {
         }
     }
 
+    backIndex(e){
+        this.props.history.push(`/`)
+    }
+
     render () {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <div> 
-                            <p>
-                                {this.state.message}
-                            </p>    
-                        </div>
+                <div class="row">
                         <form noValidate onSubmit={this.onSubmit}>
-
+                            <div class="warning-message">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                {this.state.message}
+                            </div>
+                        <div className="form form1">    
                             <div className="form-group">
-                                <label htmlFor="username">Username</label>
-
                                 <input type="username"
-                                    className="form-control"
                                     name="username"
                                     placeholder="Type your user name"
                                     value={this.state.username}
-                                    onChange={this.onChange} />
-
+                                    onChange={this.onChange}/>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="password">Password </label>
-
+                                
                                 <input type="password"
-                                    className="form-control"
                                     name="password"
                                     placeholder="Type your password"
                                     value={this.state.password}
@@ -104,12 +101,16 @@ export class Login extends React.Component {
 
                             </div>
 
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                            <button class="button button1" type="submit">
                                 Log in
                             </button>
+                            </div>
                         </form>
-                    </div>
                 </div>
+                
+                <button class="linkButton" onClick={this.backIndex}>
+                    Back to Index Page
+                </button>
             </div>
         )
     }

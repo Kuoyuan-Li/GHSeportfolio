@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from "./navbar.js"
 import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
+//import './style.scss'
 
 class Profile extends Component {
     constructor() {
