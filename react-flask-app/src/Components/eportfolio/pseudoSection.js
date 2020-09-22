@@ -1,5 +1,3 @@
-import Section from "./section"
-
 const pseudoSections = [
     {   sectionID : 1,
         sectionTitle : 'fake',
@@ -53,7 +51,7 @@ const pseudoSections = [
             image:null,
             file: null
         }]
-},
+}
     
 
 ]

@@ -3,7 +3,7 @@ import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ReactHtmlParser from "react-html-parser"
 import YearPicker from 'react-year-picker'
-import MonthPicker from 'react-simple-month-picker'
+import { Form } from 'react-bootstrap'
 
 
 class Module extends React.Component{
@@ -64,10 +64,46 @@ class Module extends React.Component{
         })
     }
     
-    saveModuleHandler = (event) =>{
+<<<<<<< Updated upstream
+    saveModuleHandler = (e) =>{
         //fetch api and send data to backend
-        console.log(this.state.image)
+        e.preventDefault()
 
+        fetch ('http://localhost:5000/module',{
+            mode: 'cors',
+            method : 'POST',
+            headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                section: this.props.parentSectionID,
+                id : this.state.id,
+                title: this.state.title,  
+                year : this.state.year,
+                text : this.state.text,
+                image : this.state.image,
+                file : this.state.file,
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            if (response.validity !== true) {
+                this.setState({ message : response.message })
+            }
+            else {
+                const loggedInUsername  = this.state.username;
+                localStorage.setItem('user', loggedInUsername);
+                this.props.history.push(`/profile`)
+            }
+
+        })
+        console.log(this.state.image)
+=======
+    saveModuleHandler = (event) =>{
+>>>>>>> Stashed changes
+
+        console.log(this.state.image)
     }
 
     deleteThisModuleHandler(id){

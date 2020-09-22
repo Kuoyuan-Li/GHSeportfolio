@@ -43,6 +43,8 @@ class EportfolioEdit extends React.Component {
      });
 
     }
+
+    
     deleteSection (id){
         this.setState(prevState => ({
             sections: prevState.sections.filter(el => el.sectionID != id )
