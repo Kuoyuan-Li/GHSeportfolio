@@ -1,11 +1,19 @@
-import os
+from os import environ, path
+from dotenv import load_dotenv
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv (path.join(basedir,'.env'))
 
 class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'This-is-a-secret'
+    SECRET_KEY = environ.get('SECRET_KEY') or 'you-will-never-guess'
+    FLASK_APP = environ.get('FLASK_APP')
+    FLASK_ENV = environ.get('FLASK_ENV')
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    user = 'root'
+    password = 'root'
+    database = 'eportfolio'
+
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/eportfolio' 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
