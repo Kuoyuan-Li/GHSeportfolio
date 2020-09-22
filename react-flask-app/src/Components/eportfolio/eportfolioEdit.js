@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './section'
 import pseudoSections from './pseudoSection'
+import SectionNavbar from './sectionNavbar'
 
 class EportfolioEdit extends React.Component {
 
@@ -11,10 +12,12 @@ class EportfolioEdit extends React.Component {
             //infoSection: '',
             sectionNumber : pseudoSections.length,
             sections : pseudoSections,
-            currentSection : null,
+            currentSectionID : 0,
             message : ''
         }
-        //this.componentDidMount = this.componentDidMount.bind(this)
+        this.addSectionHandler = this.addSectionHandler.bind(this)
+		this.deleteSection = this.deleteSection.bind(this)
+		this.handleSwitch = this.handleSwitch.bind(this)
     }
 
     /*componentDidMount(){
@@ -26,40 +29,64 @@ class EportfolioEdit extends React.Component {
         
     }*/
 
-    addSectionHandler = () => {
+    addSectionHandler () {
         const blankSection = {       
-            id: this.state.sectionNumber+1,
+            sectionID: this.state.sectionNumber + 1,
             sectionTitle:'Please enter a title',
             modules: []
         
-    }
-    this.setState(prevState => {
-        return {
-            sectionNumber: prevState.sectionNumber +1,
         }
-    })
-    this.setState({           
-        sections: [...this.state.sections , blankSection]
-     });
-
+        
+		this.setState(prevState => {
+            return (
+			    {sectionNumber: prevState.sectionNumber + 1}
+            )
+        })
+        
+		this.setState({           
+            sections: [...this.state.sections , blankSection]
+        });
     }
+	
     deleteSection (id){
-        this.setState(prevState => ({
-            sections: prevState.sections.filter(el => el.sectionID != id )
-        }));
+		
+        this.setState(prevState => {
+			const currentID = id === prevState.currentSectionID ? 0 : prevState.currentSectionID
+			return ({
+                sections: prevState.sections.filter(el => el.sectionID !== id),
+			    currentSectionID: currentID}
+			
+			)
+		});
     }
+	
+	handleSwitch (id) {
+		this.setState({currentSectionID: id})
+		console.log(this.state.currentSectionID)
+	}
     
     render() {
         const sectionItems = this.state.sections.map
-            (content => <Section key={content.sectionID} content={content} deleteHandler = {this.deleteSection.bind(this)}/>)
+            (content => {
+				return (
+				    content.sectionID === this.state.currentSectionID ?
+					<Section key={content.sectionID} content={content} deleteHandler = {this.deleteSection.bind(this)}/> :
+				    null
+				)
+			})
        
         return (
             <div className="container">
-                <div className="row">
+			    
+				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
+                <button type="button" onClick = {this.addSectionHandler}>Add new section</button>
+				
+				<div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <div className = "section-list">                                      
-                            {sectionItems}
-                            <button type="button" onClick = {this.addSectionHandler}>Add new section</button>       
+                            
+							{sectionItems}
+                                   
                         </div>
                     </div>
                 </div>
