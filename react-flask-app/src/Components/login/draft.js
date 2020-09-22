@@ -16,7 +16,15 @@ const { isLoginActive } = this.state;
               </div>
 
 
+<ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/login" className="nav-link">Login</Link>
+                    </li>
 
+                    <li className="nav-item">
+                        <Link to="/register" className="nav-link">Register</Link>
+                    </li>
+                </ul>
 
 
               
@@ -86,4 +94,82 @@ render() {
             </div>
         </div>
     }
-              */
+              
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .header {
+        font-size: 48px;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+
+        .form {
+            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: fit-content;
+                label {
+                    font-size: 20px;
+                }
+
+                input {
+                    margin-top: 6px;
+                    min-width: 18em;
+                    height: 40px;
+                    padding: 0px 10px;
+                    font-size: 16px;
+                    font-family: "Open Sans", sans-serif;
+                    background-color: #f3f3f3;
+                    border: 0;
+                    border-radius: 4px;
+                    margin-bottom: 31px;
+                    transition: all 250ms ease-in-out;
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0px 0px 12px 0.8px #0e81ce96;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        margin-top: 3em;
+    }
+}    
+
+<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+
+input {
+            margin-top: 6px;
+            min-width: 18em;
+            height: 40px;
+            padding: 0px 10px;
+            font-size: 16px;
+            font-family: 'roboto', sans-serif;
+            background-color: #f3f3f3;
+            width: 320px;
+            border: 0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            transition: all 250ms ease-in-out;
+            &:focus {
+                outline: none;
+                box-shadow: 0px 0px 12px 0.8px #0e81ce96;
+            }
+        }
+*/

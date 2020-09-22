@@ -1,6 +1,53 @@
-import "./style.scss"
+import React, { Component } from 'react'
+import './style.scss'
 
-export { Login } from "./login";
-export { Register } from "./register"
-//export { Home } from "./home"
-//export { Navbar } from "./navbar"
+class Index extends Component {
+    constructor() {
+        super();
+        this.login = this.login.bind(this)
+        this.register = this.register.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+        }
+
+    componentDidMount () {
+        const loginguser = localStorage.getItem('user')
+        if (loginguser){
+            this.props.history.push(`/profile`)
+        }
+    }
+
+    login (e) {
+        this.props.history.push(`/login`)
+    }
+
+    register (e) {
+        this.props.history.push(`/register`)
+    }
+
+    render () {
+        return (
+
+            <div class="container">
+                    <div class="col-md-12">
+                        <h3>Eportfolio System</h3>
+                            <div class="col-md-12">
+                                <button class="button button1" onClick={this.login}>
+                                    Log in
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                
+                                <button class="button button2" onClick={this.register}>
+                                    New user? Register Now!
+                                </button>
+                            </div>
+                    </div>
+            </div>
+        )
+    }
+
+}
+
+
+
+export default Index
