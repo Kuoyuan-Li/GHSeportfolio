@@ -1,4 +1,5 @@
 from os import environ
+from dotenv import load_dotenv
 
 class Config(object):
     SECRET_KEY = environ.get('SECRET_KEY') or 'This-is-a-secret'
@@ -7,5 +8,5 @@ class Config(object):
     password = 'root'
     database = 'eportfolio'
 
-    SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@localhost:3306/%s' % (user, password, database)
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/eportfolio' 
     SQLALCHEMY_TRACK_MODIFICATIONS = False

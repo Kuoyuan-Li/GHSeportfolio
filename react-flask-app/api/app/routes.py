@@ -10,7 +10,6 @@ import time
 
 db.create_all()
 db.session.commit()
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -103,7 +102,7 @@ def logout():
     return jsonify({"success": True})
 '''
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp','gif'])
 
 
 def allowed_file(filename):
@@ -112,13 +111,12 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    file = request.files['file']
+    file = request.files['image']
     # no image or type of image is incorrect
     if not (file and allowed_file(file.filename)):
         return jsonify({"success": False,
                         "message": "Please check the type of image uploaded, only PNG, PNG, JPG, JPG, BMP"}
                        )
-    user_input = request.form.get("name")
     # get the basepath
     basepath = os.path.dirname(__file__)
     # add basepath and path together get the path that we store the image
