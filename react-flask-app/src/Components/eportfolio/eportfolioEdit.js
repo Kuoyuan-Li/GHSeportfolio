@@ -8,26 +8,58 @@ class EportfolioEdit extends React.Component {
     constructor() {
         super()
         this.state = {
-            eportfolioOwner : '',
+            eportfolioOwner : localStorage.getItem('user'),
+            sectionIDs : [],
+            aSection : null,
             //infoSection: '',
-            sectionNumber : pseudoSections.length,
-            sections : pseudoSections,
+            sectionNumber : 0,//pseudoSections.length,
+            sections : [],//pseudoSections,
             currentSectionID : 0,
             message : ''
         }
+        this.componentDidMount = this.componentDidMount.bind(this)
         this.addSectionHandler = this.addSectionHandler.bind(this)
 		this.deleteSection = this.deleteSection.bind(this)
 		this.handleSwitch = this.handleSwitch.bind(this)
     }
 
-    /*componentDidMount(){
-        fetch('/eportfolioEdit').
-        then(res => res.json()).
-        then(data => {
-            this.setState({sections:data});
-          })
+    componentDidMount(){
+        fetch ('http://localhost:5000/sectionIDs',{
+            mode: 'cors',
+            method : 'POST',
+            body: JSON.stringify({
+                username: this.state.eportfolioOwner
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            //response: a list of sectionIDs
+            this.setState({sectionIDs : response.sectionIDs})
+         })
+
+
+         for (var i = 0; i < this.state.sectionIDs.length; i++) {
+            var thisID = this.state.sectionIDs[i]
         
-    }*/
+            fetch ('http://localhost:5000/section',{
+                mode: 'cors',
+                method : 'POST',
+                body: JSON.stringify({
+                    username: this.state.eportfolioOwner,
+                    sectionID : thisID
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then((response) => {
+                //response: a list of sectionIDs
+                this.setState({           
+                    sections: [...this.state.sections , response.section]
+                })
+            })
+
+        }
+        
+    }
 
     addSectionHandler () {
         const blankSection = {       
@@ -45,7 +77,23 @@ class EportfolioEdit extends React.Component {
         
 		this.setState({           
             sections: [...this.state.sections , blankSection]
-        });
+        })
+
+        //fetch api and store in DB: userID, section
+        fetch ('http://localhost:5000//addSection',{
+            mode: 'cors',
+            method : 'POST',
+            body: JSON.stringify({
+                username: this.state.eportfolioOwner,
+                sectionID : blankSection.sectionID
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            //response: a list of sectionIDs
+            this.setState({message : response.message})
+         })
+
     }
 	
     deleteSection (id){
@@ -57,7 +105,28 @@ class EportfolioEdit extends React.Component {
 			    currentSectionID: currentID}
 			
 			)
-		});
+        });
+
+        const loginguser = localStorage.getItem('user')
+        //inform backend delete module: sectionID XXX, moduleID: XXx
+        fetch ('http://localhost:5000/deleteSection',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userName : loginguser,
+                    sectionID: id
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                this.setState({ message : response.message})
+                console.log(this.state.message)
+            })
+        
     }
 	
 	handleSwitch (id) {
