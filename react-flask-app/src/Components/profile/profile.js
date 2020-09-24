@@ -29,11 +29,11 @@ class Profile extends Component {
 
 
     jumpToView (e){
-
+        this.props.history.push('/eportfolioView')
     }
 
     jumpToEdit (e){
-      this.props.history.push('/eportfolioEdit')
+        this.props.history.push('/eportfolioEdit')
     }
 
     jump(e){

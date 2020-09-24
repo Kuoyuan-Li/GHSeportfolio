@@ -54,12 +54,12 @@ export class Login extends React.Component {
                 if (response.validity !== true) {
                     this.setState({ message : response.nonValidMessage })
                 }
-                else {
+                /* else {
                     const loggedInUsername  = this.state.username;
                     localStorage.setItem('user', loggedInUsername);
                     this.props.history.push(`/profile`)
-                }
-
+                }*/
+                this.props.history.push(`/profile`)
             })
 
 
