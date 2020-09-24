@@ -60,13 +60,13 @@ class Section extends React.Component {
     //delete a specific module based on its id
     deleteModule (id){
         this.setState(prevState => ({
-            modules: prevState.modules.filter(el => el.id != id )
+            modules: prevState.modules.filter(el => el.id !== id )
         }));
     }
 
     render() {
         const moduleItems = this.state.modules.map
-            (content => <Module key={content.id} content={content} deleteHandler = {this.deleteModule.bind(this)}/>)
+            (content => <Module key={content.id} content={content} parentSectionID = {this.state.sectionID} deleteHandler = {this.deleteModule.bind(this)}/>)
        
         return (
             <div className="container">

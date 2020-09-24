@@ -3,7 +3,7 @@ import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ReactHtmlParser from "react-html-parser"
 import YearPicker from 'react-year-picker'
-import MonthPicker from 'react-simple-month-picker'
+import { Form } from 'react-bootstrap'
 
 
 class Module extends React.Component{
@@ -64,8 +64,24 @@ class Module extends React.Component{
         })
     }
     
-    saveModuleHandler = (event) =>{
+    saveModuleHandler = (e) =>{
         //fetch api and send data to backend
+        e.preventDefault()
+        const imageData = new FormData();
+        imageData.append('image',this.state.image)
+        imageData.append('imagename',this.state.image.name)
+        fetch ('http://localhost:5000/upload',{
+            mode: 'cors',
+            method : 'POST',
+            body: imageData
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            /*
+            response.json().then((body) => {
+              this.setState({ message: `http://localhost:8000/${body.file}` });
+            });*/
+          })
         console.log(this.state.image)
 
     }
