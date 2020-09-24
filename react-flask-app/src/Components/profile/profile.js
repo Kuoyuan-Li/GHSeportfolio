@@ -48,7 +48,7 @@ class Profile extends Component {
             <div className="container">
                 
 				<Navbar />           
-          <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
+                <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
 				
                             
               

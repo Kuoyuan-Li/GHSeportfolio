@@ -44,7 +44,7 @@ class App extends React.Component {
                         <Route exact path="/logout" component={Logout} />
                         <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
 						<Route exact path="/eportfolioView" component={EportfolioView} />
-						<Route exact path="/reset_your_password" component={ResetPassword} />
+						<Route exact path="/resetPassword" component={ResetPassword} />
                 </div>            
             </div>
 
