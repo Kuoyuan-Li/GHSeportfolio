@@ -10,6 +10,7 @@ class Module extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            parentSection : props.parentSectionID,
             id : props.content.id,
             title: props.content.title,  
             year : props.content.year,
@@ -17,6 +18,8 @@ class Module extends React.Component{
             // use {ReactHtmlParser(this.state.text)} to read the text
             image : props.content.image,
             file : props.content.file,
+            messageF : '',
+            messageT : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
         this.YearChangeHandler = this.YearChangeHandler.bind(this)
@@ -66,23 +69,52 @@ class Module extends React.Component{
     
     saveModuleHandler = (e) =>{
         //fetch api and send data to backend
+        const loginguser = localStorage.getItem('user')
         e.preventDefault()
-        const imageData = new FormData();
-        imageData.append('image',this.state.image)
-        imageData.append('imagename',this.state.image.name)
+        const fileData = new FormData();
+        fileData.append("username",  loginguser)
+        fileData.append("sectionID",  this.state.parentSection)
+        fileData.append("moduleID",  this.state.id)
+        fileData.append('image',this.state.image)
+        fileData.append('imagename',this.state.image.name)
+        fileData.append('file',this.state.file)
+        fileData.append('filename',this.state.file.name)
+
+
         fetch ('http://localhost:5000/upload',{
             mode: 'cors',
             method : 'POST',
-            body: imageData
+            body: fileData
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
-            /*
-            response.json().then((body) => {
-              this.setState({ message: `http://localhost:8000/${body.file}` });
-            });*/
-          })
-        console.log(this.state.image)
+            //response: if upload files susccessfully, return success message
+            this.setState({messageF : response.message})
+            console.log(this.state.messageF)
+         })
+         
+        
+         fetch ('http://localhost:5000/upload2',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userName : loginguser,
+                    sectionID : this.state.parentSection,
+                    moduleID : this.state.id,
+                    moduleTitle:  this.state.title,  
+                    year :  this.state.year,
+                    moduleText :  this.state.text
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                this.setState({messageT : response.message})
+                console.log(this.state.messageT)
+            })
 
     }
 
@@ -113,6 +145,7 @@ class Module extends React.Component{
                 <input type = "text"
                 name = 'title'
                 value={this.state.title}
+                placeholder = "Module title"
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 
