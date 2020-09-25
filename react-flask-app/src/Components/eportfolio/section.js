@@ -13,7 +13,7 @@ class Section extends React.Component {
             message : ''
         }
         this.sectionTitleChangeHandler = this.sectionTitleChangeHandler.bind(this)
-        this.saveSectionHandler = this.saveSectionHandler.bind(this)
+        //this.saveSectionHandler = this.saveSectionHandler.bind(this)
         //this.componentDidMount = this.componentDidMount.bind(this)
     }
 
