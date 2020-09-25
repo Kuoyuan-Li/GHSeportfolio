@@ -28,7 +28,8 @@ class Profile extends Component {
 
         this.props.history.push('/login')
       }
-    }*/
+    */
+	}
 
 
     jumpToView (e){
