@@ -8,7 +8,7 @@ const pseudoSections = [
             title:'titleA',
             year :2000,
             text : '<p>das213123 a</p ><p>333</p >',
-            image: null, 
+            image: null,
             file: null
         }, 
         {

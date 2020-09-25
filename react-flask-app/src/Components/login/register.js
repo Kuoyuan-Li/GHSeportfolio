@@ -77,6 +77,7 @@ export class Register extends React.Component {
 
     render () {
         return (
+            <body id="login">
             <div className="container">
                 <div class="row">
                 <form noValidate onSubmit={this.onSubmit}>
@@ -139,6 +140,7 @@ export class Register extends React.Component {
                     Back to Index Page
                 </button>
             </div>
+            </body>
         )
     }
 }
