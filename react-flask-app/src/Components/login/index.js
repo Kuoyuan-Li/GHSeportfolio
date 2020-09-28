@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import './style.scss'
 
 class Index extends Component {
     constructor() {
@@ -27,50 +28,27 @@ class Index extends Component {
     render () {
         return (
 
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container">
                     <div class="col-md-12">
-                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-                        <h3>
-                            Eportfolio System
-                        </h3>
-                        <div class="row">
+                        <h3>Eportfolio System</h3>
                             <div class="col-md-12">
-                                <button onClick={this.login} className="btn btn-lg btn-primary btn-block">
+                                <button class="button button1" onClick={this.login}>
                                     Log in
                                 </button>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-12">
                                 
-                                <button onClick={this.register} className="btn btn-lg btn-primary btn-block">
+                                <button class="button button2" onClick={this.register}>
                                     New user? Register Now!
                                 </button>
                             </div>
-                        </div>
                     </div>
-                </div>
-            </div>
-        )
-
-        return (        
-            <div className="container">
-                <div className="col-md-6 mt-5 mx-auto">
-                    <button onClick={this.login} className="btn btn-lg btn-primary btn-block">
-                        Log in
-                    </button>
-                </div>
-                
-                <div className="col-md-6 mt-5 mx-auto">
-                    <button onClick={this.register} className="btn btn-lg btn-primary btn-block">
-                        Create an account
-                    </button>
-                </div>
-                
             </div>
         )
     }
+
+        
+    
 
 }
 

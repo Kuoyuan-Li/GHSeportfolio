@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.scss'
 
 export class Register extends React.Component {
     constructor() {
@@ -15,6 +16,7 @@ export class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.backIndex = this.backIndex.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
+        this.backIndex = this.backIndex.bind(this)
     }
 
     componentDidMount () {
@@ -67,12 +69,8 @@ export class Register extends React.Component {
 
          }else{
             this.setState({message:'Please enter all required information'})
-         }
-         
-
-
+         }     
     }
-
 
     backIndex(e){
         this.props.history.push(`/`)
@@ -81,74 +79,66 @@ export class Register extends React.Component {
     render () {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <div> 
-                            <p>
-                                {this.state.message}
-                            </p>    
+                <div class="row">
+                <form noValidate onSubmit={this.onSubmit}>
+                            
+                    <div class="warning-message">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        {this.state.message}
+                    </div>
+
+                    <div className="form form2">
+
+                        <div className="form-group">
+                            <input type="username"
+                                className="form-control"
+                                name="username"
+                                placeholder="Type your user name"
+                                value={this.state.username}
+                                onChange={this.onChange} />
+
                         </div>
-                        <form noValidate onSubmit={this.onSubmit}>
 
-                            <div className="form-group">
-                                <label htmlFor="username">Username</label>
+                        <div className="form-group">
+                            <input type="email"
+                                className="form-control"
+                                name="email"
+                                placeholder="Type your email address"
+                                value={this.state.email}
+                                onChange={this.onChange} />
+                        </div>
 
-                                <input type="username"
-                                    className="form-control"
-                                    name="username"
-                                    placeholder="Type your user name"
-                                    value={this.state.username}
-                                    onChange={this.onChange} />
+                        <div className="form-group">
+                            <input type="password"
+                                className="form-control"
+                                name="password"
+                                placeholder="Type your password"
+                                value={this.state.password}
+                                onChange={this.onChange} />
+                        </div>
 
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email">Email Address</label>
-
-                                <input type="email"
-                                    className="form-control"
-                                    name="email"
-                                    placeholder="Type your email address"
-                                    value={this.state.email}
-                                    onChange={this.onChange} />
-
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="password">Password </label>
-
-                                <input type="password"
-                                    className="form-control"
-                                    name="password"
-                                    placeholder="Type your password"
-                                    value={this.state.password}
-                                    onChange={this.onChange} />
-
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="password2">Re-enter Password  </label>
-
-                                <input type="password"
-                                    className="form-control"
-                                    name="password2"
-                                    placeholder="Re-enter password"
-                                    value={this.state.password2}
-                                    onChange={this.onChange} />
-
-                            </div>
-
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                        <div className="form-group">
+                            <input type="password"
+                                className="form-control"
+                                name="password2"
+                                placeholder="Re-enter password"
+                                value={this.state.password2}
+                                onChange={this.onChange} />
+                        </div>
+                        
+                        <div className="form-group">
+                            <button class="button button2" type="submit">
                                 Create account
                             </button>
-                        </form>
-                        <div>
-                            <button type = "button" onclick = {this.backIndex} className="btn btn-lg btn-primary btn-block">
-                                Back to Index Page
-                            </button>
                         </div>
+
                     </div>
+                </form>
                 </div>
+                
+                <button class="linkButton" onClick={this.backIndex}>
+                    Back to Index Page
+                </button>
             </div>
         )
     }

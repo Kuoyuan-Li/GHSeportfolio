@@ -68,22 +68,19 @@ class Module extends React.Component{
         //fetch api and send data to backend
         e.preventDefault()
         const imageData = new FormData();
-        imageData.append('file',this.state.image)
-        imageData.append('filename',this.state.image.name)
-        fetch ('http://localhost:5000/module',{
+        imageData.append('image',this.state.image)
+        imageData.append('imagename',this.state.image.name)
+        fetch ('http://localhost:5000/upload',{
             mode: 'cors',
             method : 'POST',
-            headers :{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
             body: imageData
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
+            /*
             response.json().then((body) => {
               this.setState({ message: `http://localhost:8000/${body.file}` });
-            });
+            });*/
           })
         console.log(this.state.image)
 
