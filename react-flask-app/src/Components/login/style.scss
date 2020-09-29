@@ -1,14 +1,20 @@
-body
-{
-    background-color:#ffffff;
+#login {
     background-image: url(./background.jpg);
-    background-size: cover;
-    height: 800px;
-    
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+	
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 300px;
+    padding-right: 300px;
+	
 }
+
 
 .container {
     height: 500px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;

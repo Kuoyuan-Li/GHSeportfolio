@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './App.css';
 
@@ -11,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Index from './Components/login/index';
 import Logout from './Components/profile/logout'
 import EportfolioEdit from './Components/eportfolio/eportfolioEdit'
+import EportfolioView from './Components/eportfolio/eportfolioView'
 
 /*
 import Home from './Components/login/home'
@@ -42,7 +44,8 @@ class App extends React.Component {
                         <Route exact path="/navbar" component={NavBar} />
                         <Route exact path="/logout" component={Logout} />
                         <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
-						<Route exact path="/reset_your_password" component={ResetPassword} />
+						<Route exact path="/eportfolioView" component={EportfolioView} />
+						<Route exact path="/resetPassword" component={ResetPassword} />
                 </div>            
             </div>
 
@@ -53,3 +56,4 @@ class App extends React.Component {
 }
 
 export default App;
+

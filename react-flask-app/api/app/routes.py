@@ -11,22 +11,13 @@ import time
 db.create_all()
 db.session.commit()
 
-
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('index.html')
 
 
 @app.route('/login', methods=["POST"])
 def login():
-    # login functionality
-    # if already logged in, jump to profile
-    if current_user.is_authenticated:
-        return jsonify({"validity": True,
-                        "nonValidMessage": ""}
-                       )
-
     username = request.get_json()['username']
     password = request.get_json()['password']
 
@@ -39,19 +30,12 @@ def login():
                        )
     else:
         # login_user set the current_user (variable) to the current user(real people)
-        login_user(user)
         return jsonify({"validity": True,
                         "user_id": user.user_id})
 
 
 @app.route('/register', methods=['POST'])
 def register():
-    # if logged in, then jump to profile
-    if current_user.is_authenticated:
-        return jsonify({"validity": True,
-                        "nonValidMessage": ""}
-                       )
-
     # get register information from frontend
     username = request.get_json()['username']
     email = request.get_json()['email']
@@ -258,3 +242,7 @@ def add_module():
     db.session.add(module)
     db.session.commit()
     return jsonify({"success": True})
+'''
+if __name__ == "__main__":
+    app.run(host = '0.0.0.0',debug = False,post = os.environ.get('PORT',80))
+'''

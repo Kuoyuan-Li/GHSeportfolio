@@ -1,6 +1,5 @@
 import React from 'react';
 import Section from './section'
-import pseudoSections from './pseudoSection'
 import SectionNavbar from './sectionNavbar'
 
 class EportfolioEdit extends React.Component {
@@ -8,50 +7,77 @@ class EportfolioEdit extends React.Component {
     constructor() {
         super()
         this.state = {
-            eportfolioOwner : '',
+            eportfolioOwner : localStorage.getItem('user'),
+            sectionIDTitle : [],
             //infoSection: '',
-            sectionNumber : pseudoSections.length,
-            sections : pseudoSections,
+            sectionNumber : 0,
+            sections : [],
             currentSectionID : 0,
             message : ''
         }
+        this.componentDidMount = this.componentDidMount.bind(this)
         this.addSectionHandler = this.addSectionHandler.bind(this)
 		this.deleteSection = this.deleteSection.bind(this)
 		this.handleSwitch = this.handleSwitch.bind(this)
     }
 
     componentDidMount(){
-        fetch('/eportfolioEdit').
-        then(res => res.json()).
-        then(data => {
-            this.setState({sections:data});
-          })
-        
-            fetch ('http://localhost:5000/section',{
+        const userID = localStorage.getItem('UserID')
+        fetch ('http://localhost:5000/sectionIDs',{
+            mode: 'cors',
+            method : 'POST',
+            body: JSON.stringify({
+                user_id: userID
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            //response: a list of sectionID + sectionTitle 
+            this.setState({
+                sectionIDTitle : response
+            })
+         })
+
+         console.log(this.state.sectionIDTitle)
+
+
+         for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
+            var thisID = this.state.sectionIDTitle[i].section_id
+            var thisTitle = this.state.sectionIDTitle[i].title
+            var thisSection = {
+                sectionID : thisID,
+                moduleNumber : 0,
+                sectionTitle : thisTitle,
+                modules : null,
+                message : ''
+            }
+            fetch ('http://localhost:5000/getSection',{
                 mode: 'cors',
                 method : 'POST',
                 body: JSON.stringify({
-                    username: this.state.eportfolioOwner,
-                    sectionID : thisID
+                    section_id : thisID
                 })
             }).then(response => response.json())
             .catch(error => console.error('Error:', error))
-            .then((response) => {            
+            .then((response) => {
+                //response: a list of sectionIDs
+                thisSection.modules = response
+                thisSection.moduleNumber = response.length
                 this.setState({           
-                    sections: [...this.state.sections , response.section]
+                    sections: [...this.state.sections , thisSection]
                 })
             })
 
+        }
+       
     }
-        
     
 
     addSectionHandler () {
         const blankSection = {       
             sectionID: this.state.sectionNumber + 1,
-            sectionTitle:'Please enter a title',
-            modules: []
-        
+            sectionTitle:'new section',
+            modules: []       
         }
         
 		this.setState(prevState => {
@@ -62,19 +88,54 @@ class EportfolioEdit extends React.Component {
         
 		this.setState({           
             sections: [...this.state.sections , blankSection]
-        });
+        })
+        const userID = localStorage.getItem('userID')
+        //fetch api and store in DB: userID, section
+        fetch ('http://localhost:5000/addSection',{
+            mode: 'cors',
+            method : 'POST',
+            body: JSON.stringify({
+                user_id: userID
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            if(response.success){
+                this.setState({ message : "add section success"})
+            }
+            console.log(this.state.message)
+        })
+
     }
 	
-    deleteSection (id){
-		
+    deleteSection (id){		
         this.setState(prevState => {
 			const currentID = id === prevState.currentSectionID ? 0 : prevState.currentSectionID
 			return ({
                 sections: prevState.sections.filter(el => el.sectionID !== id),
-			    currentSectionID: currentID}
-			
-			)
-		});
+                currentSectionID: currentID
+            })
+        });
+        //inform backend delete module: sectionID XXX, moduleID: XXx
+        fetch ('http://localhost:5000/deleteSection',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    section_id: id
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                if(response.success){
+                    this.setState({ message : "delete section success"})
+                }
+                console.log(this.state.message)
+            })
+        
     }
 	
 	handleSwitch (id) {

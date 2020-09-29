@@ -10,6 +10,7 @@ class Module extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            parentSection : props.parentSectionID,
             id : props.content.id,
             title: props.content.title,  
             year : props.content.year,
@@ -17,6 +18,7 @@ class Module extends React.Component{
             // use {ReactHtmlParser(this.state.text)} to read the text
             image : props.content.image,
             file : props.content.file,
+            message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
         this.YearChangeHandler = this.YearChangeHandler.bind(this)
@@ -67,22 +69,35 @@ class Module extends React.Component{
     saveModuleHandler = (e) =>{
         //fetch api and send data to backend
         e.preventDefault()
-        const imageData = new FormData();
-        imageData.append('image',this.state.image)
-        imageData.append('imagename',this.state.image.name)
-        fetch ('http://localhost:5000/upload',{
+        const fileData = new FormData();
+        fileData.append("section_id",  this.state.parentSection)
+        fileData.append("module_id",  this.state.id)
+        fileData.append('image',this.state.image)
+        fileData.append('imagename',this.state.image.name)
+        fileData.append('file',this.state.file)
+        fileData.append('filename',this.state.file.name)
+        fileData.append('title',this.state.title)
+        fileData.append('time',this.state.year)
+        fileData.append('text',this.state.text)
+
+        fetch ('http://localhost:5000/saveModule',{
             mode: 'cors',
             method : 'POST',
-            body: imageData
+            body: fileData
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
-            /*
-            response.json().then((body) => {
-              this.setState({ message: `http://localhost:8000/${body.file}` });
-            });*/
-          })
-        console.log(this.state.image)
+            //response: if upload files susccessfully, return success message
+            if(response.success){
+                this.setState({
+                    message : 'Save the edited module' 
+                })                
+            }
+            console.log(this.state.message)
+         })
+         
+        
+         
 
     }
 
@@ -113,6 +128,7 @@ class Module extends React.Component{
                 <input type = "text"
                 name = 'title'
                 value={this.state.title}
+                placeholder = "Module title"
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 

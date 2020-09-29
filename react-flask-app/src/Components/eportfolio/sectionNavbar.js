@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import {Breadcrumb, Button} from 'react-bootstrap';
-import pseudoSections from "./pseudoSection"
 
 
 class SectionNavbar extends React.Component {

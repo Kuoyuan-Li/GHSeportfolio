@@ -55,13 +55,13 @@ export class Login extends React.Component {
                 if (response.validity !== true) {
                     this.setState({ message : response.nonValidMessage })
                 }
-                else {
+                 else {
                     const loggedInUsername  = this.state.username;
                     localStorage.setItem('userID', response.user_id);
                     localStorage.setItem('user', loggedInUsername);
                     this.props.history.push(`/profile`)
                 }
-                
+               
             })
 
 
@@ -76,14 +76,22 @@ export class Login extends React.Component {
     }
 
     render () {
+        let warning;
+        if(this.state.message === ''){
+             warning = <div></div>;
+        } else{
+            warning =
+                <div class="warning-message">                                                   
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {this.state.message}
+                </div>
+        }
         return (
+            <body id="login">
             <div className="container">
                 <div class="row">
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div class="warning-message">
-                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                {this.state.message}
-                            </div>
+                        <form noValidate onSubmit={this.onSubmit}>                                                                                             
+                            {warning}
                         <div className="form form1">    
                             <div className="form-group">
                                 <input type="username"
@@ -114,6 +122,7 @@ export class Login extends React.Component {
                     Back to Index Page
                 </button>
             </div>
+            </body>
         )
     }
 }

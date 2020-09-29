@@ -16,7 +16,6 @@ export class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.backIndex = this.backIndex.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
-        this.backIndex = this.backIndex.bind(this)
     }
 
     componentDidMount () {
@@ -77,16 +76,22 @@ export class Register extends React.Component {
     }
 
     render () {
+        let warning;
+        if(this.state.message === ''){
+             warning = <div></div>;
+        } else{
+            warning =
+            <div class="warning-message">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {this.state.message}
+            </div>
+        }
         return (
+            <body id="login">
             <div className="container">
                 <div class="row">
-                <form noValidate onSubmit={this.onSubmit}>
-                            
-                    <div class="warning-message">
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        {this.state.message}
-                    </div>
-
+                <form noValidate onSubmit={this.onSubmit}>                           
+                    {warning}
                     <div className="form form2">
 
                         <div className="form-group">
@@ -140,6 +145,7 @@ export class Register extends React.Component {
                     Back to Index Page
                 </button>
             </div>
+            </body>
         )
     }
 }

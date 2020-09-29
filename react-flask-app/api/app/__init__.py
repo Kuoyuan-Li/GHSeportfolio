@@ -7,7 +7,7 @@ from datetime import timedelta
 
 
 
-app = Flask(__name__)  # instantiate the app
+app = Flask(__name__, static_folder = '../../build',static_url_path = '/')  # instantiate the app
 app.config.from_object(Config)  # apply config from config.py file
 # Sets the static file cache expiration time
 app.send_file_max_age_default = timedelta(seconds=1)

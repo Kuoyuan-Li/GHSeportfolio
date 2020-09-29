@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from "./navbar.js"
 import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
-//import './style.scss'
+import './style.scss'
 
 class Profile extends Component {
     constructor() {
@@ -25,15 +25,16 @@ class Profile extends Component {
       }else{
         this.props.history.push('/login')
       }
-    }
+      
+	}
 
 
     jumpToView (e){
-
+        this.props.history.push('/eportfolioView')
     }
 
     jumpToEdit (e){
-      this.props.history.push('/eportfolioEdit')
+        this.props.history.push('/eportfolioEdit')
     }
 
     jump(e){
@@ -45,62 +46,46 @@ class Profile extends Component {
 
     render () {
         return (
+          <div id="profile">
             <div className="container">
                 
 				<Navbar />           
-          <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
+                <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
 				
                             
               
-				<div style = {{display:'flex', margin: 30}}>
-				    <Card className='card' style={{color: "#000", width: 600}}>
-					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/100" />
-					  <Card.Body>
-					    <Card.Title>
-						  View your eportfolio
-						</Card.Title>
-						<Card.Text>
-						  You can view your own eportfolio here
-						</Card.Text>
-                        <Button variant="primary" onClick={this.jumpToView}>
-                            Go
-                        </Button>
-					  </Card.Body>
-					</Card>
-					
-					<Card className='card' style={{color: "#000", width: 600}}>
-					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/300" />
-					  <Card.Body>
-					    <Card.Title>
-						  Edit your eportfolio
-						</Card.Title>
-						<Card.Text>
-						  You can edit your own eportfolio here
-						</Card.Text>
-                        <Button variant="primary" onClick={this.jumpToEdit}>
-                            Go
-                        </Button>
-					  </Card.Body>
-					</Card>
-					
-					<Card className='card' style={{color: "#000", width: 600}}>
-					  <Card.Img style = {{height:300}} src="https://picsum.photos/200/200" />
-					  <Card.Body>
-					    <Card.Title>
-						  View others' eportfolio
-						</Card.Title>
-						<Card.Text>
-						  You can view others' eportfolios here
-						</Card.Text>
-                        <Button variant="primary" onClick={this.jumpToView}>
-                            Go
-                        </Button>
-					  </Card.Body>
-					</Card>
+				<div className="card-group">
+				    <div className='card'>
+					      <Card.Img src="https://picsum.photos/200/100"/>
+					      <p>View your eportfolio</p>
+						    <h3>-- You can view your own eportfolio here</h3>
+                <Button onClick={this.jumpToView}>
+                  <i class="fa fa-chevron-right"></i> Go
+                </Button>
+					  </div>
+
+            <div className='card'>
+					      <Card.Img src="https://picsum.photos/200/300"/>
+					      <p>Edit your eportfolio</p>
+						    <h3>-- You can edit your own eportfolio here</h3>
+                <Button onClick={this.jumpToEdit}>
+                  <i class="fa fa-chevron-right"></i> Go
+                </Button>
+					  </div>
+
+            <div className='card'>
+					      <Card.Img src="https://picsum.photos/200/200"/>
+					      <p>View others' eportfolio</p>
+						    <h3>-- You can view others' own eportfolio here</h3>
+                <Button onClick={this.jumpToView}>
+                  <i class="fa fa-chevron-right"></i> Go
+                </Button>
+					  </div>
                 </div>
                 
                 
             </div>
+          </div>
         )
     }
 }
