@@ -130,7 +130,8 @@ def upload():
 
 
 def convert_to_json(table):
-    json = [row.convert_to_dict() for row in table]
+    data = [row.convert_to_dict() for row in table]
+    json = {"list":data}
     return json
 
 
@@ -153,7 +154,7 @@ def get_all_modules():
 @app.route('/saveSection', methods=['POST'])
 def save_section():
     section_id = request.get_json()['section_id']
-    section_title = request.get_json()['section_title']
+    section_title = request.get_json()['title']
     section = Section.query.filter_by(section_id = section_id).first()
     section.title = section_title
     db.session.commit()
@@ -162,11 +163,10 @@ def save_section():
 
 @app.route('/saveModule', methods=['POST'])
 def save_module():
-    module_id = request.get_json()['module_id']
-
     image = request.files['image']
     file = request.files['file']
 
+    module_id = request.get_json()['module_id']
     section_id = request.get_json()['section_id']
     title = request.get_json()['title']
     date = request.get_json()['time']
@@ -183,31 +183,33 @@ def save_module():
     os.remove(os.path.join(basepath, module.image))
     os.remove(os.path.join(basepath, module.file))
 
+
     if image:
         image_path = os.path.join(basepath, 'static/images', secure_filename(image.imagename))
-        # save image in path
+    # save image in path
         image.save(image_path)
 
     if file:
         file_path = os.path.join(basepath, 'static/files', secure_filename(file.filename))
-        # save file in path
+    # save file in path
         file.save(file_path)
 
+    module.image = image_path
+    module.file = file_path,
     module.section_id = section_id
     module.title = title
     module.date = date
     module.text = text
-    module.image = image_path
-    module.file = file_path,
     db.session.commit()
 
     return jsonify({"success": True})
 
 
+
 @app.route('/deleteSection', methods=['POST'])
 def delete_section():
     section_id = request.get_json()['section_id']
-    section = Module.query.filter_by(section_id=section_id).first()
+    section = Section.query.filter_by(section_id=section_id).first()
     modules = Module.query.filter_by(section_id=section_id).all()
     for module in modules:
         db.session.delete(module)
@@ -238,7 +240,8 @@ def add_section():
 @app.route('/addModule', methods=['POST'])
 def add_module():
     section_id = request.get_json()['section_id']
-    module = Module(section_id = section_id)
+    title = "new module"
+    module = Module(section_id = section_id, title = title)
     db.session.add(module)
     db.session.commit()
     return jsonify({"success": True})

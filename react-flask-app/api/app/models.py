@@ -6,7 +6,7 @@ from flask_login import UserMixin
 
 
 class User(db.Model):
-    user_id= db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True) #fields
+    user_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True) #fields
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
@@ -58,7 +58,7 @@ class Section(db.Model):
 class Module(db.Model):
 
     module_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100))
     date = db.Column(db.Time)
     text = db.Column(db.String(500))
     image = db.Column(db.String(300))

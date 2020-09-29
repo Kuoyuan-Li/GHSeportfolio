@@ -1,5 +1,4 @@
 from os import environ
-from dotenv import load_dotenv
 
 class Config(object):
     SECRET_KEY = environ.get('SECRET_KEY') or 'This-is-a-secret'
