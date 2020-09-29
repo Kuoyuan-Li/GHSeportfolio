@@ -7,6 +7,7 @@ export class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
+            userID : null,
             message : ''
         }
 
@@ -56,10 +57,11 @@ export class Login extends React.Component {
                 }
                 else {
                     const loggedInUsername  = this.state.username;
+                    localStorage.setItem('userID', response.user_id);
                     localStorage.setItem('user', loggedInUsername);
                     this.props.history.push(`/profile`)
                 }
-
+                
             })
 
 

@@ -20,14 +20,31 @@ class EportfolioEdit extends React.Component {
 		this.handleSwitch = this.handleSwitch.bind(this)
     }
 
-    /*componentDidMount(){
+    componentDidMount(){
         fetch('/eportfolioEdit').
         then(res => res.json()).
         then(data => {
             this.setState({sections:data});
           })
         
-    }*/
+            fetch ('http://localhost:5000/section',{
+                mode: 'cors',
+                method : 'POST',
+                body: JSON.stringify({
+                    username: this.state.eportfolioOwner,
+                    sectionID : thisID
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then((response) => {            
+                this.setState({           
+                    sections: [...this.state.sections , response.section]
+                })
+            })
+
+    }
+        
+    
 
     addSectionHandler () {
         const blankSection = {       
