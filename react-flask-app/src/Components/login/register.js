@@ -90,7 +90,7 @@ export class Register extends React.Component {
             <body id="login">
             <div className="container">
                 <div class="row">
-                <form noValidate onSubmit={this.onSubmit}>                           
+                <form noValidate className = 'registerForm' onSubmit={this.onSubmit}>                           
                     {warning}
                     <div className="form form2">
 
@@ -141,7 +141,7 @@ export class Register extends React.Component {
                 </form>
                 </div>
                 
-                <button class="linkButton" onClick={this.backIndex}>
+                <button class="linkButton" className = "backToIndex" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

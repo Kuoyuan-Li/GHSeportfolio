@@ -164,7 +164,7 @@ def save_section():
 @app.route('/saveModule', methods=['POST'])
 def save_module():
     
-    print("hello")
+    #print("hello")
     imagename = request.form['imagename']
     filename = request.form['filename']
     module_id = request.form['module_id']
@@ -237,7 +237,8 @@ def add_section():
     section = Section(title = title, user_id = user_id)
     db.session.add(section)
     db.session.commit()
-    return jsonify({"success": True})
+    return jsonify({"success": True,
+                    "section_id" : section.section_id})
     
 
 
@@ -248,8 +249,8 @@ def add_module():
     module = Module(section_id = section_id, title = title)
     db.session.add(module)
     db.session.commit()
-    return jsonify({"module_id": module.module_id,
-                    "success": True})
+    return jsonify({"success": True, "module": module})
+
 '''
 if __name__ == "__main__":
     app.run(host = '0.0.0.0',debug = False,post = os.environ.get('PORT',80))

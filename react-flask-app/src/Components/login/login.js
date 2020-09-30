@@ -90,7 +90,7 @@ export class Login extends React.Component {
             <body id="login">
             <div className="container">
                 <div class="row">
-                        <form noValidate onSubmit={this.onSubmit}>                                                                                             
+                        <form noValidate onSubmit={this.onSubmit} className = 'loginForm'>                                                                                             
                             {warning}
                         <div className="form form1">    
                             <div className="form-group">
@@ -111,14 +111,14 @@ export class Login extends React.Component {
 
                             </div>
 
-                            <button class="button button1" type="submit">
+                            <button class="button button1" className = 'login' type="submit">
                                 Log in
                             </button>
                             </div>
                         </form>
                 </div>
                 
-                <button class="linkButton" onClick={this.backIndex}>
+                <button class="linkButton" className = "backToIndex" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import './style.scss'
 
 class Index extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.login = this.login.bind(this)
         this.register = this.register.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)

@@ -1,5 +1,6 @@
 import React from 'react';
 import Module from './module'
+import { Route , withRouter} from 'react-router-dom';
 
 class Section extends React.Component {
 
@@ -7,41 +8,17 @@ class Section extends React.Component {
         super(props)
         this.state = {
             sectionID : props.content.sectionID,
-            moduleNumber : props.content.modules.length,
             sectionTitle : props.content.sectionTitle,
             modules : props.content.modules,
             message : ''
         }
         this.sectionTitleChangeHandler = this.sectionTitleChangeHandler.bind(this)
-        //this.saveSectionHandler = this.saveSectionHandler.bind(this)
-        //this.componentDidMount = this.componentDidMount.bind(this)
+        this.sectionTitleSaveHandler = this. sectionTitleSaveHandler.bind(this)
     }
 
-    /*componentDidMount(){
-        fetch('/eportfolioEdit').
-        then(res => res.json()).
-        then(data => {
-            this.setState({sections:data});
-          })
-        
-    }*/
-    
-
-  
-
-
     //initialize a blank module and add to the present modules list
-    addModuleHandler = () => {
-        
-		const blankModule = {       
-                //id: this.state.moduleNumber+1,
-                title:'',
-                year :null,
-                text : '',
-                image:null,
-                file: null          
-        }
-		
+    addModuleHandler = () => {   
+        const section_id = this.state.sectionID    
 		fetch ('http://localhost:5000/addModule',{
             mode: 'cors',
             method : 'POST',
@@ -50,55 +27,45 @@ class Section extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                section_id: this.state.sectionID
+                section_id : section_id
             })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
-        .then(response => {
-			//console.log(this.state.sectionID)
-            if(response.success){
+        .then(response => { // response: success, module
+            console.log(response)
+            if(response.success){                
                 this.setState({ message : "add module success"})
-				blankModule.id = response.module_id
+                this.setState({           
+                    modules: [...this.state.modules , response.module]
+                });
             }
-            console.log(this.state.message)
-			console.log(blankModule.id)
+                  
         })
-		
-		
-        /*this.setState(prevState => {
-            return {
-                moduleNumber: prevState.moduleNumber +1,
-            }
-        })*/
-        this.setState({           
-            modules: [...this.state.modules , blankModule]
-        });
 
-        
-    
-        
     }
-
-    sectionTitleChangeHandler =(e) =>{
-        this.setState({ sectionTitle : e.target.value })
-        fetch ('http://localhost:5000/saveSection',{
+    sectionTitleSaveHandler = () =>{
+            fetch ('http://localhost:5000/saveSection',{
             mode: 'cors',
-            method : 'POST',
+            method : 'POST',            
             headers :{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                sectionID: this.state.sectionID,
-                sectionTitle: this.state.sectionTitle
+                section_id: this.state.sectionID,
+                title: this.state.sectionTitle
             })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
-			console.log(response)
             this.setState({ message : response.message})
             console.log(this.state.message)
-        })
+            window.location.reload(false);
+        })       
+    }
+
+    sectionTitleChangeHandler = (e) =>{
+        this.setState({ sectionTitle : e.target.value })
     }
 
     //delete this section using the deleteHandler passed from parent component
@@ -108,11 +75,13 @@ class Section extends React.Component {
    
     //delete a specific module based on its id
     deleteModule (id){
-		console.log(id)
+        console.log(id) // return undefined 
+        /*
         this.setState(prevState => ({
             modules: prevState.modules.filter(el => el.id !== id )
         }));
         //inform backend delete module: sectionID XXX, moduleID: XXx
+        
         fetch ('http://localhost:5000/deleteModule',{
                 mode: 'cors',
                 method : 'POST',
@@ -130,7 +99,8 @@ class Section extends React.Component {
                     this.setState({ message : "delete module success"})
                 }
                 console.log(this.state.message)
-            })
+            })*/
+            
         
     }
 
@@ -148,7 +118,8 @@ class Section extends React.Component {
                         <input type = "text"
                             name = 'Sectiontitle'
                             value={this.state.sectionTitle}
-                            onClick = {this.sectionTitleChangeHandler}/>
+                            onChange = {this.sectionTitleChangeHandler}/>
+                            <button onClick = {this.sectionTitleSaveHandler}>Save title</button>
                             {moduleItems}
                             <button type="button" onClick = {this.addModuleHandler}>Add a module</button>
                         </div>

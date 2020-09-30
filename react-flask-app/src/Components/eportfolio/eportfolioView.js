@@ -23,19 +23,24 @@ class EportfolioView extends React.Component {
         fetch ('http://localhost:5000/sectionIDs',{
             mode: 'cors',
             method : 'POST',
+            headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 user_id: userID
             })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
+            console.log(response.data)
             //response: a list of sectionID + sectionTitle 
-            this.setState({
-                sectionIDTitle : response
-            })
+            //this.setState({
+                //sectionIDTitle : response.list
+            //})
          })
 
-         console.log(this.state.sectionIDTitle)
+         //console.log(this.state.sectionIDTitle)
 
 
          for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
@@ -51,6 +56,10 @@ class EportfolioView extends React.Component {
             fetch ('http://localhost:5000/getSection',{
                 mode: 'cors',
                 method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({
                     section_id : thisID
                 })

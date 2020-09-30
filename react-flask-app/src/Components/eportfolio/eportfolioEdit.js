@@ -8,10 +8,9 @@ class EportfolioEdit extends React.Component {
         super()
         this.state = {
             eportfolioOwner : localStorage.getItem('user'),
-            sectionIDTitle : [],
+            sectionIDTitle :[],
             //infoSection: '',
-            sectionNumber : 0,
-            sections : [],
+            sections :[],   
             currentSectionID : 0,
             message : ''
         }
@@ -37,25 +36,19 @@ class EportfolioEdit extends React.Component {
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: a list of sectionID + sectionTitle
-			console.log(response.list)
-            this.setState({sectionIDTitle: response.list});
-				
-				
+            this.setState({sectionIDTitle: response.list});							
         })
-         
-
         console.log(this.state.sectionIDTitle)
 
 
          for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
             var thisID = this.state.sectionIDTitle[i].section_id
             var thisTitle = this.state.sectionIDTitle[i].title
+            //section structure
             var thisSection = {
                 sectionID : thisID,
-                moduleNumber : 0,
                 sectionTitle : thisTitle,
-                modules : null,
-                message : ''
+                modules : null
             }
             await fetch ('http://localhost:5000/getSection',{
                 mode: 'cors',
@@ -72,7 +65,6 @@ class EportfolioEdit extends React.Component {
             .then((response) => {
                 //response: a list of sectionIDs
                 thisSection.modules = response.list
-                thisSection.moduleNumber = response.list.length
                 this.setState({           
                     sections: [...this.state.sections , thisSection]
                 })
@@ -80,37 +72,26 @@ class EportfolioEdit extends React.Component {
             
         }
 		
-		console.log(this.state.sections[32])
        
     }
     
 
     addSectionHandler () {
-        const blankSection = {       
+        var blankSection = {       
             //sectionID: this.state.sectionNumber + 1,
+            sectionID : 0,    
             sectionTitle:'new section',
             modules: []       
         }
         
-		this.setState(prevState => {
-            return (
-			    {sectionNumber: prevState.sectionNumber + 1}
-            )
-        })
-        
-		this.setState({           
-            sections: [...this.state.sections , blankSection]
-        })
-        const userID = localStorage.getItem('userID')
-        console.log(userID)
-		
+        const userID = localStorage.getItem('userID')		
 		//fetch api and store in DB: userID, section
         fetch ('http://localhost:5000/addSection',{
             mode: 'cors',
             method : 'POST',
 			headers :{
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 user_id: userID
@@ -120,10 +101,12 @@ class EportfolioEdit extends React.Component {
         .then(response => {
 			if(response.success){
                 this.setState({ message : "add section success"})
+                blankSection.sectionID = response.section_id
+                this.setState({           
+                    sections: [...this.state.sections , blankSection]
+                })
             }
-            console.log(this.state.message)
         })
-
     }
 	
     deleteSection (id){		
@@ -170,10 +153,9 @@ class EportfolioEdit extends React.Component {
 				    null
 				)
 			})
-       
+
         return (
             <div className="container">
-			    
 				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 <button type="button" onClick = {this.addSectionHandler}>Add new section</button>
 				

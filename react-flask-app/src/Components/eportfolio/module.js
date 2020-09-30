@@ -10,14 +10,14 @@ class Module extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            parentSection : props.parentSectionID,
-            id : props.content.id,
-            title: props.content.title,  
-            year : props.content.year,
-            text : props.content.text,
+            parentSection : props.parentSectionID === null ? '' :  props.content.section_id,
+            id :props.content.module_id === null ? '': props.content.module_id,
+            title: props.content.title=== null ? '' :props.content.title,  
+            year : props.content.date=== null ? '' :props.content.date,
+            text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
-            image : props.content.image,
-            file : props.content.file,
+            image : props.content.image=== null ? '' :props.content.image,
+            file : props.content.file=== null ? '' :props.content.file,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
@@ -93,12 +93,12 @@ class Module extends React.Component{
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: if upload files susccessfully, return success message
-            if(response.success){
+            /*if(response.success){
                 this.setState({
                     message : 'Save the edited module' 
                 })                
-            }
-            console.log(this.state.message)
+            }*/
+            //console.log(this.state.message)
          })
          
         
@@ -106,8 +106,9 @@ class Module extends React.Component{
 
     }
 
-    deleteThisModuleHandler(id){
-        this.props.deleteHandler(id);
+    deleteThisModuleHandler(){
+        console.log('deleteThisModuleHandler '+this.state.id)
+        //this.props.deleteHandler(this.state.id);
     }
    
 
