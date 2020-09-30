@@ -32,24 +32,17 @@ class Section extends React.Component {
 
     //initialize a blank module and add to the present modules list
     addModuleHandler = () => {
-        const blankModule = {       
-                id: this.state.moduleNumber+1,
+        
+		const blankModule = {       
+                //id: this.state.moduleNumber+1,
                 title:'',
                 year :null,
                 text : '',
                 image:null,
                 file: null          
         }
-        this.setState(prevState => {
-            return {
-                moduleNumber: prevState.moduleNumber +1,
-            }
-        })
-        this.setState({           
-            modules: [...this.state.modules , blankModule]
-         });
-
-        fetch ('http://localhost:5000/addModule',{
+		
+		fetch ('http://localhost:5000/addModule',{
             mode: 'cors',
             method : 'POST',
             headers :{
@@ -62,12 +55,26 @@ class Section extends React.Component {
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
-			console.log(this.state.sectionID)
+			//console.log(this.state.sectionID)
             if(response.success){
                 this.setState({ message : "add module success"})
+				blankModule.id = response.module_id
             }
             console.log(this.state.message)
+			console.log(blankModule.id)
         })
+		
+		
+        /*this.setState(prevState => {
+            return {
+                moduleNumber: prevState.moduleNumber +1,
+            }
+        })*/
+        this.setState({           
+            modules: [...this.state.modules , blankModule]
+        });
+
+        
     
         
     }

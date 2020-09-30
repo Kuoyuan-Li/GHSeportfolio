@@ -248,7 +248,8 @@ def add_module():
     module = Module(section_id = section_id, title = title)
     db.session.add(module)
     db.session.commit()
-    return jsonify({"success": True})
+    return jsonify({"module_id": module.module_id,
+                    "success": True})
 '''
 if __name__ == "__main__":
     app.run(host = '0.0.0.0',debug = False,post = os.environ.get('PORT',80))
