@@ -21,9 +21,9 @@ class EportfolioEdit extends React.Component {
 		this.handleSwitch = this.handleSwitch.bind(this)
     }
 
-    componentDidMount(){
-        const userID = localStorage.getItem('UserID')
-        fetch ('http://localhost:5000/sectionIDs',{
+    async componentDidMount(){
+        const userID = localStorage.getItem('userID')
+        await fetch ('http://localhost:5000/sectionIDs',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -36,13 +36,15 @@ class EportfolioEdit extends React.Component {
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
-            //response: a list of sectionID + sectionTitle 
-            this.setState({
-                sectionIDTitle : response
-            })
-         })
+            //response: a list of sectionID + sectionTitle
+			console.log(response.list)
+            this.setState({sectionIDTitle: response.list});
+				
+				
+        })
+         
 
-         console.log(this.state.sectionIDTitle)
+        console.log(this.state.sectionIDTitle)
 
 
          for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
@@ -55,7 +57,7 @@ class EportfolioEdit extends React.Component {
                 modules : null,
                 message : ''
             }
-            fetch ('http://localhost:5000/getSection',{
+            await fetch ('http://localhost:5000/getSection',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{
@@ -69,21 +71,23 @@ class EportfolioEdit extends React.Component {
             .catch(error => console.error('Error:', error))
             .then((response) => {
                 //response: a list of sectionIDs
-                thisSection.modules = response
-                thisSection.moduleNumber = response.length
+                thisSection.modules = response.list
+                thisSection.moduleNumber = response.list.length
                 this.setState({           
                     sections: [...this.state.sections , thisSection]
                 })
             })
-
+            
         }
+		
+		console.log(this.state.sections[32])
        
     }
     
 
     addSectionHandler () {
         const blankSection = {       
-            sectionID: this.state.sectionNumber + 1,
+            //sectionID: this.state.sectionNumber + 1,
             sectionTitle:'new section',
             modules: []       
         }

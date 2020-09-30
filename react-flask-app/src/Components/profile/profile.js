@@ -19,13 +19,15 @@ class Profile extends Component {
 	
 
     componentDidMount () {
+      
       const loginguser = localStorage.getItem('user')
+	  
       if (loginguser){
         this.setState ({profileOwner : loginguser })
       }else{
         this.props.history.push('/login')
       }
-      
+      console.log(localStorage.getItem('userID'))
 	}
 
 

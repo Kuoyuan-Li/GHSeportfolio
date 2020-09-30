@@ -101,6 +101,7 @@ class Section extends React.Component {
    
     //delete a specific module based on its id
     deleteModule (id){
+		console.log(id)
         this.setState(prevState => ({
             modules: prevState.modules.filter(el => el.id !== id )
         }));

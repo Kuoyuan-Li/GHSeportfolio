@@ -164,7 +164,7 @@ def save_section():
 @app.route('/saveModule', methods=['POST'])
 def save_module():
     
-    
+    print("hello")
     imagename = request.form['imagename']
     filename = request.form['filename']
     module_id = request.form['module_id']
@@ -172,7 +172,7 @@ def save_module():
     title = request.form['title']
     date = request.form['time']
     text = request.form['text']
-    print("hello")
+    
     image = request.files['image']
     file = request.files['file']
     module = Module.query.filter_by(module_id = module_id).first()
