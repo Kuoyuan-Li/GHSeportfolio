@@ -251,9 +251,8 @@ def add_module():
     db.session.add(module)
     db.session.commit()
     new_module = Module.query.filter_by(module_id = module.module_id).first()
-    modules_data = new_module.convert_to_dict
-    return  modules_data
-    #return jsonify({"success": True, "module": module})
+    module_json = new_module.convert_to_dict()
+    return jsonify({"success": True, "module": module_json})
 
 '''
 if __name__ == "__main__":
