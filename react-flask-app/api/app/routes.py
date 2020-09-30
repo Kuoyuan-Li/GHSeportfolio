@@ -134,6 +134,7 @@ def convert_to_json(table):
     json = {"list":data}
     return json
 
+    
 
 @app.route('/sectionIDs', methods=['POST'])
 def get_all_sections():
@@ -249,7 +250,10 @@ def add_module():
     module = Module(section_id = section_id, title = title)
     db.session.add(module)
     db.session.commit()
-    return jsonify({"success": True, "module": module})
+    new_module = Module.query.filter_by(module_id = module.module_id).first()
+    modules_data = new_module.convert_to_dict
+    return  modules_data
+    #return jsonify({"success": True, "module": module})
 
 '''
 if __name__ == "__main__":

@@ -33,12 +33,11 @@ class Section extends React.Component {
         .catch(error => console.error('Error:', error))
         .then(response => { // response: success, module
             console.log(response)
-            if(response.success){                
-                this.setState({ message : "add module success"})
-                this.setState({           
-                    modules: [...this.state.modules , response.module]
-                });
-            }
+                         
+                //this.setState({ message : "add module success"})
+                /*this.setState({           
+                    modules: [...this.state.modules , response.list]
+                })*/
                   
         })
 
