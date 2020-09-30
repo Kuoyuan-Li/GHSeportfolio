@@ -165,17 +165,17 @@ def save_section():
 @app.route('/saveModule', methods=['POST'])
 def save_module():
     
-    #print("hello")
-    imagename = request.form['imagename']
-    filename = request.form['filename']
-    module_id = request.form['module_id']
-    section_id = request.form['section_id']
-    title = request.form['title']
-    date = request.form['time']
-    text = request.form['text']
-    
     image = request.files['image']
     file = request.files['file']
+    
+    imagename = request.form.get('imagename')
+    filename = request.form.get('filename')
+    module_id = request.form.get('module_id')
+    section_id = request.form.get('section_id')
+    title = request.form.get('title')
+    date = request.form.get('time')
+    text = request.form.get('text')
+    
     module = Module.query.filter_by(module_id = module_id).first()
 
     image_path = ''
@@ -199,13 +199,14 @@ def save_module():
         file.save(file_path)
 
     module.image = image_path
-    module.file = file_path,
+    module.file = file_path
     module.section_id = section_id
     module.title = title
     module.date = date
     module.text = text
     db.session.commit()
-
+    print(title)
+    print(module_id)
     return jsonify({"success": True})
 
 

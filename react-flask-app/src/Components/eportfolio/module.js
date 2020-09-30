@@ -79,26 +79,30 @@ class Module extends React.Component{
         fileData.append('title',this.state.title)
         fileData.append('time',this.state.year)
         fileData.append('text',this.state.text)
-
+        console.log(this.state.parentSection)
         fetch ('http://localhost:5000/saveModule',{
-            mode: 'no-cors',
+            mode: 'cors',
             method : 'POST',
+			/*
 			headers: {
-                "Content-Type": "multipart/form-data",
+                //"Content-Type": "multipart/form-data",
                 "Accept": "application/json",
-                "type": "formData"
-            },
+				'Content-Type': 'application/json',
+                //"type": "formData"
+            },*/
             body: fileData
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: if upload files susccessfully, return success message
-            /*if(response.success){
+			console.log(response)
+            if(response.success){
                 this.setState({
                     message : 'Save the edited module' 
                 })                
-            }*/
-            //console.log(this.state.message)
+            }
+            console.log(this.state.message)
+			
          })
          
         
@@ -107,8 +111,8 @@ class Module extends React.Component{
     }
 
     deleteThisModuleHandler(){
-        console.log('deleteThisModuleHandler '+this.state.id)
-        //this.props.deleteHandler(this.state.id);
+        //console.log('deleteThisModuleHandler '+this.state.id)
+        this.props.deleteHandler(this.state.id);
     }
    
 

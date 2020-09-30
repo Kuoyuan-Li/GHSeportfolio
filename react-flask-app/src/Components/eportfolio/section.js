@@ -32,13 +32,12 @@ class Section extends React.Component {
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => { // response: success, module
-            console.log(response)
-                         
-                //this.setState({ message : "add module success"})
-                /*this.setState({           
-                    modules: [...this.state.modules , response.list]
-                })*/
-                  
+            
+            this.setState({ message : "add module success"})
+            this.setState({           
+                modules: [...this.state.modules , response.module]
+            })
+            console.log(this.state.message)      
         })
 
     }
@@ -75,9 +74,9 @@ class Section extends React.Component {
     //delete a specific module based on its id
     deleteModule (id){
         console.log(id) // return undefined 
-        /*
+        
         this.setState(prevState => ({
-            modules: prevState.modules.filter(el => el.id !== id )
+            modules: prevState.modules.filter(module => module.module_id !== id )
         }));
         //inform backend delete module: sectionID XXX, moduleID: XXx
         
@@ -98,14 +97,14 @@ class Section extends React.Component {
                     this.setState({ message : "delete module success"})
                 }
                 console.log(this.state.message)
-            })*/
+            })
             
         
     }
 
     render() {
         const moduleItems = this.state.modules.map
-            (content => <Module key={content.id} content={content} parentSectionID = {this.state.sectionID} deleteHandler = {this.deleteModule.bind(this)}/>)
+            (content => <Module key={content.module_id} content={content} parentSectionID = {this.state.sectionID} deleteHandler = {this.deleteModule.bind(this)}/>)
        
         return (
             <div className="container">
