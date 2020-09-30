@@ -26,6 +26,10 @@ class EportfolioEdit extends React.Component {
         fetch ('http://localhost:5000/sectionIDs',{
             mode: 'cors',
             method : 'POST',
+			headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 user_id: userID
             })
@@ -54,6 +58,10 @@ class EportfolioEdit extends React.Component {
             fetch ('http://localhost:5000/getSection',{
                 mode: 'cors',
                 method : 'POST',
+				headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({
                     section_id : thisID
                 })
@@ -90,17 +98,23 @@ class EportfolioEdit extends React.Component {
             sections: [...this.state.sections , blankSection]
         })
         const userID = localStorage.getItem('userID')
-        //fetch api and store in DB: userID, section
+        console.log(userID)
+		
+		//fetch api and store in DB: userID, section
         fetch ('http://localhost:5000/addSection',{
             mode: 'cors',
             method : 'POST',
+			headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 user_id: userID
             })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
-            if(response.success){
+			if(response.success){
                 this.setState({ message : "add section success"})
             }
             console.log(this.state.message)

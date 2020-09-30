@@ -57,11 +57,12 @@ class Section extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                sectionID: this.state.sectionID
+                section_id: this.state.sectionID
             })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
+			console.log(this.state.sectionID)
             if(response.success){
                 this.setState({ message : "add module success"})
             }
@@ -87,6 +88,7 @@ class Section extends React.Component {
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
+			console.log(response)
             this.setState({ message : response.message})
             console.log(this.state.message)
         })
@@ -138,7 +140,7 @@ class Section extends React.Component {
                         <input type = "text"
                             name = 'Sectiontitle'
                             value={this.state.sectionTitle}
-                            onChange = {this.sectionTitleChangeHandler}/>
+                            onClick = {this.sectionTitleChangeHandler}/>
                             {moduleItems}
                             <button type="button" onClick = {this.addModuleHandler}>Add a module</button>
                         </div>

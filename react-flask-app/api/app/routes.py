@@ -163,15 +163,18 @@ def save_section():
 
 @app.route('/saveModule', methods=['POST'])
 def save_module():
+    
+    
+    imagename = request.form['imagename']
+    filename = request.form['filename']
+    module_id = request.form['module_id']
+    section_id = request.form['section_id']
+    title = request.form['title']
+    date = request.form['time']
+    text = request.form['text']
+    print("hello")
     image = request.files['image']
     file = request.files['file']
-
-    module_id = request.get_json()['module_id']
-    section_id = request.get_json()['section_id']
-    title = request.get_json()['title']
-    date = request.get_json()['time']
-    text = request.get_json()['text']
-
     module = Module.query.filter_by(module_id = module_id).first()
 
     image_path = ''
@@ -180,17 +183,17 @@ def save_module():
     # get the basepath
     basepath = os.path.dirname(__file__)
 
-    os.remove(os.path.join(basepath, module.image))
-    os.remove(os.path.join(basepath, module.file))
+    #os.remove(os.path.join(basepath, module.image))
+    #os.remove(os.path.join(basepath, module.file))
 
 
     if image:
-        image_path = os.path.join(basepath, 'static/images', secure_filename(image.imagename))
+        image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
     # save image in path
         image.save(image_path)
 
     if file:
-        file_path = os.path.join(basepath, 'static/files', secure_filename(file.filename))
+        file_path = os.path.join(basepath, 'static/files', secure_filename(filename))
     # save file in path
         file.save(file_path)
 
@@ -235,6 +238,7 @@ def add_section():
     db.session.add(section)
     db.session.commit()
     return jsonify({"success": True})
+    
 
 
 @app.route('/addModule', methods=['POST'])

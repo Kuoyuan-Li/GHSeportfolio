@@ -81,8 +81,13 @@ class Module extends React.Component{
         fileData.append('text',this.state.text)
 
         fetch ('http://localhost:5000/saveModule',{
-            mode: 'cors',
+            mode: 'no-cors',
             method : 'POST',
+			headers: {
+                "Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+                "type": "formData"
+            },
             body: fileData
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
