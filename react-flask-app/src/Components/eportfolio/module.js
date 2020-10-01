@@ -2,7 +2,6 @@ import React from 'react'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ReactHtmlParser from "react-html-parser"
-import YearPicker from 'react-year-picker'
 import { Form } from 'react-bootstrap'
 import './style.scss'
 
@@ -13,7 +12,7 @@ class Module extends React.Component{
             parentSection : props.parentSectionID === null ? '' :  props.content.section_id,
             id :props.content.module_id === null ? '': props.content.module_id,
             title: props.content.title=== null ? '' :props.content.title,  
-            year : props.content.date=== null ? '' :props.content.date,
+            time : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
             image : props.content.image=== null ? null :props.content.image,
@@ -21,7 +20,7 @@ class Module extends React.Component{
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
-        this.YearChangeHandler = this.YearChangeHandler.bind(this)
+        this.TimeChangeHandler = this.TimeChangeHandler.bind(this)
         this.handleTextInput = this.handleTextInput.bind(this)  
         this.selectImageHandler = this.selectImageHandler.bind(this)     
         this.selectFileHandler = this.selectFileHandler.bind(this)
@@ -36,8 +35,8 @@ class Module extends React.Component{
 
     }
 
-    YearChangeHandler = (yearvalue) => {
-        this.setState({year: yearvalue})
+    TimeChangeHandler = (e) => {
+        this.setState({time: e.target.value})
     }
 
 
@@ -148,18 +147,20 @@ class Module extends React.Component{
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
                 </div>
-
-                {this.state.year}
-                <YearPicker onChange={this.YearChangeHandler} >Change Year</YearPicker>
-    
+                <input class="input"
+                type = "text"
+                name = 'time'
+                value={this.state.time}
+                placeholder = "Time"
+                onChange = {this.TimeChangeHandler}/>
+                
+                
                 <CKEditor   
                     class="editor"
                     editor = {ClassicEditor}
                     data={this.state.text}        
                     onChange = {this.handleTextInput}
-                />
-                {ReactHtmlParser(this.state.text)}
-                
+                />             
                 <br/>
                 <input  
                 style={{display:'none'}}

@@ -60,7 +60,7 @@ class Profile extends Component {
 				    <div className='card'>
 					      <Card.Img src="https://picsum.photos/200/100"/>
 					      <p>View your eportfolio</p>
-						    <h3>-- You can view your own eportfolio here</h3>
+						    <h3>You can view your own eportfolio here</h3>
                 <Button onClick={this.jumpToView}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
@@ -69,7 +69,7 @@ class Profile extends Component {
             <div className='card'>
 					      <Card.Img src="https://picsum.photos/200/300"/>
 					      <p>Edit your eportfolio</p>
-						    <h3>-- You can edit your own eportfolio here</h3>
+						    <h3>You can edit your own eportfolio here</h3>
                 <Button onClick={this.jumpToEdit}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
@@ -78,7 +78,7 @@ class Profile extends Component {
             <div className='card'>
 					      <Card.Img src="https://picsum.photos/200/200"/>
 					      <p>View others' eportfolio</p>
-						    <h3>-- You can view others' own eportfolio here</h3>
+						    <h3>You can view others' eportfolio here</h3>
                 <Button onClick={this.jumpToView}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>

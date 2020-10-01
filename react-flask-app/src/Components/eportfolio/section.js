@@ -66,26 +66,6 @@ class Section extends React.Component {
 
     sectionTitleChangeHandler = (e) =>{
         this.setState({ sectionTitle : e.target.value })
-        const loginguser = localStorage.getItem('user')
-        fetch ('http://localhost:5000/saveSection',{
-            mode: 'cors',
-            method : 'POST',
-            headers :{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username : loginguser,
-                sectionID: this.state.sectionID,
-                sectionTitle: this.state.sectionTitle
-            })
-        }).then(response => response.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => {
-            this.setState({ message : response.message})
-            console.log(this.state.message)
-        })
-
     }
 
     //delete this section using the deleteHandler passed from parent component
