@@ -1,0 +1,125 @@
+body{
+  background-color: #f0fbff;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0fbff;
+    padding-top: 10px;
+}
+.section-list{
+}
+
+.section{
+  padding-top: 30px;
+  .section-title{
+    padding-bottom: 10px;
+  }
+}
+
+
+.section-group{
+    list-style:none;
+    display: inline-block;
+    padding-bottom: 12px;
+    .item{
+      display: inline-block;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+}
+
+.button{
+  align-self:center;
+  background:transparent;
+  padding:5px 5px;
+  margin:0 1px;
+  transition:all .5s ease;
+  color:#41403E;
+  font-size:12px;
+  letter-spacing:1px;
+  outline:none;
+  box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  &:hover{
+    box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+  }
+}
+
+.section-button {
+  font-family: 'Patrick Hand SC', cursive;
+  border: solid 2px #41403E;
+}
+.add-button {
+  padding: 2px 2px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 11px;
+  font-weight: 800;
+  
+  border:dashed 2px #41403E;
+  .fa.fa-plus{
+    padding-right: 5px;
+  }
+}
+.delete-button {
+  color: #41403E;
+  padding-left: 10px;
+  padding: 2px 2px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+}
+.image-button{
+  display: flex;
+  margin-left: 20px;
+  width: 150px;
+  height: 30px;
+  align-content: center;
+  font-family: 'Patrick Hand SC', cursive;
+  border: solid 2px #41403E;
+  .fa{
+    padding-left: 5px;  
+    padding-right: 20px;
+  }
+}
+
+.input{
+  align-self:center;
+  background:transparent;
+  padding:5px 5px;
+  padding-right: 45px;
+  margin:0 0px;
+  color:#41403E;
+  font-size:12px;
+  letter-spacing:1px;
+  box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  font-family: 'Patrick Hand SC', cursive;
+  border: 0;
+  border-bottom: solid 2px #41403E;
+}
+
+.module{
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border:dashed 2px #8a8884;
+  align-content: left;
+  width: 900px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  .module-title{
+    padding-left: 5px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+  }
+}
+
+.editor{
+  width: 10px;
+  margin-left: 500px;
+}

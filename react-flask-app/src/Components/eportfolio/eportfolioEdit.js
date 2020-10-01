@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './section'
 import SectionNavbar from './sectionNavbar'
+import './style.scss'
 
 class EportfolioEdit extends React.Component {
 
@@ -157,17 +158,11 @@ class EportfolioEdit extends React.Component {
         return (
             <div className="container">
 				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
-                <button type="button" onClick = {this.addSectionHandler}>Add new section</button>
+                <button class="button add-button" onClick = {this.addSectionHandler}>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                    Add new section</button>
 				
-				<div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <div className = "section-list">                                      
-                            
 							{sectionItems}
-                                   
-                        </div>
-                    </div>
-                </div>
             </div>
         )  
     }  
