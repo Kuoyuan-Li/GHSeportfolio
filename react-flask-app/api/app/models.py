@@ -4,7 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True) #fields
     username = db.Column(db.String(64), index=True, unique=True)
@@ -15,9 +14,11 @@ class User(db.Model):
     gender = db.Column(db.String(25))
     date_of_birth = db.Column(db.Time)
     address = db.Column(db.String(200))
-    studentID = db.Column(db.Integer, unique=True)
     phone_number = db.Column(db.String(45))
+    contact_email = db.Column(db.String(120), index=True, unique=True)
     linkedin = db.Column(db.String(200))
+    introduction = db.Column(db.String(500))
+    user_image = db.Column(db.String(300))
 
     sections = db.relationship('Section', backref='sections', lazy='dynamic')
 

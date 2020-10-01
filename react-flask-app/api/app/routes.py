@@ -170,8 +170,6 @@ def save_module():
     module.date = date
     module.text = text
     db.session.commit()
-    print(title)
-    print(module_id)
     return jsonify({"success": True})
 
 
@@ -242,3 +240,49 @@ def reset_password():
     return jsonify({"validity": True,
                     "nonValidMessage": ""}
                    )
+
+
+@app.route('/saveInformation', methods=['POST'])
+def save_information():
+    user_image = request.files['user_image']
+    user_id = request.form.get('user_id')
+
+    imagename = request.form.get('imagename')
+    family_name = request.form.get('family_name')
+    first_name = request.form.get('first_name')
+    gender = request.form.get('gender')
+    date_of_birth = request.form.get('date_of_birth')
+    address = request.form.get('address')
+    phone_number = request.form.get('phone_number')
+    contact_email = request.form.get('contact_email')
+    linkedin = request.form.get('linkedin')
+    introduction = request.form.get('introduction')
+
+    user = User.query.filter_by(user_id=user_id).first()
+
+    image_path = ''
+
+    # get the basepath
+    basepath = os.path.dirname(__file__)
+
+    # os.remove(os.path.join(basepath, module.image))
+    # os.remove(os.path.join(basepath, module.file))
+
+    if user_image:
+        image_path = os.path.join(basepath, 'static/user_images', secure_filename(imagename))
+        # save image in path
+        user_image.save(image_path)
+
+    user.user_image = image_path
+    user.family_name = family_name
+    user.first_name = first_name
+    user.gender = gender
+    user.date_of_birth = date_of_birth
+    user.address = address
+    user.phone_number = phone_number
+    user.contact_email = contact_email
+    user.linkedin = linkedin
+    user.introduction = introduction
+    db.session.commit()
+
+    return jsonify({"success": True})
