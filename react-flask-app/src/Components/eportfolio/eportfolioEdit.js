@@ -1,7 +1,9 @@
 import React from 'react';
 import Section from './section'
 import SectionNavbar from './sectionNavbar'
+import AboutMe from './aboutMe'
 import './style.scss'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 
 class EportfolioEdit extends React.Component {
 
@@ -19,6 +21,8 @@ class EportfolioEdit extends React.Component {
         this.addSectionHandler = this.addSectionHandler.bind(this)
 		this.deleteSection = this.deleteSection.bind(this)
 		this.handleSwitch = this.handleSwitch.bind(this)
+		this.backProfile = this.backProfile.bind(this)
+		this.editAboutMe = this.editAboutMe.bind(this)
     }
 
     async componentDidMount(){
@@ -144,6 +148,14 @@ class EportfolioEdit extends React.Component {
 		this.setState({currentSectionID: id})
 		console.log(this.state.currentSectionID)
 	}
+	
+	backProfile(e){
+        this.props.history.push(`/profile`)
+    }
+	
+	editAboutMe(e) {
+		this.props.history.push(`/aboutMe`)
+	}
     
     render() {
         const sectionItems = this.state.sections.map
@@ -157,12 +169,18 @@ class EportfolioEdit extends React.Component {
 
         return (
             <div className="container">
+			    <button onClick={this.backProfile}>
+                    Back to Home Page
+                </button>
+				<button onClick={this.editAboutMe}>
+                    Edit your basic info
+                </button>
 				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 <button class="button add-button" onClick = {this.addSectionHandler}>
                 <i class="fa fa-plus" aria-hidden="true"></i>
                     Add new section</button>
 				
-							{sectionItems}
+					{sectionItems}
             </div>
         )  
     }  

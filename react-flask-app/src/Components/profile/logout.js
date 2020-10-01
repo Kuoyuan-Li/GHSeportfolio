@@ -1,27 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 
 export class Logout extends React.Component {
     constructor() {
         super()
-        this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick (e) {
-        localStorage.clear();    
-        this.props.history.push(`/`)     
-    }
+    
+	// when users click logout button on navbar, they are directed to this page when then immediately send them to login page
+	componentDidMount(){
+		localStorage.clear()
+        this.props.history.push(`/login`)
+	}
     
 
     render () {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <button type = "button" onClick={this.handleClick} className="btn btn-lg btn-primary btn-block">
-                                Logout
-                        </button>
-                    </div>
-                </div>
+                <h1>You are logging out...</h1>
             </div>
         )
     }

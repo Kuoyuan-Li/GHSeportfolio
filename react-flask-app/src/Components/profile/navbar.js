@@ -64,11 +64,11 @@ class Navbar extends Component {
                     </Nav.Item>
                     
                     <Nav.Item>
-                        <Nav.Link href="/reset_your_password">Reset password</Nav.Link>
+                        <Nav.Link href="/resetPassword">Reset password</Nav.Link>
                     </Nav.Item>
 					
 					<Nav.Item>
-                        <Nav.Link href="/login">Log out</Nav.Link>
+                        <Nav.Link href="/logout">Log out</Nav.Link>
                     </Nav.Item>
                     
                 </Nav>

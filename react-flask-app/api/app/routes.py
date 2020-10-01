@@ -244,10 +244,9 @@ def reset_password():
 
 @app.route('/saveInformation', methods=['POST'])
 def save_information():
-    user_image = request.files['user_image']
+    
     user_id = request.form.get('user_id')
-
-    imagename = request.form.get('imagename')
+    
     family_name = request.form.get('family_name')
     first_name = request.form.get('first_name')
     gender = request.form.get('gender')
@@ -257,7 +256,8 @@ def save_information():
     contact_email = request.form.get('contact_email')
     linkedin = request.form.get('linkedin')
     introduction = request.form.get('introduction')
-
+    user_image = request.files['user_image']
+    imagename = request.form.get('imagename')
     user = User.query.filter_by(user_id=user_id).first()
 
     image_path = ''

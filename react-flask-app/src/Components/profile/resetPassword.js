@@ -28,7 +28,7 @@ class ResetPassword extends Component {
 	
 	onSubmit (e) {
         e.preventDefault()
-        
+        const userID = localStorage.getItem('userID')
         if (this.state.password !== '' && this.state.password2 !== '')  {
             
             const newPass = {
@@ -44,6 +44,7 @@ class ResetPassword extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+					user_id: userID,
                     password: newPass.password,
                     password2: newPass.password2
                 })
@@ -56,6 +57,9 @@ class ResetPassword extends Component {
                 else {
                     this.setState({ message : "You've successfully changed your password!" })
                 }
+				this.setState({password: '',
+                               password2 : ''
+				})
 
             })
 

@@ -7,17 +7,18 @@ class AboutMe extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            sectionTitle : 'About Me',
+            //sectionTitle : 'About Me',
             firstname : '123',
             familyname :'321',
             gender : '',
             dateOfBirth : '',
+			address: '',
             emailAddress  : '',
             phoneNo :'',
             intro : '',
             image : null,
             imageView : null,
-            websites : [],
+            websites : '',
             message : ''
         }
         //this.sectionTitleChangeHandler = this.sectionTitleChangeHandler.bind(this)
@@ -45,9 +46,48 @@ class AboutMe extends React.Component {
         
     }
 
-    saveHandler () {
-        //fetch api and save
-    }
+    saveHandler (e) {
+		e.preventDefault()
+		const userID = localStorage.getItem('userID')
+        const fileData = new FormData();
+		fileData.append("user_id",  userID)
+		fileData.append('family_name',this.state.familyname)
+		fileData.append("first_name",  this.state.firstname)
+		fileData.append('gender',this.state.gender)
+        fileData.append('date_of_birth',this.state.dateOfBirth)
+		fileData.append('address',this.state.address)
+		fileData.append('phone_number',this.state.phoneNo)
+		fileData.append('contact_email',this.state.emailAddress)
+        fileData.append('phone_number',this.state.phoneNo)
+		fileData.append('linkedin',this.state.websites)
+        fileData.append('introduction',this.state.intro)
+        fileData.append('user_image',this.state.image)
+		fileData.append('imagename',this.state.image.name)
+        
+		fetch ('http://localhost:5000/saveInformation',{
+            mode: 'cors',
+            method : 'POST',
+			/*
+			headers: {
+                //"Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+				'Content-Type': 'application/json',
+                //"type": "formData"
+            },*/
+            body: fileData
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            //response: if upload files susccessfully, return success message
+			console.log(response)
+            if(response.success){
+                this.setState({
+                    message : 'Save aboutme page' 
+                })                
+            }
+            console.log(this.state.message)
+		})
+	}
 
     render() {      
         return (
@@ -75,7 +115,12 @@ class AboutMe extends React.Component {
                 <input name="dateOfBirth"
                     placeholder="Type your date of birth"
                     value={this.state.dateOfBirth}
-                    onChange={this.onChange}/>  
+                    onChange={this.onChange}/>
+                PhysicalAddress:
+                <input name="address"
+                    placeholder="Type your physical address"
+                    value={this.state.address}
+                    onChange={this.onChange}/>					
                 Email Address:
                 <input name="emailAddress"
                     placeholder="Type your email address"

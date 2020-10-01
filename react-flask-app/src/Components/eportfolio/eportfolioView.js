@@ -16,6 +16,7 @@ class EportfolioView extends React.Component {
             message : ''
         }
         this.handleSwitch = this.handleSwitch.bind(this)
+		this.backProfile = this.backProfile.bind(this)
     }
 
     componentDidMount(){
@@ -83,6 +84,10 @@ class EportfolioView extends React.Component {
 		this.setState({currentSectionID: id})
 		console.log(this.state.currentSectionID)
 	}
+	
+	backProfile(e){
+        this.props.history.push(`/profile`)
+    }
     
     render() {
         const sectionItems = this.state.sections.map
@@ -96,7 +101,9 @@ class EportfolioView extends React.Component {
        
         return (
             <div className="container">
-			    
+			    <button onClick={this.backProfile}>
+                    Back to Home Page
+                </button>
 				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 
 				

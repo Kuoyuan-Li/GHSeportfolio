@@ -171,7 +171,7 @@ class Module extends React.Component{
                 ref = {(imageInput) => {this.imageInput = imageInput}}/>
                 <button class="button image-button" onClick = {() => this.imageInput.click()}>
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                    Choose image {imageName}</button>           
+                    Choose  image {imageName}</button>           
                 {/*<button class="button delete-button"  onClick = {this.deleteImageHandler}>
                 <i class="fa fa-trash-o" aria-hidden="true"></i></button> */}
                 
