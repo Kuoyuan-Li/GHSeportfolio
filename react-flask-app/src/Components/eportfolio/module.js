@@ -16,8 +16,8 @@ class Module extends React.Component{
             year : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
-            image : props.content.image=== null ? '' :props.content.image,
-            file : props.content.file=== null ? '' :props.content.file,
+            image : props.content.image=== null ? null :props.content.image,
+            file : props.content.file=== null ? null :props.content.file,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
