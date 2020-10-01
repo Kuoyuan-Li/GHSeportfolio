@@ -28,23 +28,24 @@ class Index extends Component {
     render () {
         return (
             <div id="login">
-            <div class="container">
+                <div class="container">
                     <div class="col-md-12">
                         <h3>Eportfolio System</h3>
-                            <div class="col-md-12">
-                                <button class="button button1" onClick={this.login}>
-                                    Log in
-                                </button>
-                            </div>
-                            <div class="col-md-12">
-                                
-                                <button class="button button2" onClick={this.register}>
-                                    New user? Register Now!
-                                </button>
-                            </div>
+
+                        <div class="col-md-12">
+                            <button class="button button1" onClick={this.login}>
+                                Log in
+                            </button>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button class="button button2" onClick={this.register}>
+                                New user? Register Now!
+                            </button>
+                        </div>
                     </div>
+                </div>
             </div>
-        </div>
         )
     }
 

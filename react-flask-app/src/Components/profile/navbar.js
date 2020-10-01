@@ -49,7 +49,7 @@ class Navbar extends Component {
 		.then(response => response.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
-			this.props.history.push(`/reset_your_password`)
+			this.props.history.push(`/resetPassword`)
         })
 	}
 

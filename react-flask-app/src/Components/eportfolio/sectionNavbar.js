@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import {Breadcrumb, Button} from 'react-bootstrap';
 import pseudoSections from "./pseudoSection"
+import './style.scss'
 
 
 class SectionNavbar extends React.Component {
@@ -27,28 +28,25 @@ class SectionNavbar extends React.Component {
 		const sectionItems = this.state.sections.map(content => {  
 			const sectionColor = (content.sectionID === this.state.currentSectionID ? 'red' : 'white')
 			return (
-			    <Breadcrumb.Item>
-				    <div>
-			            <button
+			    <div class="section-group">
+				    <div class="item">
+			            <button class="button section-button"
 						    key={content.sectionID}
-					        style={{color: content.sectionID === this.state.currentSectionID ? 'red' : 'white'}}
-						    type = "button" 
+					        //style={{color: content.sectionID === this.state.currentSectionID ? 'red' : 'white'}}
 						    onClick={(event) => this.props.handleSwitch(content.sectionID)}
-						    className="btn btn-lg btn-primary btn-block">
+						    //className="btn btn-lg btn-primary btn-block"
+							>
                         
 						    {content.sectionTitle}
                         </button>
 				    </div>
-		    </Breadcrumb.Item>)})
+		    </div>)})
 			
 	    
 		
 		return (
-		    <div>
-			    <Breadcrumb>
-				    {sectionItems}
-				</Breadcrumb>
-			</div>
+		    <div class="section-list">
+				{sectionItems}</div>
 		)
 		
 	}

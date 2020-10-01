@@ -22,10 +22,14 @@ class Profile extends Component {
       const loginguser = localStorage.getItem('user')
       if (loginguser){
         this.setState ({profileOwner : loginguser })
+      }else{
+
       }/*else{
+
         this.props.history.push('/login')
-      }*/
-    }
+      }
+    */
+	}
 
 
     jumpToView (e){
@@ -49,7 +53,7 @@ class Profile extends Component {
             <div className="container">
                 
 				<Navbar />           
-          <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
+                <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
 				
                             
               

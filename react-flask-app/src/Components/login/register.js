@@ -16,7 +16,6 @@ export class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.backIndex = this.backIndex.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
-        this.backIndex = this.backIndex.bind(this)
     }
 
     componentDidMount () {
