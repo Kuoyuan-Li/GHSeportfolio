@@ -95,46 +95,11 @@ def allowed_image(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-@app.route('/upload', methods=['POST'])
-def upload():
-    image = request.files['image']
-    file = request.files['file']
-
-    section_id = request.get_json()['section_id']
-    title = request.get_json()['title']
-    date = request.get_json()['time']
-    text = request.get_json()['text']
-
-    image_path = ''
-    file_path = ''
-
-    # get the basepath
-    basepath = os.path.dirname(__file__)
-
-    # no image or type of image is incorrect
-    if image:
-        image_path = os.path.join(basepath, 'static/images', secure_filename(image.imagename))
-        # save image in path
-        image.save(image_path)
-
-    if file:
-        file_path = os.path.join(basepath, 'static/files', secure_filename(file.filename))
-        # save file in path
-        file.save(file_path)
-
-    module = Module(section_id = section_id, title = title, date = date, text = text, image = image_path, file = file_path)
-    db.session.add(module)
-    db.session.commit()
-
-    return jsonify({"success": True})
-
-
 def convert_to_json(table):
     data = [row.convert_to_dict() for row in table]
     json = {"list":data}
     return json
 
-    
 
 @app.route('/sectionIDs', methods=['POST'])
 def get_all_sections():
@@ -210,7 +175,6 @@ def save_module():
     return jsonify({"success": True})
 
 
-
 @app.route('/deleteSection', methods=['POST'])
 def delete_section():
     section_id = request.get_json()['section_id']
@@ -241,7 +205,6 @@ def add_section():
     db.session.commit()
     return jsonify({"success": True,
                     "section_id" : section.section_id})
-    
 
 
 @app.route('/addModule', methods=['POST'])
@@ -255,7 +218,27 @@ def add_module():
     module_json = new_module.convert_to_dict()
     return jsonify({"success": True, "module": module_json})
 
-'''
-if __name__ == "__main__":
-    app.run(host = '0.0.0.0',debug = False,post = os.environ.get('PORT',80))
-'''
+
+@app.route('/resetPassword', methods=['POST'])
+def reset_password():
+    user_id = request.get_json()['user_id']
+    password = request.get_json()['password']
+    password2 = request.get_json()['password2']
+    user = User.query.filter_by(user_id = user_id).first()
+
+    # The two passwords are different
+    if password != password2:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Non consistent password"}
+                       )
+
+    if user.check_password(password):
+        return jsonify({"validity": False,
+                        "nonValidMessage": "same password as previous"}
+                       )
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"validity": True,
+                    "nonValidMessage": ""}
+                   )
