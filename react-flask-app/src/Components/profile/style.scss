@@ -38,25 +38,25 @@ h1
 .card-group {
 .card {
     color: #ffffff;
-    width: 600px;
-    height: 520px;
+    width: 480px;
+    height: 440px;
     margin-left: 4px;
     margin-right: 4px;
 
     img{
-        height: 400px;
+        height: 280px;
     }
 
     p {
         color: #000000;
-        font-size:30px;
+        font-size:28px;
         padding-top: 5px;
         padding-bottom: 6px;
     }
 
     h3 {
         color: #000000;
-        font-size: 25px;
+        font-size: 18px;
         padding-bottom: 4px;
         margin-bottom: 0px;
     }
@@ -81,4 +81,91 @@ h1
     }
 }
 }
+
+.form {
+    margin-top: 150px;
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+
+        input {
+            margin-top: 6px;
+            min-width: 18em;
+            height: 40px;
+            padding: 0px 10px;
+            font-size: 16px;
+            font-family: 'roboto', sans-serif;
+            background-color: #f3f3f3;
+            width: 320px;
+            border: 0;
+            border-radius: 4px;
+            //margin-bottom: 10px;
+            transition: all 250ms ease-in-out;
+            &:focus {
+                outline: none;
+                box-shadow: 0px 0px 12px 0.8px #0e81ce96;
+            }
+        }
+    }
+
+    .button {
+        text-align: center;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        font-size: 14px;
+        width: 320px;
+        letter-spacing: 2px;
+        transition: all .3s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            z-index: -2;
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            transition: all .3s;
+            border-radius: 10px;
+            z-index: -1;
+        }
+        &:hover {
+            &:before {
+                width: 100%;
+            }
+        }
+
+        background-color: #f5f5fc;
+        color: #000000;
+        &:before {
+            background-color: darken(#f5f5fc, 5%);
+        }
+        &:hover {
+            color:#000000;
+        }}
+
+}
+
+.linkButton {
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-family: 'roboto', sans-serif;
+}
+
 }

@@ -141,7 +141,7 @@ export class Register extends React.Component {
                 </form>
                 </div>
                 
-                <button class="linkButton" className = "backToIndex" onClick={this.backIndex}>
+                <button class="linkButton" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

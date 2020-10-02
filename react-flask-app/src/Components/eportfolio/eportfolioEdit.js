@@ -168,6 +168,7 @@ class EportfolioEdit extends React.Component {
 			})
 
         return (
+            <div id="edit">
             <div className="container">
 			    <button onClick={this.backProfile}>
                     Back to Home Page
@@ -181,7 +182,7 @@ class EportfolioEdit extends React.Component {
                     Add new section</button>
 				
 					{sectionItems}
-            </div>
+            </div></div>
         )  
     }  
 }

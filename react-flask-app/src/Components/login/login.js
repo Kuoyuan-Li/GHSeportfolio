@@ -111,14 +111,14 @@ export class Login extends React.Component {
 
                             </div>
 
-                            <button class="button button1" className = 'login' type="submit">
+                            <button class="button button1" type="submit">
                                 Log in
                             </button>
                             </div>
                         </form>
                 </div>
                 
-                <button class="linkButton" className = "backToIndex" onClick={this.backIndex}>
+                <button class="linkButton" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

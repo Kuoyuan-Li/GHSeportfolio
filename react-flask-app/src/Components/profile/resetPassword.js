@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
-import '../login/style.scss'
+import './style.scss'
 
 class ResetPassword extends Component {
     
@@ -70,6 +70,7 @@ class ResetPassword extends Component {
 	
 	render () {
         return (
+            <div id="profile">
             <div className="container">
 			    <div class="row">
                 <form noValidate onSubmit={this.onSubmit}>
@@ -79,7 +80,7 @@ class ResetPassword extends Component {
                         {this.state.message}
                     </div>
 
-                    <div className="form form2">
+                    <div className="form">
 
                         <div className="form-group">
                             <input type="password"
@@ -100,7 +101,7 @@ class ResetPassword extends Component {
                         </div>
                         
                         <div className="form-group">
-                            <button class="button button2" type="submit">
+                            <button class="button" type="submit">
                                 Confirm to Reset
                             </button>
                         </div>
@@ -112,7 +113,7 @@ class ResetPassword extends Component {
                 <button class="linkButton" onClick={this.backProfile}>
                     Back to Home Page
                 </button>
-            </div>
+            </div></div>
         )
     }
 }
