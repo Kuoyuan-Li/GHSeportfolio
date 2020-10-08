@@ -15,6 +15,10 @@ body{
 .section-list{
 }
 
+.first-section{
+  margin-bottom: 2px;
+}
+
 .section{
   padding-top: 30px;
   .section-title{
@@ -84,9 +88,18 @@ body{
   font-family: 'Patrick Hand SC', cursive;
   border: solid 2px #41403E;
   .fa{
-    padding-left: 5px;  
+    padding-left: 5px;
     padding-right: 20px;
   }
+  
+}
+.linkButton {
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-family: 'roboto', sans-serif;
+    margin-bottom: 5px;
+    font-size: 12px;
 }
 
 .input{

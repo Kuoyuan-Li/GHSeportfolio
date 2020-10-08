@@ -170,12 +170,16 @@ class EportfolioEdit extends React.Component {
         return (
             <div id="edit">
             <div className="container">
-			    <button onClick={this.backProfile}>
+			    <button class="linkButton" onClick={this.backProfile}>
                     Back to Home Page
                 </button>
-				<button onClick={this.editAboutMe}>
+
+                <div class="first-section">
+				<button class="button section-button" onClick={this.editAboutMe}>
                     Edit your basic info
                 </button>
+                </div>
+
 				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 <button class="button add-button" onClick = {this.addSectionHandler}>
                 <i class="fa fa-plus" aria-hidden="true"></i>

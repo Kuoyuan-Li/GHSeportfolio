@@ -15,6 +15,8 @@ import EportfolioEdit from './Components/eportfolio/eportfolioEdit'
 import EportfolioView from './Components/eportfolio/eportfolioView'
 import AboutMe from './Components/eportfolio/aboutMe'
 
+import 'font-awesome/css/font-awesome.min.css';
+
 /*
 import Home from './Components/login/home'
 import Profile from './Components/login/profile'

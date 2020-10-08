@@ -1,6 +1,7 @@
 import React from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import './style.scss'
                 
 class AboutMe extends React.Component {
 
@@ -91,14 +92,17 @@ class AboutMe extends React.Component {
 
     render() {      
         return (
+            <div id="edit">
             <div className="container">
                 Firstname:
-                <input name="firstname"
+                <input class="input"
+                    name="firstname"
                     placeholder="Type your first name"
                     value={this.state.firstname}
                     onChange={this.onChange}/>
-                familyname:
-                <input name="familyname"
+                Familyname:
+                <input class="input"
+                    name="familyname"
                     placeholder="Type your family name"
                     value={this.state.familyname}
                     onChange={this.onChange}/>
@@ -112,22 +116,26 @@ class AboutMe extends React.Component {
                     <option value="Others">Others</option>
                 </select>
                 Date of Birth:
-                <input name="dateOfBirth"
+                <input class="input"
+                    name="dateOfBirth"
                     placeholder="Type your date of birth"
                     value={this.state.dateOfBirth}
                     onChange={this.onChange}/>
                 PhysicalAddress:
-                <input name="address"
+                <input class="input"
+                    name="address"
                     placeholder="Type your physical address"
                     value={this.state.address}
                     onChange={this.onChange}/>					
                 Email Address:
-                <input name="emailAddress"
+                <input class="input"
+                    name="emailAddress"
                     placeholder="Type your email address"
                     value={this.state.emailAddress}
                     onChange={this.onChange}/>
                 Phone Number:
-                <input name="phoneNo"
+                <input class="input"
+                    name="phoneNo"
                     placeholder="Type your phone number"
                     value={this.state.phoneNo}
                     onChange={this.onChange}/>  
@@ -150,8 +158,9 @@ class AboutMe extends React.Component {
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
                         Choose image</button>  
                 <img src={this.state.imageView}/> 
-                <button onClick = {this.saveHandler}>Save AboutMe</button> 
-            </div>
+                <button class="button save-button" onClick = {this.saveHandler}>
+                    Save AboutMe<i class="fa fa-check" aria-hidden="true"></i></button> 
+            </div></div>
         )  
     }  
 }
