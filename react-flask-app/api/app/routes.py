@@ -133,8 +133,8 @@ def save_module():
     image = request.files['image']
     file = request.files['file']
     
-    imagename = request.form.get('imagename')
-    filename = request.form.get('filename')
+    image_name = request.form.get('image_name')
+    file_name = request.form.get('file_name')
     module_id = request.form.get('module_id')
     section_id = request.form.get('section_id')
     title = request.form.get('title')
@@ -147,26 +147,26 @@ def save_module():
     file_path = ''
 
     # get the basepath
-    basepath = os.path.dirname(__file__)
+    base_path = os.path.dirname(__file__)
 
     #os.remove(os.path.join(basepath, module.image))
     #os.remove(os.path.join(basepath, module.file))
 
 
     if image:
-        image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
+        image_path = os.path.join(base_path, 'static/images', secure_filename(image_name))
     # save image in path
         image.save(image_path)
 
     if file:
-        file_path = os.path.join(basepath, 'static/files', secure_filename(filename))
+        file_path = os.path.join(base_path, 'static/files', secure_filename(file_name))
     # save file in path
         file.save(file_path)
 
-    module.image = image_path
-    module.image_name = imagename
-    module.file = file_path
-    module.file_name = filename
+    module.image_path = image_path
+    module.image_name = image_name
+    module.file_path = file_path
+    module.file_name = file_name
     module.section_id = section_id
     module.title = title
     module.date = date
@@ -258,25 +258,25 @@ def save_information():
     contact_email = request.form.get('contact_email')
     linkedin = request.form.get('linkedin')
     introduction = request.form.get('introduction')
-    user_image = request.files['user_image']
-    imagename = request.form.get('imagename')
+    user_image = request.files['image_path']
+    image_name = request.form.get('image_name')
     user = User.query.filter_by(user_id=user_id).first()
 
     image_path = ''
 
     # get the basepath
-    basepath = os.path.dirname(__file__)
+    base_path = os.path.dirname(__file__)
 
-    # os.remove(os.path.join(basepath, module.image))
-    # os.remove(os.path.join(basepath, module.file))
+    # os.remove(os.path.join(base_path, module.image))
+    # os.remove(os.path.join(base_path, module.file))
 
     if user_image:
-        image_path = os.path.join(basepath, 'static/user_images', secure_filename(imagename))
+        image_path = os.path.join(base_path, 'static/user_images', secure_filename(image_name))
         # save image in path
         user_image.save(image_path)
 
-    user.user_image = image_path
-    user.image_name = imagename
+    user.image_path = image_path
+    user.image_name = image_name
     user.family_name = family_name
     user.first_name = first_name
     user.gender = gender

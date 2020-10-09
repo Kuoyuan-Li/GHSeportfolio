@@ -18,9 +18,8 @@ class User(db.Model):
     contact_email = db.Column(db.String(120), index=True, unique=True)
     linkedin = db.Column(db.String(200))
     introduction = db.Column(db.String(500))
-    user_image = db.Column(db.String(300))
+    image_path = db.Column(db.String(300))
     image_name = db.Column(db.String(100))
-
     sections = db.relationship('Section', backref='sections', lazy='dynamic')
 
     # set password
@@ -63,9 +62,9 @@ class Module(db.Model):
     title = db.Column(db.String(100))
     date = db.Column(db.String(50))
     text = db.Column(db.String(500))
-    image = db.Column(db.String(300))
+    image_path = db.Column(db.String(300))
     image_name = db.Column(db.String(100))
-    file = db.Column(db.String(300))
+    file_path = db.Column(db.String(300))
     file_name = db.Column(db.String(100))
     section_id = db.Column(db.Integer, db.ForeignKey('section.section_id'))
 
