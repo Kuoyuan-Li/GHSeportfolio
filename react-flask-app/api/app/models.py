@@ -60,7 +60,7 @@ class Module(db.Model):
 
     module_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
     title = db.Column(db.String(100))
-    date = db.Column(db.Time)
+    date = db.Column(db.String(50))
     text = db.Column(db.String(500))
     image = db.Column(db.String(300))
 

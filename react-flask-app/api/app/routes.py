@@ -1,5 +1,5 @@
 from flask import request
-from flask import render_template, flash, redirect, url_for, jsonify
+from flask import render_template, flash, redirect, url_for, jsonify, make_response
 from app import app, db
 from app.models import User, Section, Module
 from flask_login import current_user, login_user, logout_user, login_required
@@ -244,9 +244,9 @@ def reset_password():
 
 @app.route('/saveInformation', methods=['POST'])
 def save_information():
-    
+
     user_id = request.form.get('user_id')
-    
+
     family_name = request.form.get('family_name')
     first_name = request.form.get('first_name')
     gender = request.form.get('gender')
@@ -286,3 +286,19 @@ def save_information():
     db.session.commit()
 
     return jsonify({"success": True})
+
+
+@app.route('/showInformation', methods=['POST'])
+def show_information():
+    user_id = request.form.get('user_id')
+    user = User.query.filter_by(user_id=user_id).first()
+    response = user.convert_to_dict()
+    return response
+
+
+@app.route('/show/<string:file_path>', methods=['GET'])
+def show_photo(file_path):
+    image_data = open(file_path, "rb").read()
+    response = make_response(image_data)
+    response.headers['Content-Type'] = 'image/png'
+    return response
