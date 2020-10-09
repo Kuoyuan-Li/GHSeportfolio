@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Section from './section'
 import SectionNavbar from './sectionNavbar'
 import AboutMe from './aboutMe'
@@ -43,11 +43,12 @@ class EportfolioEdit extends React.Component {
             //response: a list of sectionID + sectionTitle
             this.setState({sectionIDTitle: response.list});							
         })
-        console.log(this.state.sectionIDTitle)
+        
 
 
-         for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
+        for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
             var thisID = this.state.sectionIDTitle[i].section_id
+			
             var thisTitle = this.state.sectionIDTitle[i].title
             //section structure
             var thisSection = {
@@ -68,6 +69,7 @@ class EportfolioEdit extends React.Component {
             }).then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then((response) => {
+				
                 //response: a list of sectionIDs
                 thisSection.modules = response.list
                 this.setState({           

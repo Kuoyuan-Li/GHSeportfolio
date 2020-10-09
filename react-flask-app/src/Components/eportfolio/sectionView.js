@@ -1,6 +1,7 @@
 import React from 'react';
 import ModuleView from './moduleView'
-
+import { Route , withRouter} from 'react-router-dom';
+import './style.scss'
 
 class SectionView extends React.Component {
 
@@ -8,31 +9,19 @@ class SectionView extends React.Component {
         super(props)
         this.state = {
             sectionID : props.content.sectionID,
-            moduleNumber : props.content.modules.length,
             sectionTitle : props.content.sectionTitle,
             modules : props.content.modules,
             message : ''
         }
     }
 
-
-    
-    
-    
-
     render() {
         const moduleItems = this.state.modules.map
-            (content => <ModuleView key={content.id} content={content} parentSectionID = {this.state.sectionID} />)
+            (content => <ModuleView key={content.module_id} content={content} parentSectionID = {this.state.sectionID} />)
        
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <div className = "section-list">
-                            {moduleItems}                           
-                        </div>
-                    </div>
-                </div>
+            <div className = "section">
+			    {moduleItems}
             </div>
         )  
     }  

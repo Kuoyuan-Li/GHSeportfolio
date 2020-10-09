@@ -37,6 +37,7 @@ class Module extends React.Component{
 	
 	async componentDidMount(){
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
+		
 	}
 	
 
@@ -90,14 +91,19 @@ class Module extends React.Component{
         const fileData = new FormData();
         fileData.append("section_id",  this.state.parentSection)
         fileData.append("module_id",  this.state.id)
-        fileData.append('image',this.state.image)
+        if (this.state.image !== null) {
+		    fileData.append('image',this.state.image)
+		}
         fileData.append('image_name',this.state.image_name)
-        fileData.append('file',this.state.file)
+		if (this.state.file !== null) {
+            fileData.append('file',this.state.file)
+		}
         fileData.append('file_name',this.state.file_name)
         fileData.append('title',this.state.title)
         fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
-        console.log(this.state.parentSection)
+        
+		
         fetch ('http://localhost:5000/saveModule',{
             mode: 'cors',
             method : 'POST',
@@ -116,16 +122,12 @@ class Module extends React.Component{
 			console.log(response)
             if(response.success){
                 this.setState({
-                    message : 'Save the edited module' 
+                    message : 'Successfully saved the edited module' 
                 })                
             }
             console.log(this.state.message)
 			
-         })
-         
-        
-         
-
+        })
     }
 
     deleteThisModuleHandler(){
@@ -163,11 +165,14 @@ class Module extends React.Component{
                 placeholder = "Module title"
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
-
-                <button class="button delete-button" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
+				
+				<button class="button delete-button" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
                 </div>
+				
+
+                
                 <input class="input"
                 type = "text"
                 name = 'time'
@@ -211,7 +216,12 @@ class Module extends React.Component{
 
                 <button class="button save-button" onClick = {this.saveModuleHandler}>
                 Save<i class="fa fa-check" aria-hidden="true"></i>
-                </button> 
+                </button>
+				
+				<div class="warning-message">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {this.state.message}
+                </div>
                 <br/>
                               
             </div>

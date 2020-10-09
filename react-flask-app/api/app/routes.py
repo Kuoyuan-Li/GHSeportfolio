@@ -111,7 +111,9 @@ def get_all_sections():
 
 @app.route('/getSection', methods=['POST'])
 def get_all_modules():
+    
     section_id = request.get_json()['section_id']
+    print(section_id)
     modules = Module.query.filter_by(section_id = section_id).all()
     modules_json = convert_to_json(modules)
     return modules_json
@@ -129,9 +131,18 @@ def save_section():
 
 @app.route('/saveModule', methods=['POST'])
 def save_module():
+    image = ''
+    file = ''
+    if 'file' not in request.files:
+        pass
+    else:
+        file = request.files['file']
     
-    image = request.files['image']
-    file = request.files['file']
+    if 'image' not in request.files:
+        pass
+    else:
+        image = request.files['image']
+    
     
     image_name = request.form.get('image_name')
     file_name = request.form.get('file_name')
@@ -140,7 +151,7 @@ def save_module():
     title = request.form.get('title')
     date = request.form.get('time')
     text = request.form.get('text')
-    print(image_name)
+    
     module = Module.query.filter_by(module_id = module_id).first()
 
     image_path = ''
@@ -301,6 +312,7 @@ def show_information():
 
 @app.route('/showImage/<string:imagename>', methods=['GET'])
 def show_photo(imagename):
+    
     basepath = os.path.dirname(__file__)
     image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
     image_data = open(image_path, "rb").read()
@@ -311,9 +323,15 @@ def show_photo(imagename):
 
 @app.route('/downloadImage/<string:imagename>', methods=['GET'])
 def download_photo(imagename):
-    basepath = os.path.dirname(__file__)
-    image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
-    if os.path.isfile(image_path):
-        return send_from_directory('upload', imagename, as_attachment=True)
+    
+    if os.path.isfile(os.path.join('static/images', imagename)):
+        return send_from_directory('static/images', imagename, as_attachment=True)
+    pass
+    
+@app.route('/downloadFile/<string:filename>', methods=['GET'])
+def download_file(filename):
+    
+    if os.path.isfile(os.path.join('static/files', filename)):
+        return send_from_directory('static/files', filename, as_attachment=True)
     pass
 
