@@ -140,7 +140,7 @@ def save_module():
     title = request.form.get('title')
     date = request.form.get('time')
     text = request.form.get('text')
-    
+    print(image_name)
     module = Module.query.filter_by(module_id = module_id).first()
 
     image_path = ''

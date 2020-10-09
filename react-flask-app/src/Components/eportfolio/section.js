@@ -110,7 +110,7 @@ class Section extends React.Component {
        
         return (
                         <div className = "section">
-                            {/*<button type="button" onClick = {this.saveSectionHandler}>Save this section</button>*/}
+						<button type="button" onClick = {this.sectionTitleSaveHandler}>Save section title</button>
                             <div class="section-title">
                             <input class="input" type = "text"
                                 name = 'Sectiontitle'

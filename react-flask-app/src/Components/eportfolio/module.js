@@ -15,11 +15,12 @@ class Module extends React.Component{
             time : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
-            image : props.content.image=== null ? null :props.content.image,
-			imagepath : props.content.image=== null ? null :props.content.image,
-			imagename : props.content.imagename=== null ? null :props.content.imagename,
-            file : props.content.file=== null ? null :props.content.file,
-			imagename : props.content.filename=== null ? null :props.content.filename,
+            image : null,
+			image_name : props.content.image_name=== null ? '' :props.content.image_name,
+			image_path : '',
+            file : null,
+			file_path : props.content.file_path=== null ? '' :props.content.file_path,
+			file_name : props.content.file_name=== null ? '' :props.content.file_name,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
@@ -28,9 +29,16 @@ class Module extends React.Component{
         this.selectImageHandler = this.selectImageHandler.bind(this)     
         this.selectFileHandler = this.selectFileHandler.bind(this)
         this.saveModuleHandler = this.saveModuleHandler.bind(this)
-
-        
+		this.componentDidMount = this.componentDidMount.bind(this)
+		this.deleteImageHandler = this.deleteImageHandler.bind(this)
+		this.deleteFileHandler = this.deleteFileHandler.bind(this)
     }
+	
+	
+	async componentDidMount(){
+        this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
+	}
+	
 
 
     TitleChangeHandler = (e) => {
@@ -50,21 +58,28 @@ class Module extends React.Component{
 
     selectImageHandler = (event) => {
         this.setState({image:event.target.files[0]})
+		this.setState({image_name:event.target.files[0].name})
+		this.setState({image_path:URL.createObjectURL(event.target.files[0])})
     }
 
     deleteImageHandler = () =>{
         this.setState({
-            image:null            
+            image: null,
+            image_name: '',
+            image_path: ''			
         })
     }
     
     selectFileHandler = (event) => {
         this.setState({file:event.target.files[0]})
+		this.setState({file_name:event.target.files[0].name})
     }
 
     deleteFileHandler = () =>{
         this.setState({
-            file:null          
+            file: null,
+            file_name: '',
+            file_path: ''			
         })
     }
     
@@ -76,9 +91,9 @@ class Module extends React.Component{
         fileData.append("section_id",  this.state.parentSection)
         fileData.append("module_id",  this.state.id)
         fileData.append('image',this.state.image)
-        fileData.append('imagename',this.state.image.name)
+        fileData.append('image_name',this.state.image_name)
         fileData.append('file',this.state.file)
-        fileData.append('filename',this.state.file.name)
+        fileData.append('file_name',this.state.file_name)
         fileData.append('title',this.state.title)
         fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
@@ -120,20 +135,23 @@ class Module extends React.Component{
    
 
     render (){
-
-        let imageName;
-        if (this.state.image) {
-            imageName =  <p>{this.state.image.name}</p> 
-        } else {
-            imageName = <p></p>;
-        }
-
-        let fileName;
-        if (this.state.file) {
-            fileName =  <p>{this.state.file.name}</p> 
-        } else {
-            fileName = <p></p>;
-            }
+        let image_render = this.state.image_name === '' ? 
+		                   null : 
+						   <div>
+		                        <img style={{height:200, width:300}} src={this.state.image_path}/>
+		                        
+								<button class="button delete-button"  onClick = {this.deleteImageHandler}>
+								    <i class="fa fa-trash-o" aria-hid="true"></i>
+                                </button>
+						   </div>
+						   
+		let file_render = this.state.file_name === '' ? 
+		                  null : 
+						  <div>
+		                       <button class="button delete-button" onClick = {this.deleteFileHandler}>
+                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+							   </button>
+						  </div>
 
         return (
             <div class="module">
@@ -174,9 +192,9 @@ class Module extends React.Component{
                 ref = {(imageInput) => {this.imageInput = imageInput}}/>
                 <button class="button image-button" onClick = {() => this.imageInput.click()}>
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                    Choose  image {imageName}</button>           
-                {/*<button class="button delete-button"  onClick = {this.deleteImageHandler}>
-                <i class="fa fa-trash-o" aria-hidden="true"></i></button> */}
+                    Choose  image {this.state.image_name}</button>
+						{image_render}					
+                
                 
                 <br/>
                 <input 
@@ -186,9 +204,9 @@ class Module extends React.Component{
                 ref = {(fileInput) => this.fileInput = fileInput}/>
                 <button class="button image-button" onClick = {() => this.fileInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
-                Choose file {fileName}</button>       
-                {/*<button class="button delete-button" onClick = {this.deleteFileHandler}>
-                <i class="fa fa-trash-o" aria-hidden="true"></i></button> */}
+                Choose file {this.state.file_name}</button> 
+					{file_render}				
+                
                 <br/>
 
                 <button class="button save-button" onClick = {this.saveModuleHandler}>
@@ -208,3 +226,20 @@ class Module extends React.Component{
 }
 
 export default Module
+
+/*
+let imageName;
+        if (this.state.image) {
+            imageName =  <p>{this.state.image_name}</p> 
+        } else {
+            imageName = <p></p>;
+        }
+
+        let fileName;
+        if (this.state.file) {
+            fileName =  <p>{this.state.file_name}</p> 
+        } else {
+            fileName = <p></p>;
+            }
+			
+			*/
