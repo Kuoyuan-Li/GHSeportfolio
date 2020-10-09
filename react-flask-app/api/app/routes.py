@@ -1,5 +1,5 @@
 from flask import request
-from flask import render_template, flash, redirect, url_for, jsonify, make_response
+from flask import render_template, flash, redirect, url_for, jsonify, make_response, send_from_directory
 from app import app, db
 from app.models import User, Section, Module
 from flask_login import current_user, login_user, logout_user, login_required
@@ -164,7 +164,9 @@ def save_module():
         file.save(file_path)
 
     module.image = image_path
+    module.image_name = imagename
     module.file = file_path
+    module.file_name = filename
     module.section_id = section_id
     module.title = title
     module.date = date
@@ -274,6 +276,7 @@ def save_information():
         user_image.save(image_path)
 
     user.user_image = image_path
+    user.image_name = imagename
     user.family_name = family_name
     user.first_name = first_name
     user.gender = gender
@@ -296,9 +299,21 @@ def show_information():
     return response
 
 
-@app.route('/show/<string:file_path>', methods=['GET'])
-def show_photo(file_path):
-    image_data = open(file_path, "rb").read()
+@app.route('/showImage/<string:imagename>', methods=['GET'])
+def show_photo(imagename):
+    basepath = os.path.dirname(__file__)
+    image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
+    image_data = open(image_path, "rb").read()
     response = make_response(image_data)
     response.headers['Content-Type'] = 'image/png'
     return response
+
+
+@app.route('/downloadImage/<string:imagename>', methods=['GET'])
+def download_photo(imagename):
+    basepath = os.path.dirname(__file__)
+    image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
+    if os.path.isfile(image_path):
+        return send_from_directory('upload', imagename, as_attachment=True)
+    pass
+

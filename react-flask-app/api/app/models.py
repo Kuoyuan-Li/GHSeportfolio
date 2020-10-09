@@ -19,6 +19,7 @@ class User(db.Model):
     linkedin = db.Column(db.String(200))
     introduction = db.Column(db.String(500))
     user_image = db.Column(db.String(300))
+    image_name = db.Column(db.String(100))
 
     sections = db.relationship('Section', backref='sections', lazy='dynamic')
 
@@ -63,11 +64,9 @@ class Module(db.Model):
     date = db.Column(db.String(50))
     text = db.Column(db.String(500))
     image = db.Column(db.String(300))
-
-    video = db.Column(db.String(300))
-    audio = db.Column(db.String(300))
-
+    image_name = db.Column(db.String(100))
     file = db.Column(db.String(300))
+    file_name = db.Column(db.String(100))
     section_id = db.Column(db.Integer, db.ForeignKey('section.section_id'))
 
     def convert_to_dict(self):
@@ -79,9 +78,4 @@ class Module(db.Model):
                 result[key] = getattr(self, key)
         return result
 
-    '''
-        Position = db.Column(db.String(45))
-        StartTime = db.Column(db.Time)
-        EndTime = db.Column(db.Time)
-    '''
 
