@@ -16,7 +16,10 @@ class Module extends React.Component{
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
             image : props.content.image=== null ? null :props.content.image,
+			imagepath : props.content.image=== null ? null :props.content.image,
+			imagename : props.content.imagename=== null ? null :props.content.imagename,
             file : props.content.file=== null ? null :props.content.file,
+			imagename : props.content.filename=== null ? null :props.content.filename,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
@@ -77,7 +80,7 @@ class Module extends React.Component{
         fileData.append('file',this.state.file)
         fileData.append('filename',this.state.file.name)
         fileData.append('title',this.state.title)
-        fileData.append('time',this.state.year)
+        fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
         console.log(this.state.parentSection)
         fetch ('http://localhost:5000/saveModule',{
