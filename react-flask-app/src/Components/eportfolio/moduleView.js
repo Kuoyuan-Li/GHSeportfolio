@@ -15,15 +15,26 @@ class ModuleView extends React.Component{
             time : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
-            image : null,
+            // image stuff
+			image : null,
 			image_name : props.content.image_name=== null ? '' :props.content.image_name,
 			image_path : '',
-            file : null,
+            // file stuff
+			file : null,
 			file_path : props.content.file_path=== null ? '' :props.content.file_path,
 			file_name : props.content.file_name=== null ? '' :props.content.file_name,
+			// audio stuff
+			audio : null,
+			audio_path : props.content.audio_path=== null ? '' :props.content.audio_path,
+			audio_name : props.content.audio_name=== null ? '' :props.content.audio_name,
+			// video stuff
+			video : null,
+			video_path : props.content.vedio_path=== null ? '' :props.content.vedio_path,
+			video_name : props.content.vedio_name=== null ? '' :props.content.vedio_name,
             message : ''
         }
         this.showImage = this.showImage.bind(this)
+		this.showVideo = this.showVideo.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.downloadImage = this.downloadImage.bind(this)
 		this.downloadFile = this.downloadFile.bind(this)
@@ -32,11 +43,20 @@ class ModuleView extends React.Component{
 	
 	async componentDidMount(){
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
+		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.audio_name})
+		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.video_name})
 	}
 	
-    showImage(e) {
+    // show image in new tab
+	showImage(e) {
 		const url = 'http://localhost:5000/showImage/' + this.state.image_name
         
+        window.open(url)
+	}
+	
+	// show video in new tab
+	showVideo(e) {
+		const url = 'http://localhost:5000/showVideo/' + this.state.video_name
         window.open(url)
 		
 	}

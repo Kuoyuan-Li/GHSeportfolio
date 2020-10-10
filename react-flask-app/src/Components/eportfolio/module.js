@@ -26,11 +26,11 @@ class Module extends React.Component{
 			// audio stuff
 			audio : null,
 			audio_path : props.content.audio_path=== null ? '' :props.content.audio_path,
-			audio_path : props.content.audio_name=== null ? '' :props.content.audio_name,
+			audio_name : props.content.audio_name=== null ? '' :props.content.audio_name,
 			// video stuff
-			vedio : null,
-			vedio_path : props.content.vedio_path=== null ? '' :props.content.vedio_path,
-			vedio_path : props.content.vedio_name=== null ? '' :props.content.vedio_name,
+			video : null,
+			video_path : props.content.video_path=== null ? '' :props.content.video_path,
+			video_name : props.content.video_name=== null ? '' :props.content.video_name,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
@@ -51,7 +51,8 @@ class Module extends React.Component{
 	
 	async componentDidMount(){
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
-		
+		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showVideo/' + this.state.video_name})
 	}
 	
 
@@ -133,14 +134,28 @@ class Module extends React.Component{
         const fileData = new FormData();
         fileData.append("section_id",  this.state.parentSection)
         fileData.append("module_id",  this.state.id)
-        if (this.state.image !== null) {
+        
+		if (this.state.image !== null) {
 		    fileData.append('image',this.state.image)
 		}
         fileData.append('image_name',this.state.image_name)
+		
 		if (this.state.file !== null) {
             fileData.append('file',this.state.file)
 		}
         fileData.append('file_name',this.state.file_name)
+		
+		if (this.state.audio !== null) {
+            fileData.append('audio',this.state.audio)
+		}
+        fileData.append('audio_name',this.state.audio_name)
+		
+		if (this.state.video !== null) {
+            fileData.append('video',this.state.video)
+		}
+        fileData.append('video_name',this.state.video_name)
+		
+		
         fileData.append('title',this.state.title)
         fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
@@ -255,7 +270,7 @@ class Module extends React.Component{
                     onChange = {this.handleTextInput}
                 />             
                 
-				<br/>
+				<hr/>
                 <input  
                 style={{display:'none'}}
                 class="input"
@@ -265,10 +280,10 @@ class Module extends React.Component{
                 ref = {(imageInput) => {this.imageInput = imageInput}}/>
                 <button class="button image-button" onClick = {() => this.imageInput.click()}>
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                    Choose  image {this.state.image_name}</button>
+                    Choose image {this.state.image_name}</button>
 						{image_render}					
                 
-                <br/>
+                <hr/>
                 <input 
                 style={{display:'none'}}
                 type = "file"            
@@ -279,31 +294,31 @@ class Module extends React.Component{
                 Choose file {this.state.file_name}</button> 
 					{file_render}				
                 
-                <br/>
+                <hr/>
 				<input 
                 style={{display:'none'}}
                 type = "file" 
                 accept="audio/*"				
                 onChange = {this.selectAudioHandler}
-                ref = {(fileInput) => this.fileInput = fileInput}/>
-                <button class="button image-button" onClick = {() => this.fileInput.click()}>
+                ref = {(audioInput) => this.audioInput = audioInput}/>
+                <button class="button image-button" onClick = {() => this.audioInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
                 Choose audio {this.state.audio_name}</button> 
 					{audio_render}
 				
-				<br/>
+				<hr/>
 				<input 
                 style={{display:'none'}}
                 type = "file" 
                 accept="video/*"				
                 onChange = {this.selectVideoHandler}
-                ref = {(fileInput) => this.fileInput = fileInput}/>
-                <button class="button image-button" onClick = {() => this.fileInput.click()}>
+                ref = {(videoInput) => this.videoInput = videoInput}/>
+                <button class="button image-button" onClick = {() => this.videoInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
                 Choose video {this.state.video_name}</button> 
 					{video_render}				
                 
-                <br/>
+                <hr/>
 
                 <button class="button save-button" onClick = {this.saveModuleHandler}>
                 Save<i class="fa fa-check" aria-hidden="true"></i>

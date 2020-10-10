@@ -193,14 +193,15 @@ def save_module():
         video_new_name = video_name
     else:
         video_new_name = get_new_name(video_name)
-        if module.video_name:
-            os.remove(os.path.join(base_path, 'static/videos', module.video_name))
+        
+        #if module.video_name:
+            #os.remove(os.path.join(base_path, 'static/videos', module.video_name))
     if audio_name != '' and audio == '':
         audio_new_name = audio_name
     else:
         audio_new_name = get_new_name(audio_name)
-        if module.audio_name:
-            os.remove(os.path.join(base_path, 'static/audios', module.audio_name))
+        #if module.audio_name:
+            #os.remove(os.path.join(base_path, 'static/audios', module.audio_name))
 
     if image:
         image_path = os.path.join(base_path, 'static/images', secure_filename(image_new_name))
