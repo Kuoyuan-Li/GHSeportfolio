@@ -182,7 +182,7 @@ class EportfolioEdit extends React.Component {
                 </button>
                 </div>
 
-				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
+				<SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 <button class="button add-button" onClick = {this.addSectionHandler}>
                 <i class="fa fa-plus" aria-hidden="true"></i>
                     Add new section</button>

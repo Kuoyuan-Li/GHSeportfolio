@@ -154,6 +154,13 @@ class Module extends React.Component{
                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
 							   </button>
 						  </div>
+						  
+		let message_render = this.state.message === '' ? 
+		                     null :
+							 <div class="warning-message">
+                                 <i class="fa fa-heart" aria-hidden="true"></i>
+                                 {this.state.message}
+                             </div>
 
         return (
             <div class="module">
@@ -218,10 +225,7 @@ class Module extends React.Component{
                 Save<i class="fa fa-check" aria-hidden="true"></i>
                 </button>
 				
-				<div class="warning-message">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    {this.state.message}
-                </div>
+				{message_render}
                 <br/>
                               
             </div>
