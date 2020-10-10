@@ -7,6 +7,8 @@ from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 import os
 import time
+import datetime
+import random
 
 db.create_all()
 db.session.commit()
@@ -129,6 +131,16 @@ def save_section():
     return jsonify({"message": "success"})
 
 
+def get_new_name(name):
+    file_type = os.path.splitext(name)[-1]
+    now_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    random_num = random.randint(0, 100)
+    if random_num <= 10:
+        random_num = str(0) + str(random_num)
+    image_new_name = str(now_time) + str(random_num) + str(file_type)
+    return image_new_name
+
+
 @app.route('/saveModule', methods=['POST'])
 def save_module():
     image = ''
@@ -137,13 +149,11 @@ def save_module():
         pass
     else:
         file = request.files['file']
-    
     if 'image' not in request.files:
         pass
     else:
         image = request.files['image']
-    
-    
+
     image_name = request.form.get('image_name')
     file_name = request.form.get('file_name')
     module_id = request.form.get('module_id')
@@ -163,21 +173,23 @@ def save_module():
     #os.remove(os.path.join(basepath, module.image))
     #os.remove(os.path.join(basepath, module.file))
 
+    image_new_name = get_new_name(image_name)
+    file_new_name = get_new_name(file_name)
 
     if image:
-        image_path = os.path.join(base_path, 'static/images', secure_filename(image_name))
+        image_path = os.path.join(base_path, 'static/images', secure_filename(image_new_name))
     # save image in path
         image.save(image_path)
 
     if file:
-        file_path = os.path.join(base_path, 'static/files', secure_filename(file_name))
+        file_path = os.path.join(base_path, 'static/files', secure_filename(file_new_name))
     # save file in path
         file.save(file_path)
 
     module.image_path = image_path
-    module.image_name = image_name
+    module.image_name = image_new_name
     module.file_path = file_path
-    module.file_name = file_name
+    module.file_name = file_new_name
     module.section_id = section_id
     module.title = title
     module.date = date
