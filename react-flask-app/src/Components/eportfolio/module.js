@@ -15,12 +15,22 @@ class Module extends React.Component{
             time : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
+			// image stuff
             image : null,
 			image_name : props.content.image_name=== null ? '' :props.content.image_name,
 			image_path : '',
+			// file stuff
             file : null,
 			file_path : props.content.file_path=== null ? '' :props.content.file_path,
 			file_name : props.content.file_name=== null ? '' :props.content.file_name,
+			// audio stuff
+			audio : null,
+			audio_path : props.content.audio_path=== null ? '' :props.content.audio_path,
+			audio_path : props.content.audio_name=== null ? '' :props.content.audio_name,
+			// video stuff
+			vedio : null,
+			vedio_path : props.content.vedio_path=== null ? '' :props.content.vedio_path,
+			vedio_path : props.content.vedio_name=== null ? '' :props.content.vedio_name,
             message : ''
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
@@ -32,6 +42,10 @@ class Module extends React.Component{
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.deleteImageHandler = this.deleteImageHandler.bind(this)
 		this.deleteFileHandler = this.deleteFileHandler.bind(this)
+		this.selectAudioHandler = this.selectAudioHandler.bind(this)
+		this.deleteAudioHandler = this.deleteAudioHandler.bind(this)
+		this.selectVideoHandler = this.selectVideoHandler.bind(this)
+		this.deleteVideoHandler = this.deleteVideoHandler.bind(this)
     }
 	
 	
@@ -81,6 +95,34 @@ class Module extends React.Component{
             file: null,
             file_name: '',
             file_path: ''			
+        })
+    }
+	
+	selectAudioHandler = (event) => {
+        this.setState({audio:event.target.files[0]})
+		this.setState({audio_name:event.target.files[0].name})
+		this.setState({audio_path:URL.createObjectURL(event.target.files[0])})
+    }
+
+    deleteAudioHandler = () =>{
+        this.setState({
+            audio: null,
+            audio_name: '',
+            audio_path: ''			
+        })
+    }
+	
+	selectVideoHandler = (event) => {
+        this.setState({video:event.target.files[0]})
+		this.setState({video_name:event.target.files[0].name})
+		this.setState({video_path:URL.createObjectURL(event.target.files[0])})
+    }
+
+    deleteVideoHandler = () =>{
+        this.setState({
+            video: null,
+            video_name: '',
+            video_path: ''			
         })
     }
     
@@ -155,6 +197,24 @@ class Module extends React.Component{
 							   </button>
 						  </div>
 						  
+		let video_render = this.state.video_name === '' ? 
+		                   null : 
+						   <div>
+		                       <video style={{height:200, width:300}} src={this.state.video_path} controls="controls"/>
+							   <button class="button delete-button" onClick = {this.deleteVideoHandler}>
+                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+							   </button>
+						   </div>
+						   
+		let audio_render = this.state.audio_name === '' ? 
+		                   null : 
+						   <div>
+		                       <audio style={{height:200, width:300}} src={this.state.audio_path} controls="controls"/>
+							   <button class="button delete-button" onClick = {this.deleteAudioHandler}>
+                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+							   </button>
+						   </div>
+						  
 		let message_render = this.state.message === '' ? 
 		                     null :
 							 <div class="warning-message">
@@ -194,7 +254,8 @@ class Module extends React.Component{
                     data={this.state.text}        
                     onChange = {this.handleTextInput}
                 />             
-                <br/>
+                
+				<br/>
                 <input  
                 style={{display:'none'}}
                 class="input"
@@ -207,7 +268,6 @@ class Module extends React.Component{
                     Choose  image {this.state.image_name}</button>
 						{image_render}					
                 
-                
                 <br/>
                 <input 
                 style={{display:'none'}}
@@ -218,6 +278,30 @@ class Module extends React.Component{
                 <i class="fa fa-file-o" aria-hidden="true"></i>
                 Choose file {this.state.file_name}</button> 
 					{file_render}				
+                
+                <br/>
+				<input 
+                style={{display:'none'}}
+                type = "file" 
+                accept="audio/*"				
+                onChange = {this.selectAudioHandler}
+                ref = {(fileInput) => this.fileInput = fileInput}/>
+                <button class="button image-button" onClick = {() => this.fileInput.click()}>
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                Choose audio {this.state.audio_name}</button> 
+					{audio_render}
+				
+				<br/>
+				<input 
+                style={{display:'none'}}
+                type = "file" 
+                accept="video/*"				
+                onChange = {this.selectVideoHandler}
+                ref = {(fileInput) => this.fileInput = fileInput}/>
+                <button class="button image-button" onClick = {() => this.fileInput.click()}>
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                Choose video {this.state.video_name}</button> 
+					{video_render}				
                 
                 <br/>
 
