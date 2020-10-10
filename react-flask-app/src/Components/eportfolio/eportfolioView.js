@@ -111,7 +111,7 @@ class EportfolioView extends React.Component {
 
                     
 
-				    <SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
+				    <SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
 				    {sectionItems}
 				</div>
 			</div>

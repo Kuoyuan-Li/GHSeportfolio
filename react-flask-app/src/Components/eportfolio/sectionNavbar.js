@@ -22,7 +22,7 @@ class SectionNavbar extends React.Component {
 		if (prevState.currentSectionID !== this.props.currentSectionID) {
             this.setState({currentSectionID: this.props.currentSectionID})
         }
-		console.log(this.state.currentSectionID)
+		
     }
 	
 

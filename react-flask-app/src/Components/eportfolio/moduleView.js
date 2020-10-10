@@ -112,7 +112,7 @@ class ModuleView extends React.Component{
 				<hr style={{height:2}} />
                 
 				<p>
-				    text:{this.state.text}
+				    text:{ReactHtmlParser(this.state.text)}
                 </p>         
                 <hr style={{height:2}} />
                 
