@@ -132,64 +132,121 @@ def save_section():
 
 
 def get_new_name(name):
-    file_type = os.path.splitext(name)[-1]
-    now_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    random_num = random.randint(0, 100)
-    if random_num <= 10:
-        random_num = str(0) + str(random_num)
-    image_new_name = str(now_time) + str(random_num) + str(file_type)
-    return image_new_name
+    if name:
+        file_type = os.path.splitext(name)[-1]
+        now_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        random_num = random.randint(0, 100)
+        if random_num <= 10:
+            random_num = str(0) + str(random_num)
+        image_new_name = str(now_time) + str(random_num) + str(file_type)
+        return image_new_name
+    return name
 
 
 @app.route('/saveModule', methods=['POST'])
 def save_module():
-    image = ''
-    file = ''
-    if 'file' not in request.files:
-        pass
-    else:
-        file = request.files['file']
     if 'image' not in request.files:
-        pass
+        image = ''
     else:
         image = request.files['image']
+    if 'file' not in request.files:
+        file = ''
+    else:
+        file = request.files['file']
+    if 'video' not in request.files:
+        video = ''
+    else:
+        video = request.files['video']
+    if 'audio' not in request.files:
+        audio = ''
+    else:
+        audio = request.files['audio']
 
     image_name = request.form.get('image_name')
     file_name = request.form.get('file_name')
+    video_name = request.form.get('video_name')
+    audio_name = request.form.get('audio_name')
     module_id = request.form.get('module_id')
     section_id = request.form.get('section_id')
     title = request.form.get('title')
     date = request.form.get('time')
     text = request.form.get('text')
-    
-    module = Module.query.filter_by(module_id = module_id).first()
 
-    image_path = ''
-    file_path = ''
+    module = Module.query.filter_by(module_id=module_id).first()
 
-    # get the basepath
+    # get the base path
     base_path = os.path.dirname(__file__)
 
-    #os.remove(os.path.join(basepath, module.image))
-    #os.remove(os.path.join(basepath, module.file))
-
-    image_new_name = get_new_name(image_name)
-    file_new_name = get_new_name(file_name)
+    if image_name != '' and image == '':
+        image_new_name = image_name
+    else:
+        image_new_name = get_new_name(image_name)
+        if module.image_name:
+            os.remove(os.path.join(base_path, 'static/images', module.image_name))
+    if file_name != '' and file == '':
+        file_new_name = file_name
+    else:
+        file_new_name = get_new_name(file_name)
+        if module.file_name:
+            os.remove(os.path.join(base_path, 'static/files', module.file_name))
+    if video_name != '' and video == '':
+        video_new_name = video_name
+    else:
+        video_new_name = get_new_name(video_name)
+        if module.video_name:
+            os.remove(os.path.join(base_path, 'static/videos', module.video_name))
+    if audio_name != '' and audio == '':
+        audio_new_name = audio_name
+    else:
+        audio_new_name = get_new_name(audio_name)
+        if module.audio_name:
+            os.remove(os.path.join(base_path, 'static/audios', module.audio_name))
 
     if image:
         image_path = os.path.join(base_path, 'static/images', secure_filename(image_new_name))
-    # save image in path
+        # save image in path
         image.save(image_path)
-
+    else:
+        if image_name:
+            image_path = module.image_path
+        else:
+            image_path = ''
     if file:
         file_path = os.path.join(base_path, 'static/files', secure_filename(file_new_name))
-    # save file in path
+        # save file in path
         file.save(file_path)
+    else:
+        if file_name:
+            file_path = module.file_path
+        else:
+            file_path = ''
+    if video:
+        video_path = os.path.join(base_path, 'static/videos', secure_filename(video_new_name))
+        # save video in path
+        video.save(video_path)
+    else:
+        if video_name:
+            video_path = module.video_path
+        else:
+            video_path = ''
+    if audio:
+        audio_path = os.path.join(base_path, 'static/audios', secure_filename(audio_new_name))
+        # save audio in path
+        audio.save(audio_path)
+    else:
+        if audio_name:
+            audio_path = module.audio_path
+        else:
+            audio_path = ''
 
     module.image_path = image_path
     module.image_name = image_new_name
     module.file_path = file_path
     module.file_name = file_new_name
+    module.video_path = video_path
+    module.video_name = video_new_name
+    module.audio_path = audio_path
+    module.audio_name = audio_new_name
     module.section_id = section_id
     module.title = title
     module.date = date
@@ -322,24 +379,55 @@ def show_information():
     return response
 
 
-@app.route('/showImage/<string:imagename>', methods=['GET'])
-def show_photo(imagename):
-    
-    basepath = os.path.dirname(__file__)
-    image_path = os.path.join(basepath, 'static/images', secure_filename(imagename))
+@app.route('/showImage/<string:image_name>', methods=['GET'])
+def show_image(image_name):
+    base_path = os.path.dirname(__file__)
+    image_path = os.path.join(base_path, 'static/images', secure_filename(image_name))
     image_data = open(image_path, "rb").read()
     response = make_response(image_data)
-    response.headers['Content-Type'] = 'image/png'
+    response.headers['Content-Type'] = 'image/*'
     return response
 
 
-@app.route('/downloadImage/<string:imagename>', methods=['GET'])
-def download_image(imagename):
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    return send_from_directory(current_dir+"/static/images", imagename, as_attachment=True)
-    
-@app.route('/downloadFile/<string:filename>', methods=['GET'])
-def download_file(filename):
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    return send_from_directory(current_dir+"/static/files", filename, as_attachment=True)
+@app.route('/showVideo/<string:video_name>', methods=['GET'])
+def show_video(video_name):
+    base_path = os.path.dirname(__file__)
+    video_path = os.path.join(base_path, 'static/videos', secure_filename(video_name))
+    video_data = open(video_path, "rb").read()
+    response = make_response(video_data)
+    response.headers['Content-Type'] = 'video/*'
+    return response
 
+
+@app.route('/showAudio/<string:audio_name>', methods=['GET'])
+def show_audio(audio_name):
+    base_path = os.path.dirname(__file__)
+    audio_path = os.path.join(base_path, 'static/audios', secure_filename(audio_name))
+    audio_data = open(audio_path, "rb").read()
+    response = make_response(audio_data)
+    response.headers['Content-Type'] = 'audio/*'
+    return response
+
+
+@app.route('/downloadImage/<string:image_name>', methods=['GET'])
+def download_image(image_name):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/images", image_name, as_attachment=True)
+
+
+@app.route('/downloadFile/<string:file_name>', methods=['GET'])
+def download_file(file_name):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/files", file_name, as_attachment=True)
+
+
+@app.route('/downloadVideo/<string:video_name>', methods=['GET'])
+def download_video(video_name):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/videos", video_name, as_attachment=True)
+
+
+@app.route('/downloadAudio/<string:audio_name>', methods=['GET'])
+def download_audio(audio_name):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/audios", audio_name, as_attachment=True)

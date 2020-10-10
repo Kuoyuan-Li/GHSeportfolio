@@ -66,6 +66,10 @@ class Module(db.Model):
     image_name = db.Column(db.String(100))
     file_path = db.Column(db.String(300))
     file_name = db.Column(db.String(100))
+    video_path = db.Column(db.String(300))
+    video_name = db.Column(db.String(100))
+    audio_path = db.Column(db.String(300))
+    audio_name = db.Column(db.String(100))
     section_id = db.Column(db.Integer, db.ForeignKey('section.section_id'))
 
     def convert_to_dict(self):
