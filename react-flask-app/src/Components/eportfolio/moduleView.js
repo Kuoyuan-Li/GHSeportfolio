@@ -23,9 +23,10 @@ class ModuleView extends React.Component{
 			file_name : props.content.file_name=== null ? '' :props.content.file_name,
             message : ''
         }
-        this.downloadFile = this.downloadFile.bind(this)
+        this.showImage = this.showImage.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
-		
+		this.downloadImage = this.downloadImage.bind(this)
+		this.downloadFile = this.downloadFile.bind(this)
     }
 	
 	
@@ -33,30 +34,67 @@ class ModuleView extends React.Component{
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
 	}
 	
-    downloadFile(e) {
-		const url = 'http://localhost:5000/downloadImage/' + this.state.image_name
+    showImage(e) {
+		const url = 'http://localhost:5000/showImage/' + this.state.image_name
         
         window.open(url)
 		
 	}
+	
+	downloadImage() {
+        var element = document.createElement("a");
+        var file = new Blob(
+          [
+            "http://localhost:5000/downloadImage/" + this.state.image_name
+          ],
+          { type: "image/*" }
+        );
+        element.href = URL.createObjectURL(file);
+        /*element.download = "image.jpg";*/
+        element.click();
+    }
+	
+	downloadFile() {
+        var element = document.createElement("a");
+        var file = new Blob(
+          [
+            "http://localhost:5000/downloadFile/" + this.state.file_name
+          ],
+          { type:"application/*" }
+        );
+        element.href = URL.createObjectURL(file);
+        /*element.download = "image.jpg";*/
+        element.click();
+    }
 
     
    
 
     render (){
+		let url = "http://localhost:5000/downloadImage/" + this.state.image_name
+		let url_file = "http://localhost:5000/downloadFile/" + this.state.file_name
         let image_render = this.state.image_name === '' ? 
 		                   null : 
 						   <div>
-		                        <img style={{height:200, width:300}} src={this.state.image_path} alt={this.state.image_name}/>
+		                        <img style={{height:200, width:300}} 
+								 src={this.state.image_path} 
+								 alt={this.state.image_name} 
+								 onClick={this.showImage} 
+								/>
 		                        
 								
 						   </div>
 						   
 		let file_render = this.state.file_name === '' ? 
 		                  null : 
-						  <div>
-		                       <p>{this.state.file_name}</p>
-						  </div>
+						  <a
+                           href={url_file}
+                           download
+                           onClick={() => this.downloadFile()}
+                           >
+                              <i className="fa fa-download" />
+                             Download File
+                           </a>
 						  
 		
         return (
@@ -66,19 +104,33 @@ class ModuleView extends React.Component{
                 <p>
                     title:{this.state.title}
 			    </p>
+				<hr style={{height:2}} />
+				
 				<p>
                     time:{this.state.time}
 				</p>
-                <p>
-				    time:{this.state.text}
+				<hr style={{height:2}} />
+                
+				<p>
+				    text:{this.state.text}
                 </p>         
+                <hr style={{height:2}} />
                 
-                
-				{image_render}					
-				
-                <a href="http://localhost:5000/downloadImage/blue.jpg" download>
+				{image_render}				
+				<a
+                   href={url}
+                   download
+                   onClick={() => this.downloadImage()}
+                >
                     <i className="fa fa-download" />
+                    Download Image
                 </a>
+				
+				<hr style={{height:2}} />
+				
+				
+				{file_render}				
+                
                               
             </div>
             
@@ -94,8 +146,6 @@ class ModuleView extends React.Component{
 export default ModuleView;
 
 
-/*
-				<button onClick={this.downloadFile} >
-				    {file_render}				
-                </button>
-				*/
+
+			
+				

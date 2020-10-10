@@ -322,16 +322,12 @@ def show_photo(imagename):
 
 
 @app.route('/downloadImage/<string:imagename>', methods=['GET'])
-def download_photo(imagename):
-    
-    if os.path.isfile(os.path.join('static/images', imagename)):
-        return send_from_directory('static/images', imagename, as_attachment=True)
-    pass
+def download_image(imagename):
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/images", imagename, as_attachment=True)
     
 @app.route('/downloadFile/<string:filename>', methods=['GET'])
 def download_file(filename):
-    
-    if os.path.isfile(os.path.join('static/files', filename)):
-        return send_from_directory('static/files', filename, as_attachment=True)
-    pass
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    return send_from_directory(current_dir+"/static/files", filename, as_attachment=True)
 
