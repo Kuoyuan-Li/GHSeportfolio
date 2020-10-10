@@ -1,11 +1,11 @@
-import os
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
+from os import environ
 
 class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'This-is-a-secret'
+    SECRET_KEY = environ.get('SECRET_KEY') or 'This-is-a-secret'
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    user = 'root'
+    password = 'root'
+    database = 'eportfolio'
+
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/eportfolio' 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-

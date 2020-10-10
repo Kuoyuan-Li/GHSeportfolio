@@ -1,16 +1,27 @@
 import React from 'react';
-import { login } from './userfunction'
+import './style.scss'
 
 export class Login extends React.Component {
     constructor() {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            userID : null,
+            message : ''
         }
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+        this.backIndex = this.backIndex.bind(this)
+    }
+
+    componentDidMount () {
+        const loginguser = localStorage.getItem('user')
+        if (loginguser){
+            this.props.history.push(`/profile`)
+        }
     }
 
     onChange (e) {
@@ -20,44 +31,79 @@ export class Login extends React.Component {
     onSubmit (e) {
         e.preventDefault()
 
-        const user = {
-            username: this.state.username,
-            password: this.state.password
-        }
-
-        login(user).then(res => {
-            if (!res.error) {
-                this.props.history.push(`/profile`)
+        if (this.state.username !== '' && this.state.password !== ''){
+            const user = {
+                username: this.state.username,
+                password: this.state.password
             }
-        })
+            this.setState({message:''})
 
+            fetch ('http://localhost:5000/login',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: user.username,
+                    password: user.password
+                })
+            }).then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                if (response.validity !== true) {
+                    this.setState({ message : response.nonValidMessage })
+                }
+                 else {
+                    const loggedInUsername  = this.state.username;
+                    localStorage.setItem('userID', response.user_id);
+                    localStorage.setItem('user', loggedInUsername);
+                    this.props.history.push(`/profile`)
+                }
+               
+            })
+
+
+        }else{
+            this.setState({message:'Please enter all required information'})
+
+        }
+    }
+
+    backIndex(e){
+        this.props.history.push(`/`)
     }
 
     render () {
+        let warning;
+        if(this.state.message === ''){
+             warning = <div></div>;
+        } else{
+            warning =
+                <div class="warning-message">                                                   
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {this.state.message}
+                </div>
+        }
         return (
+            <body id="login">
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-
-                        <form noValidate onSubmit={this.onSubmit}>
-
+                <div class="row">
+                        <form noValidate onSubmit={this.onSubmit} className = 'loginForm'>                                                                                             
+                            {warning}
+                        <div className="form form1">    
                             <div className="form-group">
-                                <label htmlFor="username">Username</label>
-
                                 <input type="username"
-                                    className="form-control"
                                     name="username"
                                     placeholder="Type your user name"
                                     value={this.state.username}
-                                    onChange={this.onChange} />
-
+                                    onChange={this.onChange}/>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="password">Password </label>
-
+                                
                                 <input type="password"
-                                    className="form-control"
                                     name="password"
                                     placeholder="Type your password"
                                     value={this.state.password}
@@ -65,14 +111,18 @@ export class Login extends React.Component {
 
                             </div>
 
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                            <button class="button button1" type="submit">
                                 Log in
                             </button>
-
+                            </div>
                         </form>
-                    </div>
                 </div>
+                
+                <button class="linkButton" onClick={this.backIndex}>
+                    Back to Index Page
+                </button>
             </div>
+            </body>
         )
     }
 }

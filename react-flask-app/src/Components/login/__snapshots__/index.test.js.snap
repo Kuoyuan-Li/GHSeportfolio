@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index page test renders correctly 1`] = `
+<div
+  id="login"
+>
+  <div
+    class="container"
+  >
+    <div
+      class="col-md-12"
+    >
+      <h3>
+        Eportfolio System
+      </h3>
+      <div
+        class="col-md-12"
+      >
+        <button
+          class="button button1"
+          onClick={[Function]}
+        >
+          Log in
+        </button>
+      </div>
+      <div
+        class="col-md-12"
+      >
+        <button
+          class="button button2"
+          onClick={[Function]}
+        >
+          New user? Register Now!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

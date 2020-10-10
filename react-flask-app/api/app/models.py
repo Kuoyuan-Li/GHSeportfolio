@@ -1,22 +1,26 @@
-from app import db
-from app import loginMngr
+from app import db, loginMngr
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-@loginMngr.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
-class User(UserMixin, db.Model):
-    # user db model
-    id = db.Column(db.Integer, primary_key=True) #fields
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True) #fields
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    family_name = db.Column(db.String(64))
+    first_name = db.Column(db.String(64))
+    gender = db.Column(db.String(25))
+    date_of_birth = db.Column(db.Time)
+    address = db.Column(db.String(200))
+    phone_number = db.Column(db.String(45))
+    contact_email = db.Column(db.String(120), index=True, unique=True)
+    linkedin = db.Column(db.String(200))
+    introduction = db.Column(db.String(500))
+    image_path = db.Column(db.String(300))
+    image_name = db.Column(db.String(100))
+    sections = db.relationship('Section', backref='sections', lazy='dynamic')
 
     # set password
     def set_password(self, password):
@@ -30,12 +34,47 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
 
-class Post(db.Model):
-    # idk why its here, just part of the tutorial, will be deleted
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+class Section(db.Model):
 
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)
+    section_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    title = db.Column(db.String(64), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    modules = db.relationship('Module', backref='modules', lazy='dynamic')
+
+    def get_section_id(self):
+        return self.id
+
+    def convert_to_dict(self):
+        result = {}
+        for key in self.__mapper__.c.keys():
+            if getattr(self, key) is not None:
+                result[key] = str(getattr(self, key))
+            else:
+                result[key] = getattr(self, key)
+        return result
+
+
+
+class Module(db.Model):
+
+    module_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    title = db.Column(db.String(100))
+    date = db.Column(db.String(50))
+    text = db.Column(db.String(500))
+    image_path = db.Column(db.String(300))
+    image_name = db.Column(db.String(100))
+    file_path = db.Column(db.String(300))
+    file_name = db.Column(db.String(100))
+    section_id = db.Column(db.Integer, db.ForeignKey('section.section_id'))
+
+    def convert_to_dict(self):
+        result = {}
+        for key in self.__mapper__.c.keys():
+            if getattr(self, key) is not None:
+                result[key] = str(getattr(self, key))
+            else:
+                result[key] = getattr(self, key)
+        return result
+
+

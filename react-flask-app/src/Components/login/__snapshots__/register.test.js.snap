@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login page test renders correctly 1`] = `
+<body
+  id="login"
+>
+  <div
+    className="container"
+  >
+    <div
+      class="row"
+    >
+      <form
+        className="registerForm"
+        noValidate={true}
+        onSubmit={[Function]}
+      >
+        <div />
+        <div
+          className="form form2"
+        >
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              name="username"
+              onChange={[Function]}
+              placeholder="Type your user name"
+              type="username"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              name="email"
+              onChange={[Function]}
+              placeholder="Type your email address"
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              name="password"
+              onChange={[Function]}
+              placeholder="Type your password"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              name="password2"
+              onChange={[Function]}
+              placeholder="Re-enter password"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <button
+              class="button button2"
+              type="submit"
+            >
+              Create account
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button
+      class="linkButton"
+      className="backToIndex"
+      onClick={[Function]}
+    >
+      Back to Index Page
+    </button>
+  </div>
+</body>
+`;

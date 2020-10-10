@@ -1,12 +1,21 @@
+
 import React from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-//import { Login, Register } from './Components/login/index'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
-import Navbar from './Components/login/navbar'
+import Profile from  './Components/profile/profile'
+import NavBar from './Components/profile/navbar'
+import ResetPassword from './Components/profile/resetPassword'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Index from './Components/login/index';
+import Logout from './Components/profile/logout'
+import EportfolioEdit from './Components/eportfolio/eportfolioEdit'
+import EportfolioView from './Components/eportfolio/eportfolioView'
+import AboutMe from './Components/eportfolio/aboutMe'
 
+import 'font-awesome/css/font-awesome.min.css';
 
 /*
 import Home from './Components/login/home'
@@ -22,13 +31,6 @@ let hashHistory = Router.hashHistory;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLoginActive: true
-        }
-    }
-
-    changeState= () => {
-        this.setState((prevState) => ({isLoginActive: !prevState.isLoginActive}));  
     }
     
     render() {
@@ -36,10 +38,18 @@ class App extends React.Component {
             <Router>            
 
             <div className="App">
-                <Navbar />
+            
                 <div className="container">
-                    <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
+                        <Route exact path="/" component={Index} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/navbar" component={NavBar} />
+                        <Route exact path="/logout" component={Logout} />
+                        <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
+						<Route exact path="/eportfolioView" component={EportfolioView} />
+						<Route exact path="/resetPassword" component={ResetPassword} />
+                        <Route exact path="/aboutMe" component={AboutMe} />
                 </div>            
             </div>
 
@@ -50,3 +60,4 @@ class App extends React.Component {
 }
 
 export default App;
+
