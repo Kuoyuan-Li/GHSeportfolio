@@ -4,9 +4,9 @@ class OtherEportfolioSelect extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            userID : this.props.content.userID,
+            userID : this.props.content.user_id,
             username : this.props.content.username,
-            sectionNumber : this.props.content.sectionNumber
+            sectionNumber : this.props.content.num_of_sections
         }
         this.viewHandler = this.viewHandler.bind(this)
 
