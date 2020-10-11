@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import request
 from flask import render_template, jsonify, make_response, send_from_directory
 from app import app, db, mail
@@ -464,9 +465,11 @@ def download_audio(audio_name):
     return send_from_directory(current_dir+"/static/audios", audio_name, as_attachment=True)
 
 
-@app.route('/emailCaptcha')
+@app.route('/emailCaptcha', methods=['POST'])
 def email_captcha():
-    email = request.args.get('email')
+    
+    email = request.get_json()['email']
+    
     if not email:
         return jsonify({"validity": False,
                         "nonValidMessage": "No email address entered"}
@@ -482,7 +485,13 @@ def email_captcha():
     captcha = str(uuid.uuid1())[:6]
     message = Message('This is a email verification from eportfolio by GHS', recipients=[email],
                       body='your captcha is：%s' % captcha)
-    mail.send(message)
+    try:
+        mail.send(message)
+    except:
+        
+        return jsonify({"validity": False,
+                    "nonValidMessage": "Non-valid email address"})
+    
     return jsonify({"validity": True,
-                    "captcha": captcha}
-                   )
+                    "nonValidMessage": "The captcha is successfully sent...",
+                    "captcha": captcha})

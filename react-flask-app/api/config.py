@@ -10,10 +10,10 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/eportfolio' 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    MAIL_SERVER = "smtp.qq.com"
-    MAIL_PORT = '587'
-    MAIL_USE_TLS = True
-    # MAIL_USE_SSL
-    MAIL_USERNAME = "1414518976@qq.com"
-    MAIL_PASSWORD = "*****"  
-    MAIL_DEFAULT_SENDER = "1414518976@qq.com"
+    MAIL_SERVER = "smtp.126.com"
+    MAIL_PORT = '465'
+    # MAIL_USE_TLS = True
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = "yuchen99@126.com"
+    MAIL_PASSWORD = "PMKOEEWVGKEWLLER"  
+    MAIL_DEFAULT_SENDER = "yuchen99@126.com"

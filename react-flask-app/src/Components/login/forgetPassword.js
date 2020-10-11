@@ -1,14 +1,14 @@
 import React from 'react';
 import './style.scss'
 
-export class Register extends React.Component {
+export class ForgetPassword extends React.Component {
     constructor() {
         super()
         this.state = {
             username: '',
             email: '',
 			email_confirmed: '',
-            password: '',
+			password: '',
             password2 :'',
 			captcha:'',
 			userCaptcha:'',
@@ -50,11 +50,9 @@ export class Register extends React.Component {
         .then(response => {
             if (response.validity !== true) {
                 this.setState({ message : response.nonValidMessage })
-				
             } else {
                 this.setState({captcha: response.captcha})
 				this.setState({email_confirmed: this.state.email})
-				this.setState({message: response.nonValidMessage })
             }
 
 	    })
@@ -202,4 +200,4 @@ export class Register extends React.Component {
     }
 }
 
-export default Register
+export default ForgetPassword

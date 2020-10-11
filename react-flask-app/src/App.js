@@ -5,6 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import Login from './Components/login/login'
 import Register from './Components/login/register'
+import ForgetPassword from './Components/login/forgetPassword'
 import Profile from  './Components/profile/profile'
 import NavBar from './Components/profile/navbar'
 import ResetPassword from './Components/profile/resetPassword'
@@ -44,6 +45,7 @@ class App extends React.Component {
                         <Route exact path="/" component={Index} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
+						<Route exact path="/forgetPassword" component={ForgetPassword} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/navbar" component={NavBar} />
                         <Route exact path="/logout" component={Logout} />
