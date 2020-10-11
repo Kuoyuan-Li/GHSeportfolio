@@ -1,6 +1,7 @@
 import React from 'react'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import {Spinner} from 'react-bootstrap'
 import ReactHtmlParser from "react-html-parser"
 import { Form } from 'react-bootstrap'
 import './style.scss'
@@ -31,7 +32,8 @@ class Module extends React.Component{
 			video : null,
 			video_path : props.content.video_path=== null ? '' :props.content.video_path,
 			video_name : props.content.video_name=== null ? '' :props.content.video_name,
-            message : ''
+            message : '',
+            loading : true
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
         this.TimeChangeHandler = this.TimeChangeHandler.bind(this)
@@ -239,6 +241,7 @@ class Module extends React.Component{
 
         return (
             <div class="module">
+                
                 <div class="module-title">
                 <input class="input"
                 type = "text"
@@ -326,7 +329,7 @@ class Module extends React.Component{
 				
 				{message_render}
                 <br/>
-                              
+                      
             </div>
             
             

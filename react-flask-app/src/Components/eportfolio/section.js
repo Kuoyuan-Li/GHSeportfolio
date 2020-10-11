@@ -1,6 +1,7 @@
 import React from 'react';
 import Module from './module'
 import { Route , withRouter} from 'react-router-dom';
+import {Spinner} from 'react-bootstrap'
 import './style.scss'
 
 class Section extends React.Component {
@@ -11,12 +12,37 @@ class Section extends React.Component {
             sectionID : props.content.sectionID,
             sectionTitle : props.content.sectionTitle,
             modules : props.content.modules,
-            message : ''
+            message : '',
+            loading : true
         }
         this.sectionTitleChangeHandler = this.sectionTitleChangeHandler.bind(this)
-        this.sectionTitleSaveHandler = this. sectionTitleSaveHandler.bind(this)
+        this.sectionTitleSaveHandler = this. sectionTitleSaveHandler.bind(this)      
     }
 
+
+    async componentDidMount () {
+        await fetch ('http://localhost:5000/getSection',{
+            mode: 'cors',
+            method : 'POST',
+            headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                section_id : this.state.sectionID
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {				
+            //response: a list of sectionIDs
+            this.setState({           
+                modules : response.list
+            })
+        })
+        this.setState({
+            loading : false
+        })  
+    }
     //initialize a blank module and add to the present modules list
     addModuleHandler = () => {   
         const section_id = this.state.sectionID    
@@ -61,7 +87,8 @@ class Section extends React.Component {
             this.setState({ message : response.message})
             console.log(this.state.message)
             window.location.reload(false);
-        })       
+        })
+               
     }
 
     sectionTitleChangeHandler = (e) =>{
@@ -107,11 +134,15 @@ class Section extends React.Component {
     render() {
         const moduleItems = this.state.modules.map
             (content => <Module key={content.module_id} content={content} parentSectionID = {this.state.sectionID} deleteHandler = {this.deleteModule.bind(this)}/>)
-       
+ 
         return (
-                        <div className = "section">
-						<button type="button" onClick = {this.sectionTitleSaveHandler}>Save section title</button>
-                            <div class="section-title">
+          
+            
+                <div className = "section">
+                    { this.state.loading ? <Spinner animation="border"/> :
+                    <div>
+				    <button type="button" onClick = {this.sectionTitleSaveHandler}>Save section title</button>
+                        <div class="section-title">
                             <input class="input" type = "text"
                                 name = 'Sectiontitle'
                                 value={this.state.sectionTitle}
@@ -121,13 +152,21 @@ class Section extends React.Component {
                             <button class="button delete-button" onClick = {this.deleteThisSectionHandler.bind(this, this.state.sectionID)}>
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
-                            </div>
-                            {moduleItems}
-                            
-                            <button class="button add-button" onClick = {this.addModuleHandler}>
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Add a module</button>
                         </div>
+
+                       
+                            <div>
+                            {moduleItems}   
+                            <button class="button add-button" onClick = {this.addModuleHandler}>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Add a module
+                            </button>                        
+                            </div>
+                    </div> 
+                        }
+                </div>
+
+
         )  
     }  
 }
