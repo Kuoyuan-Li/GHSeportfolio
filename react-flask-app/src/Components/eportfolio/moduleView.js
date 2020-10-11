@@ -122,14 +122,17 @@ class ModuleView extends React.Component{
 						   
 		let file_render = this.state.file_name === '' ? 
 		                  null : 
-						  <a
-                           href={url_file}
-                           download
-                           onClick={() => this.downloadFile()}
-                           >
-                              <i className="fa fa-download" />
-                             Download File
-                           </a>
+						  <div>
+						      {this.state.file_name}
+							  <a
+                               href={url_file}
+                               download
+                               onClick={() => this.downloadFile()}
+                               >
+                                   <i className="fa fa-download" />
+                                   Download File
+                              </a>
+					      </div>
 						   
 		let audio_render = this.state.audio_name === '' ? 
 		                   null : 

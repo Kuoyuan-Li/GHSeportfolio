@@ -28,7 +28,7 @@ class EportfolioView extends React.Component {
 
     async componentDidMount(){
         const userID = localStorage.getItem('userID')
-        await fetch ('http://localhost:5000/sectionIDs',{
+        await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -56,7 +56,7 @@ class EportfolioView extends React.Component {
                 sectionTitle : thisTitle,
                 modules : null
             }
-            await fetch ('http://localhost:5000/getSection',{
+            await fetch ('http://localhost:5000/getModules',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{
@@ -123,7 +123,7 @@ class EportfolioView extends React.Component {
                     <div>The generated URL is copied to your clipboard!</div>
                 </Popup>
                 
-			    <button onClick={this.backProfile}>
+			    <button class="linkButton" onClick={this.backProfile}>
                     Back to Home Page
                 </button>
 				<SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />

@@ -21,7 +21,10 @@ class SectionView extends React.Component {
        
         return (
             <div className = "section">
-			    {moduleItems}
+			    {this.state.modules.length === 0 ?
+				 <p>You have no modules in this section...</p> :
+				 moduleItems
+				}
             </div>
         )  
     }  

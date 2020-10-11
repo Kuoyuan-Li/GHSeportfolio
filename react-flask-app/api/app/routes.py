@@ -103,7 +103,7 @@ def convert_to_json(table):
     return json
 
 
-@app.route('/sectionIDs', methods=['POST'])
+@app.route('/getSections', methods=['POST'])
 def get_all_sections():
     user_id = request.get_json()['user_id']
     sections = Section.query.filter_by(user_id = user_id).all()
@@ -111,7 +111,7 @@ def get_all_sections():
     return sections_json
 
 
-@app.route('/getSection', methods=['POST'])
+@app.route('/getModules', methods=['POST'])
 def get_all_modules():
     
     section_id = request.get_json()['section_id']

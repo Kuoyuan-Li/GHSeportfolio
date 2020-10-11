@@ -21,7 +21,7 @@ class Section extends React.Component {
 
 
     async componentDidMount () {
-        await fetch ('http://localhost:5000/getSection',{
+        await fetch ('http://localhost:5000/getModules',{
             mode: 'cors',
             method : 'POST',
             headers :{

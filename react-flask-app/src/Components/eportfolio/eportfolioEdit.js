@@ -28,7 +28,7 @@ class EportfolioEdit extends React.Component {
 
     async componentDidMount(){
         const userID = localStorage.getItem('userID')
-        await fetch ('http://localhost:5000/sectionIDs',{
+        await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
