@@ -29,12 +29,13 @@ class ModuleView extends React.Component{
 			audio_name : props.content.audio_name=== null ? '' :props.content.audio_name,
 			// video stuff
 			video : null,
-			video_path : props.content.vedio_path=== null ? '' :props.content.vedio_path,
-			video_name : props.content.vedio_name=== null ? '' :props.content.vedio_name,
+			video_path : props.content.video_path=== null ? '' :props.content.video_path,
+			video_name : props.content.video_name=== null ? '' :props.content.video_name,
             message : ''
         }
         this.showImage = this.showImage.bind(this)
-		this.showVideo = this.showVideo.bind(this)
+		/*this.showVideo = this.showVideo.bind(this)*/
+		this.showAudio = this.showAudio.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.downloadImage = this.downloadImage.bind(this)
 		this.downloadFile = this.downloadFile.bind(this)
@@ -43,8 +44,8 @@ class ModuleView extends React.Component{
 	
 	async componentDidMount(){
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
-		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.audio_name})
-		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.video_name})
+		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showVideo/' + this.state.video_name})
 	}
 	
     // show image in new tab
@@ -55,8 +56,16 @@ class ModuleView extends React.Component{
 	}
 	
 	// show video in new tab
+	/*
 	showVideo(e) {
 		const url = 'http://localhost:5000/showVideo/' + this.state.video_name
+        window.open(url)
+		
+	}
+	*/
+	
+	showAudio(e) {
+		const url = 'http://localhost:5000/showAudio/' + this.state.audio_name
         window.open(url)
 		
 	}
@@ -101,9 +110,15 @@ class ModuleView extends React.Component{
 								 alt={this.state.image_name} 
 								 onClick={this.showImage} 
 								/>
-		                        
 								
-						   </div>
+								<a href={url}
+                                   download
+                                   onClick={() => this.downloadImage()}
+                                >
+                                    <i className="fa fa-download" />
+                                    Download Image
+                                </a>
+		                   </div>
 						   
 		let file_render = this.state.file_name === '' ? 
 		                  null : 
@@ -115,6 +130,26 @@ class ModuleView extends React.Component{
                               <i className="fa fa-download" />
                              Download File
                            </a>
+						   
+		let audio_render = this.state.audio_name === '' ? 
+		                   null : 
+						   <div>
+		                        <audio style={{height:50, width:300}} 
+								 src={this.state.audio_path} 
+								 controls = 'controls'
+								 onClick={this.showAudio} 
+								/>
+		                   </div>
+						   
+		let video_render = this.state.video_name === '' ? 
+		                   null : 
+						   <div>
+		                        <video style={{height:200, width:300}} 
+								 src={this.state.video_path} 
+								 controls = 'controls' 
+								 
+								/>
+		                   </div>
 						  
 		
         return (
@@ -124,33 +159,35 @@ class ModuleView extends React.Component{
                 <p>
                     title:{this.state.title}
 			    </p>
+				
 				<hr style={{height:2}} />
 				
 				<p>
                     time:{this.state.time}
 				</p>
+				
 				<hr style={{height:2}} />
                 
 				<p>
 				    text:{ReactHtmlParser(this.state.text)}
                 </p>         
-                <hr style={{height:2}} />
+                
+				<hr style={{height:2}} />
                 
 				{image_render}				
-				<a
-                   href={url}
-                   download
-                   onClick={() => this.downloadImage()}
-                >
-                    <i className="fa fa-download" />
-                    Download Image
-                </a>
+				
 				
 				<hr style={{height:2}} />
 				
-				
-				{file_render}				
+				{file_render}
+
+                <hr style={{height:2}} />				
                 
+				{audio_render}
+				
+				<hr style={{height:2}} />				
+                
+				{video_render}
                               
             </div>
             

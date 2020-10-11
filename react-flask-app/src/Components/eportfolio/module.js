@@ -224,7 +224,7 @@ class Module extends React.Component{
 		let audio_render = this.state.audio_name === '' ? 
 		                   null : 
 						   <div>
-		                       <audio style={{height:200, width:300}} src={this.state.audio_path} controls="controls"/>
+		                       <audio style={{height:50, width:300}} src={this.state.audio_path} controls="controls"/>
 							   <button class="button delete-button" onClick = {this.deleteAudioHandler}>
                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
 							   </button>
