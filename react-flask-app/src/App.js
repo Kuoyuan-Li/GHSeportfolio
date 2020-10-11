@@ -8,14 +8,15 @@ import Register from './Components/login/register'
 import Profile from  './Components/profile/profile'
 import NavBar from './Components/profile/navbar'
 import ResetPassword from './Components/profile/resetPassword'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Index from './Components/login/index';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Index from './Components/login/index'
 import Logout from './Components/profile/logout'
 import EportfolioEdit from './Components/eportfolio/eportfolioEdit'
 import EportfolioView from './Components/eportfolio/eportfolioView'
-import AboutMe from './Components/eportfolio/aboutMe'
+import ViewOtherEportfolio from './Components/eportfolio/viewOtherEportfolio'
+import OtherEportfolio from './Components/eportfolio/otherEportfolios'
+import 'font-awesome/css/font-awesome.min.css'
 
-import 'font-awesome/css/font-awesome.min.css';
 
 /*
 import Home from './Components/login/home'
@@ -49,7 +50,9 @@ class App extends React.Component {
                         <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
 						<Route exact path="/eportfolioView" component={EportfolioView} />
 						<Route exact path="/resetPassword" component={ResetPassword} />
-                        <Route exact path="/aboutMe" component={AboutMe} />
+                        <Route exact path="/otherEportfolio" component={OtherEportfolio} />
+                        <Route exact path="/viewOtherEportfolio/:id" component={ViewOtherEportfolio} />
+                        
                 </div>            
             </div>
 

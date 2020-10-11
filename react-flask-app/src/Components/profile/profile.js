@@ -12,7 +12,7 @@ class Profile extends Component {
 
 
         this.componentDidMount = this.componentDidMount.bind(this)
-        this.jump = this.jump.bind(this)
+        this.jumpToOtherEportfolio= this.jumpToOtherEportfolio.bind(this)
         this.jumpToEdit= this.jumpToEdit.bind(this)
         this.jumpToView = this.jumpToView.bind(this)
     }
@@ -39,8 +39,8 @@ class Profile extends Component {
         this.props.history.push('/eportfolioEdit')
     }
 
-    jump(e){
-        
+    jumpToOtherEportfolio(e){
+      this.props.history.push('/otherEportfolio')
     }
 
     
@@ -79,7 +79,7 @@ class Profile extends Component {
 					      <Card.Img src="https://picsum.photos/200/200"/>
 					      <p>View others' eportfolio</p>
 						    <h3>-- You can view others' eportfolio here</h3>
-                <Button onClick={this.jumpToView}>
+                <Button onClick={this.jumpToOtherEportfolio}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>

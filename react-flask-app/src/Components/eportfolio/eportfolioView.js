@@ -86,7 +86,10 @@ class EportfolioView extends React.Component {
     }
     
 
-    
+    generateLink () {
+        const userID = localStorage.getItem('userID')
+        copy( '/viewOtherEportfolio/'+ userID)
+    }
 	
 	handleSwitch (id) {
 		this.setState({currentSectionID: id})
