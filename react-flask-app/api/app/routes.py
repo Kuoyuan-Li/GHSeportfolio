@@ -68,13 +68,17 @@ def register():
 
     user = User(username=username, email=email)
     user.set_password(password)
-    about_me = Section(title = "about me", user_id = user.user_id)
-    user_info = Module(title = "basic information", section_id = about_me.section_id)
-    contact_me = Section(title = "contact me", user_id = user.user_id)
-    contact_info = Module(title = "contact information", section_id = about_me.section_id)
     db.session.add(user)
+    db.session.commit()
+
+    about_me = Section(title="about me", user_id=user.user_id)
+    contact_me = Section(title="contact me", user_id=user.user_id)
     db.session.add(about_me)
     db.session.add(contact_me)
+    db.session.commit()
+
+    user_info = Module(title = "basic information", section_id = about_me.section_id)
+    contact_info = Module(title = "contact information", section_id = about_me.section_id)
     db.session.add(user_info)
     db.session.add(contact_info)
     db.session.commit()
