@@ -121,6 +121,24 @@ def get_all_modules():
     return modules_json
 
 
+@app.route('/getRandomUsers', methods=['POST'])
+def get_random_users():
+    num_of_users = User.query.count()
+    response = []
+    if num_of_users > 10:
+        random_numbers = random.sample(range(1, num_of_users+1), 10)
+    else:
+        random_numbers = range(1, num_of_users+1)
+    for i in random_numbers:
+        user = User.query.filter_by(user_id = i).first()
+        json = user.to_json()
+        json["num_of_sections"] = Section.query.filter_by(user_id = i).count()
+        del json["email"]
+        del json["password_hash"]
+        response.append(json)
+    return jsonify(response), 200
+
+
 @app.route('/saveSection', methods=['POST'])
 def save_section():
     section_id = request.get_json()['section_id']

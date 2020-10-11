@@ -9,6 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    '''
     family_name = db.Column(db.String(64))
     first_name = db.Column(db.String(64))
     gender = db.Column(db.String(25))
@@ -20,6 +21,7 @@ class User(db.Model):
     introduction = db.Column(db.String(500))
     image_path = db.Column(db.String(300))
     image_name = db.Column(db.String(100))
+    '''
     sections = db.relationship('Section', backref='sections', lazy='dynamic')
 
     # set password
@@ -32,6 +34,12 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def to_json(self):
+        json = self.__dict__
+        if "_sa_instance_state" in json:
+            del json["_sa_instance_state"]
+        return json
 
 
 class Section(db.Model):
