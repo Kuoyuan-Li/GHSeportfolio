@@ -495,3 +495,40 @@ def email_captcha():
     return jsonify({"validity": True,
                     "nonValidMessage": "The captcha is successfully sent...",
                     "captcha": captcha})
+
+
+@app.route('/forgetPassword', methods=['POST'])
+def forget_password():
+    username = request.get_json()['username']
+    email = request.get_json()['email']
+    password = request.get_json()['password']
+    password2 = request.get_json()['password2']
+
+    user = User.query.filter_by(username=username).first()
+
+    if user is None:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "username not exist"}
+                       )
+    if user.email != email:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "username or email is not correct "}
+                       )
+
+    # The two passwords are different
+    if password != password2:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Non consistent password"}
+                       )
+
+    if user.check_password(password):
+        return jsonify({"validity": False,
+                        "nonValidMessage": "same password as previous"}
+                       )
+
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"validity": True,
+                    "nonValidMessage": ""}
+                   )
