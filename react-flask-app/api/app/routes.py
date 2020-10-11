@@ -1,14 +1,13 @@
 from flask import request
-from flask import render_template, flash, redirect, url_for, jsonify, make_response, send_from_directory
-from app import app, db
+from flask import render_template, jsonify, make_response, send_from_directory
+from app import app, db, mail
 from app.models import User, Section, Module
-from flask_login import current_user, login_user, logout_user, login_required
-from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 import os
-import time
 import datetime
 import random
+import uuid
+from flask_mail import Message
 
 db.create_all()
 db.session.commit()
@@ -463,3 +462,27 @@ def download_video(video_name):
 def download_audio(audio_name):
     current_dir = os.path.dirname(os.path.realpath(__file__))
     return send_from_directory(current_dir+"/static/audios", audio_name, as_attachment=True)
+
+
+@app.route('/emailCaptcha')
+def email_captcha():
+    email = request.args.get('email')
+    if not email:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "No email address entered"}
+                       )
+    # get data of user with the email address from database
+    user = User.query.filter_by(email=email).first()
+    # The email address has been used or not invalid email? XXXX@ XXX.com
+    if user is not None:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Please use another email address"}
+                       )
+
+    captcha = str(uuid.uuid1())[:6]
+    message = Message('This is a email verification from eportfolio by GHS', recipients=[email],
+                      body='your captcha is：%s' % captcha)
+    mail.send(message)
+    return jsonify({"validity": True,
+                    "captcha": captcha}
+                   )
