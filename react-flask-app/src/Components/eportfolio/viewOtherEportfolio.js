@@ -10,7 +10,6 @@ class ViewOtherEportfolio extends React.Component {
         this.state = {
             eportfolioOwnerID : this.props.match.params.id,
             sectionIDTitle : [],
-            sectionNumber : 0,
             sections : [],
             currentSectionID : 0,
             message : '',
@@ -23,7 +22,7 @@ class ViewOtherEportfolio extends React.Component {
 
     async componentDidMount(){
         const userID =  this.state.eportfolioOwnerID
-        await fetch ('http://localhost:5000/sectionIDs',{
+        await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -50,7 +49,7 @@ class ViewOtherEportfolio extends React.Component {
                 sectionTitle : thisTitle,
                 modules : null
             }
-            await fetch ('http://localhost:5000/getSection',{
+            await fetch ('http://localhost:5000/getModules',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{

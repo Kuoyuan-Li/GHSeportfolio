@@ -8,6 +8,7 @@ class OtherEportfolio extends React.Component {
         this.state = {
             eportfolios : pesudoUsers
         }
+        this.viewOtherHandler = this.viewOtherHandler.bind(this)
     }
 
     viewOtherHandler (id) {

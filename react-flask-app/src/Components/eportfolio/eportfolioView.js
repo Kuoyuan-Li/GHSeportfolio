@@ -13,14 +13,12 @@ class EportfolioView extends React.Component {
         this.state = {
             eportfolioOwner : localStorage.getItem('user'),
             sectionIDTitle :[],
-            //infoSection: '',
             sections :[],   
             currentSectionID : 0,
             message : '',
             loading : true
         }
-        this.componentDidMount = this.componentDidMount.bind(this)
-        
+        this.componentDidMount = this.componentDidMount.bind(this)    
 		this.handleSwitch = this.handleSwitch.bind(this)
 		this.backProfile = this.backProfile.bind(this)
 		
@@ -88,7 +86,7 @@ class EportfolioView extends React.Component {
 
     generateLink () {
         const userID = localStorage.getItem('userID')
-        copy( '/viewOtherEportfolio/'+ userID)
+        copy( 'http://localhost:3000/viewOtherEportfolio/'+ userID)
     }
 	
 	handleSwitch (id) {
