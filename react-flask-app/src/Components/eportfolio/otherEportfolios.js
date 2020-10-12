@@ -30,7 +30,7 @@ class OtherEportfolio extends React.Component {
 	
      
     viewOtherHandler (id) {
-        this.props.history.push('/viewOtherEportfolio/'+id)
+        this.props.history.push('/viewOtherEportfolio/'+ id)
     }
 
     backToProfile () {
@@ -52,7 +52,15 @@ class OtherEportfolio extends React.Component {
 
     render(){
         const SelectionList = this.state.eportfolios.map(
-            content => <OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
+            content =>   <div>
+			
+			               {content.user_id}
+                           {content.username}
+                           {content.num_of_sections}
+                           <button className="button" onClick={this.viewOtherHandler(content.user_id)}>
+                               View
+                           </button>
+						 </div>
         )
 		
 		
@@ -78,5 +86,14 @@ class OtherEportfolio extends React.Component {
 }
 export default OtherEportfolio
 
-
-
+/*
+<OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
+<div>
+                           {content.user_id}
+                           {content.username}
+                           {content.num_of_sections}
+                           <button className="button" onClick={this.viewOtherHandler(content.user_id)}>
+                               View
+                           </button>
+                       </div>
+*/

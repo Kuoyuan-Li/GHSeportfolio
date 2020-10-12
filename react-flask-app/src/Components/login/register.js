@@ -7,8 +7,7 @@ export class Register extends React.Component {
         this.state = {
             username: '',
             email: '',
-			email_confirmed: '',
-            password: '',
+			password: '',
             password2 :'',
 			captcha:'',
 			userCaptcha:'',
@@ -53,7 +52,6 @@ export class Register extends React.Component {
 				
             } else {
                 this.setState({captcha: response.captcha})
-				this.setState({email_confirmed: this.state.email})
 				this.setState({message: response.nonValidMessage })
             }
 
@@ -67,8 +65,7 @@ export class Register extends React.Component {
 		    this.state.email !== '' && 
 			this.state.password !== '' && 
 			this.state.password2 !== '' &&
-		    this.state.captcha === this.state.userCaptcha &&
-			this.state.email === this.state.email_confirmed)  {
+		    this.state.captcha === this.state.userCaptcha)  {
             
             const newUser = {
                 username: this.state.username,
@@ -102,9 +99,7 @@ export class Register extends React.Component {
             })
 
         }else{
-			if (this.state.email !== this.state.email_confirmed) {
-				this.setState({message:'Please keep your email unchanged'})
-			} else if (this.state.captcha !== this.state.userCaptcha) {
+			if (this.state.captcha !== this.state.userCaptcha) {
 				this.setState({message:'Please enter the right captcha'})
 			} else {
 				this.setState({message:'Please enter all required information'})

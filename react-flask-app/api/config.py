@@ -14,6 +14,6 @@ class Config(object):
     MAIL_PORT = '465'
     # MAIL_USE_TLS = True
     MAIL_USE_SSL = True
-    MAIL_USERNAME = "yuchen99@126.com"
-    MAIL_PASSWORD = "PMKOEEWVGKEWLLER"  
-    MAIL_DEFAULT_SENDER = "yuchen99@126.com"
+    MAIL_USERNAME = "GHSeportfolio@126.com"
+    MAIL_PASSWORD = "SBRBTSATTHTVQBPT"  
+    MAIL_DEFAULT_SENDER = "GHSeportfolio@126.com"

@@ -16,13 +16,13 @@ class OtherEportfolioSelect extends React.Component {
        this.props.viewOther(this.state.userID)
     }
 
+	 
+	
+	
     render(){
 
         return (
             <div>
-                {this.state.userID}
-                {this.state.username}
-                {this.state.sectionNumber}
                 <button className="button" onClick={this.viewHandler}>
                     View
                 </button>
