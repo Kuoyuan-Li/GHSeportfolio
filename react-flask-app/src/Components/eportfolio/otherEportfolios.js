@@ -6,12 +6,13 @@ class OtherEportfolio extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            eportfolios : []
+            eportfolios : [],
+            lists : []
         }
         this.viewOtherHandler = this.viewOtherHandler.bind(this)
         this.backToProfile = this.backToProfile.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
-		this.refetchRandom = this.refetchRandom.bind(this)
+        this.refetchRandom = this.refetchRandom.bind(this)
     }
 
     async componentDidMount(){
@@ -45,20 +46,15 @@ class OtherEportfolio extends React.Component {
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: a list of sectionID + sectionTitle
-            this.setState({eportfolios: response});	
-            console.log(this.state.eportfolios)			
+            this.setState({eportfolios: response});	          		
         })
-	}
+        //window.location.reload(false)   
+        console.log(this.state.eportfolios)		
+    }
+    
 
     render(){
-        const SelectionList = this.state.eportfolios.map(
-            content => <OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
-        )
-		
-		
-		
-		
-		
+        						
         return (
             <div>
                 <button onClick = {this.backToProfile}>
@@ -67,7 +63,15 @@ class OtherEportfolio extends React.Component {
 				<button onClick = {this.refetchRandom}>
                     Grab other users!
                 </button>
-                {SelectionList}
+                <div>
+                {this.state.eportfolios.map(content => {
+                        return (
+                        <div>                          
+                            <OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
+                        </div>
+                        )
+                    })}
+                </div>
             </div>
 
         )
@@ -78,5 +82,9 @@ class OtherEportfolio extends React.Component {
 }
 export default OtherEportfolio
 
-
-
+/*
+const SelectionList = this.state.eportfolios.map(
+    content => {
+        return (<OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>)
+    }
+)*/
