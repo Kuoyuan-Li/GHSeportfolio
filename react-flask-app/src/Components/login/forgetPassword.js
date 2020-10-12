@@ -94,7 +94,7 @@ export class ForgetPassword extends React.Component {
 
         }else{
 			if (this.state.captcha !== this.state.userCaptcha) {
-				this.setState({message:'Please enter the right captcha'})
+				this.setState({message:'Please enter the right code'})
 			} else {
 				this.setState({message:'Please enter all required information'})
 			}
@@ -131,7 +131,7 @@ export class ForgetPassword extends React.Component {
                                 placeholder="Type your user name"
                                 value={this.state.username}
                                 onChange={this.onChange} />
-							<button onClick={this.onSendCaptcha}>send captcha</button>
+							<button onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         
@@ -140,7 +140,7 @@ export class ForgetPassword extends React.Component {
                             <input type="captcha"
                                 className="form-control"
                                 name="userCaptcha"
-                                placeholder="Type your received captcha"
+                                placeholder="Type your received verification code"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
 						    

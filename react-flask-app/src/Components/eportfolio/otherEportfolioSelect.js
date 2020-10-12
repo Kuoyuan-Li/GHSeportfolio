@@ -12,6 +12,14 @@ class OtherEportfolioSelect extends React.Component {
 
     }
 
+    componentDidMount(){
+        this.setState({
+            userID : this.props.content.user_id,
+            username : this.props.content.username,
+            sectionNumber : this.props.content.num_of_sections
+        })
+    }
+    
     viewHandler () {
        this.props.viewOther(this.state.userID)
     }
@@ -23,6 +31,12 @@ class OtherEportfolioSelect extends React.Component {
 
         return (
             <div>
+
+                {this.state.userID}
+                {this.state.username}
+                {this.state.sectionNumber}
+                
+
                 <button className="button" onClick={this.viewHandler}>
                     View
                 </button>
