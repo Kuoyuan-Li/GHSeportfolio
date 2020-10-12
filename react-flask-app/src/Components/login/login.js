@@ -15,6 +15,7 @@ export class Login extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
         this.backIndex = this.backIndex.bind(this)
+		this.forgetPassword = this.forgetPassword.bind(this)
     }
 
     componentDidMount () {
@@ -74,6 +75,10 @@ export class Login extends React.Component {
     backIndex(e){
         this.props.history.push(`/`)
     }
+	
+	forgetPassword(e) {
+		this.props.history.push(`/forgetPassword`)
+	}
 
     render () {
         let warning;
@@ -118,7 +123,11 @@ export class Login extends React.Component {
                         </form>
                 </div>
                 
-                <button class="linkButton" onClick={this.backIndex}>
+                <button class="linkButton" onClick={this.forgetPassword}>
+                    Forget Password?
+                </button>
+				
+				<button class="linkButton" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

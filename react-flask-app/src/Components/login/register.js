@@ -143,8 +143,8 @@ export class Register extends React.Component {
                                 value={this.state.username}
                                 onChange={this.onChange} />
                         </div>
-
-                        <div className="form-group">
+						
+						<div className="form-group">
                             <input type="email"
                                 className="form-control"
                                 name="email"
@@ -153,12 +153,13 @@ export class Register extends React.Component {
                                 onChange={this.onChange} />
 						    
                         </div>
-						
+
+                        
 						<div className="form-group">
                             <input type="captcha"
                                 className="form-control"
                                 name="userCaptcha"
-                                placeholder="Type your received captcha"
+                                placeholder="Type the captcha we sent to your email"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
 						    <button onClick={this.onSendCaptcha}>send captcha</button>

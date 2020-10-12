@@ -78,7 +78,7 @@ def register():
     db.session.commit()
 
     user_info = Module(title = "basic information", section_id = about_me.section_id)
-    contact_info = Module(title = "contact information", section_id = about_me.section_id)
+    contact_info = Module(title = "contact information", section_id = contact_me.section_id)
     db.session.add(user_info)
     db.session.add(contact_info)
     db.session.commit()
@@ -138,8 +138,8 @@ def get_all_modules():
 def get_random_users():
     num_of_users = User.query.count()
     response = []
-    if num_of_users > 10:
-        random_numbers = random.sample(range(1, num_of_users+1), 10)
+    if num_of_users > 2:
+        random_numbers = random.sample(range(1, num_of_users+1), 2)
     else:
         random_numbers = range(1, num_of_users+1)
     for i in random_numbers:
@@ -500,20 +500,10 @@ def email_captcha():
 @app.route('/forgetPassword', methods=['POST'])
 def forget_password():
     username = request.get_json()['username']
-    email = request.get_json()['email']
     password = request.get_json()['password']
     password2 = request.get_json()['password2']
 
     user = User.query.filter_by(username=username).first()
-
-    if user is None:
-        return jsonify({"validity": False,
-                        "nonValidMessage": "username not exist"}
-                       )
-    if user.email != email:
-        return jsonify({"validity": False,
-                        "nonValidMessage": "username or email is not correct "}
-                       )
 
     # The two passwords are different
     if password != password2:
@@ -532,3 +522,25 @@ def forget_password():
     return jsonify({"validity": True,
                     "nonValidMessage": ""}
                    )
+
+
+@app.route('/emailCaptcha2', methods=['POST'])
+def email_captcha2():
+    username = request.get_json()['username']
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "username not exist"}
+                       )
+    email = user.email
+    captcha = str(uuid.uuid1())[:6]
+    message = Message('This is a email verification from eportfolio by GHS', recipients=[email],
+                      body='your captcha is：%s' % captcha)
+    try:
+        mail.send(message)
+    except:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "Non-valid email address"})
+    return jsonify({"validity": True,
+                    "nonValidMessage": "The captcha is successfully sent...",
+                    "captcha": captcha})

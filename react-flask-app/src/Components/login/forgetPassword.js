@@ -6,9 +6,7 @@ export class ForgetPassword extends React.Component {
         super()
         this.state = {
             username: '',
-            email: '',
-			email_confirmed: '',
-			password: '',
+            password: '',
             password2 :'',
 			captcha:'',
 			userCaptcha:'',
@@ -17,7 +15,7 @@ export class ForgetPassword extends React.Component {
         this.onSendCaptcha = this.onSendCaptcha.bind(this)
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.backIndex = this.backIndex.bind(this)
+        this.backLogin = this.backLogin.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
     }
 
@@ -35,7 +33,7 @@ export class ForgetPassword extends React.Component {
 	onSendCaptcha(e) {
 		
 		e.preventDefault()
-		fetch ('http://localhost:5000/emailCaptcha',{
+		fetch ('http://localhost:5000/emailCaptcha2',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{
@@ -43,7 +41,7 @@ export class ForgetPassword extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: this.state.email
+                    username: this.state.username
                 })
         }).then(response => response.json())
         .catch(error => console.error('Error:', error))
@@ -52,8 +50,7 @@ export class ForgetPassword extends React.Component {
                 this.setState({ message : response.nonValidMessage })
             } else {
                 this.setState({captcha: response.captcha})
-				this.setState({email_confirmed: this.state.email})
-            }
+			}
 
 	    })
 	}
@@ -62,20 +59,17 @@ export class ForgetPassword extends React.Component {
         e.preventDefault()
         
         if (this.state.username !== '' && 
-		    this.state.email !== '' && 
-			this.state.password !== '' && 
+		    this.state.password !== '' && 
 			this.state.password2 !== '' &&
-		    this.state.captcha === this.state.userCaptcha &&
-			this.state.email === this.state.email_confirmed)  {
+		    this.state.captcha === this.state.userCaptcha)  {
             
             const newUser = {
                 username: this.state.username,
-                email: this.state.email,
                 password: this.state.password,
                 password2 : this.state.password2
             }
             this.setState({message:''})
-            fetch ('http://localhost:5000/register',{
+            fetch ('http://localhost:5000/forgetPassword',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{
@@ -84,7 +78,6 @@ export class ForgetPassword extends React.Component {
                 },
                 body: JSON.stringify({
                     username: newUser.username,
-                    email: newUser.email,
                     password: newUser.password,
                     password2: newUser.password2
                 })
@@ -100,9 +93,7 @@ export class ForgetPassword extends React.Component {
             })
 
         }else{
-			if (this.state.email !== this.state.email_confirmed) {
-				this.setState({message:'Please keep your email unchanged'})
-			} else if (this.state.captcha !== this.state.userCaptcha) {
+			if (this.state.captcha !== this.state.userCaptcha) {
 				this.setState({message:'Please enter the right captcha'})
 			} else {
 				this.setState({message:'Please enter all required information'})
@@ -110,8 +101,8 @@ export class ForgetPassword extends React.Component {
 		}     
     }
 
-    backIndex(e){
-        this.props.history.push(`/`)
+    backLogin(e){
+        this.props.history.push(`/login`)
     }
 
     render () {
@@ -140,17 +131,10 @@ export class ForgetPassword extends React.Component {
                                 placeholder="Type your user name"
                                 value={this.state.username}
                                 onChange={this.onChange} />
+							<button onClick={this.onSendCaptcha}>send captcha</button>
                         </div>
 
-                        <div className="form-group">
-                            <input type="email"
-                                className="form-control"
-                                name="email"
-                                placeholder="Type your email address"
-                                value={this.state.email}
-                                onChange={this.onChange} />
-						    
-                        </div>
+                        
 						
 						<div className="form-group">
                             <input type="captcha"
@@ -159,7 +143,7 @@ export class ForgetPassword extends React.Component {
                                 placeholder="Type your received captcha"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
-						    <button onClick={this.onSendCaptcha}>send captcha</button>
+						    
                         </div>
 
                         <div className="form-group">
@@ -182,7 +166,7 @@ export class ForgetPassword extends React.Component {
                         
                         <div className="form-group">
                             <button class="button button2" type="submit">
-                                Create account
+                                Reset Password
                             </button>
                         </div>
 
@@ -191,8 +175,8 @@ export class ForgetPassword extends React.Component {
 				
                 </div>
                 
-                <button class="linkButton" onClick={this.backIndex}>
-                    Back to Index Page
+                <button class="linkButton" onClick={this.backLogin}>
+                    Back to Login
                 </button>
             </div>
             </body>
