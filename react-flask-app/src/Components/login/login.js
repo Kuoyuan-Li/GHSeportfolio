@@ -78,8 +78,8 @@ export class Login extends React.Component {
 	
 	forgetPassword(e) {
 		this.props.history.push(`/forgetPassword`)
-	}
-
+    }
+    
     render () {
         let warning;
         if(this.state.message === ''){
@@ -126,8 +126,8 @@ export class Login extends React.Component {
                 <button class="linkButton" onClick={this.forgetPassword}>
                     Forget Password?
                 </button>
-				
-				<button class="linkButton" onClick={this.backIndex}>
+
+                <button class="linkButton" onClick={this.backIndex}>
                     Back to Index Page
                 </button>
             </div>

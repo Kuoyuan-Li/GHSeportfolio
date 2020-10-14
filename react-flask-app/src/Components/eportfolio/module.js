@@ -247,11 +247,11 @@ class Module extends React.Component{
                 type = "text"
                 name = 'title'
                 value={this.state.title}
-                placeholder = "Module title"
+                placeholder = "Module title (e.g. Personal Info)"
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 				
-				<button class="button delete-button" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
+				<button class="button delete-button module-delete" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
                 </div>
@@ -262,7 +262,7 @@ class Module extends React.Component{
                 type = "text"
                 name = 'time'
                 value={this.state.time}
-                placeholder = "Time"
+                placeholder = "Time (e.g. 2020-02-20)"
                 onChange = {this.TimeChangeHandler}/>
                 
                 

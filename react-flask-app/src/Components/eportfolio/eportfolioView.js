@@ -110,34 +110,36 @@ class EportfolioView extends React.Component {
 			})
 
         return (
-            <div>
+            <div id="view">
             {this.state.loading ? <Spinner animation = "border"/> :
-            <div className="container">
-                <br/><br/>
-                              
+            <div class="container">
+                <div class="setting">
+                GHS
+                <button class="linkButton" onClick={this.backProfile}>
+                <i class="fa fa-arrow-circle-o-left"></i>
+                    Back to Home Page
+                </button> 
+          
                 <Popup
-                    trigger = {<button className="button">
+                    trigger = {<button class="linkButton generate-button">
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
                             Generate URL of your eportfolio
                         </button>}
                     position="right center"
                     onOpen = {this.generateLink}>
                     <div>The generated URL is copied to your clipboard!</div>
                 </Popup>
-                
-			    <button class="linkButton" onClick={this.backProfile}>
-                    Back to Home Page
-                </button>
+                </div>
+			    
+                <div class="content">
 				<SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 
 				
-				<div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
                         <div className = "section-list">                                      
                             
 							{sectionItems}
                                    
                         </div>
-                    </div>
                 </div>
             </div>
             }

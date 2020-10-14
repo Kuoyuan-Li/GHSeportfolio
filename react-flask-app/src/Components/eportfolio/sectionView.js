@@ -20,12 +20,13 @@ class SectionView extends React.Component {
             (content => <ModuleView key={content.module_id} content={content} parentSectionID = {this.state.sectionID} />)
        
         return (
-            <div className = "section">
+            <div id="view">
+            <div class = "section">
 			    {this.state.modules.length === 0 ?
-				 <p>You have no modules in this section...</p> :
+				 <p>No modules in this section...</p> :
 				 moduleItems
 				}
-            </div>
+            </div></div>
         )  
     }  
 }

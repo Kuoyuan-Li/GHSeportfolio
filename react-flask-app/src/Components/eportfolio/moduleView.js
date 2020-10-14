@@ -104,7 +104,7 @@ class ModuleView extends React.Component{
 		let url_file = "http://localhost:5000/downloadFile/" + this.state.file_name
         let image_render = this.state.image_name === '' ? 
 		                   null : 
-						   <div>
+						   <div class="image">
 		                        <img style={{height:200, width:300}} 
 								 src={this.state.image_path} 
 								 alt={this.state.image_name} 
@@ -116,13 +116,12 @@ class ModuleView extends React.Component{
                                    onClick={() => this.downloadImage()}
                                 >
                                     <i className="fa fa-download" />
-                                    Download Image
                                 </a>
 		                   </div>
 						   
 		let file_render = this.state.file_name === '' ? 
 		                  null : 
-						  <div>
+						  <div class="file">
 						      {this.state.file_name}
 							  <a
                                href={url_file}
@@ -130,13 +129,12 @@ class ModuleView extends React.Component{
                                onClick={() => this.downloadFile()}
                                >
                                    <i className="fa fa-download" />
-                                   Download File
                               </a>
 					      </div>
 						   
 		let audio_render = this.state.audio_name === '' ? 
 		                   null : 
-						   <div>
+						   <div class="audio">
 		                        <audio style={{height:50, width:300}} 
 								 src={this.state.audio_path} 
 								 controls = 'controls'
@@ -146,7 +144,7 @@ class ModuleView extends React.Component{
 						   
 		let video_render = this.state.video_name === '' ? 
 		                   null : 
-						   <div>
+						   <div class="video">
 		                        <video style={{height:200, width:300}} 
 								 src={this.state.video_path} 
 								 controls = 'controls' 
@@ -156,44 +154,45 @@ class ModuleView extends React.Component{
 						  
 		
         return (
+			<div id="view">
             <div class="module">
                 
                 
-                <p>
-                    title:{this.state.title}
-			    </p>
+                <h2>
+                    {this.state.title}
+			    </h2>
+				
+				{/*<hr style={{height:2}} />*/}
+				
+				<h6>
+                    {this.state.time}
+				</h6>
 				
 				<hr style={{height:2}} />
-				
+                <div class="text" style={{width: this.state.image_name === '' ? 950 : 550}}>
 				<p>
-                    time:{this.state.time}
-				</p>
-				
-				<hr style={{height:2}} />
-                
-				<p>
-				    text:{ReactHtmlParser(this.state.text)}
+				    {ReactHtmlParser(this.state.text)}
                 </p>         
-                
-				<hr style={{height:2}} />
-                
+                </div>
+				{/*<hr style={{height:2}} />*/}
+                <div class="media">
 				{image_render}				
 				
 				
-				<hr style={{height:2}} />
+				{/*<hr style={{height:2}} />*/}
 				
 				{file_render}
 
-                <hr style={{height:2}} />				
+                {/*<hr style={{height:2}} />*/}				
                 
 				{audio_render}
 				
-				<hr style={{height:2}} />				
+				{/*<hr style={{height:2}} />*/}				
                 
 				{video_render}
-                              
+                </div>             
             </div>
-            
+            </div>
             
             
         )

@@ -1,6 +1,7 @@
 import React from 'react'
 import OtherEportfolioSelect from './otherEportfolioSelect'
 //import pesudoUsers from './pseudoUsers'
+import './style.scss'
 
 class OtherEportfolio extends React.Component {
     constructor(props){
@@ -52,32 +53,28 @@ class OtherEportfolio extends React.Component {
         	
     }
     
-
     render(){
-
         const SelectionList = this.state.eportfolios.map(
             content =>   <OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
         )
-		
-		
-		
-		
-		
-
-        						
-
         return (
-            <div>
-                <button onClick = {this.backToProfile}>
+            <div id="view">
+                <div class="container">
+                    <div class="setting">
+                GHS
+                <button class="linkButton" onClick = {this.backToProfile}>
+                <i class="fa fa-arrow-circle-o-left"></i>
                     Back To Profile
                 </button>
-				<button onClick = {this.refetchRandom}>
+				<button class="linkButton" onClick = {this.refetchRandom}>
                     Grab other users!
                 </button>
-                <div>
-				    {SelectionList}
                 </div>
-            </div>
+
+                <div class="content">
+                {SelectionList}
+                </div>
+            </div></div>
 
         )
     }
@@ -86,23 +83,3 @@ class OtherEportfolio extends React.Component {
 
 }
 export default OtherEportfolio
-
-/*
-
-<OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
-<div>
-                           {content.user_id}
-                           {content.username}
-                           {content.num_of_sections}
-                           <button className="button" onClick={this.viewOtherHandler(content.user_id)}>
-                               View
-                           </button>
-                       </div>
-
-
-const SelectionList = this.state.eportfolios.map(
-    content => {
-        return (<OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>)
-    }
-)*/
-
