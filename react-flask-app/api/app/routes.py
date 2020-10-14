@@ -535,12 +535,12 @@ def email_captcha2():
     email = user.email
     captcha = str(uuid.uuid1())[:6]
     message = Message('This is a email verification from eportfolio by GHS', recipients=[email],
-                      body='your captcha is：%s' % captcha)
+                      body='your verification code is：%s' % captcha)
     try:
         mail.send(message)
     except:
         return jsonify({"validity": False,
                         "nonValidMessage": "Non-valid email address"})
     return jsonify({"validity": True,
-                    "nonValidMessage": "The captcha is successfully sent...",
+                    "nonValidMessage": "The verification code is successfully sent...",
                     "captcha": captcha})
