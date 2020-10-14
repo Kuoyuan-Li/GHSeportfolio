@@ -101,7 +101,7 @@ export class Register extends React.Component {
         }else{
 
 			if (this.state.captcha !== this.state.userCaptcha) {
-				this.setState({message:'Please enter the right captcha'})
+				this.setState({message:'Please enter the right code'})
 
 			} else {
 				this.setState({message:'Please enter all required information'})
@@ -159,7 +159,7 @@ export class Register extends React.Component {
                                 placeholder="Type the verification code sent to your email"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
-						    <button onClick={this.onSendCaptcha}>Verify your email</button>
+						    <button onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         <div className="form-group">

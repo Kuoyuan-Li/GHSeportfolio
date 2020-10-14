@@ -1,5 +1,5 @@
 body{
-  background-color: #f0fbff;
+  color: #41403E;
 }
 
 #edit{
@@ -9,7 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0fbff;
+    background: transparent;
     padding-top: 10px;
 }
 .section-list{
@@ -72,13 +72,16 @@ body{
 }
 .delete-button {
   color: #41403E;
-  padding-left: 10px;
   padding: 2px 2px;
   font-family: 'Patrick Hand SC', cursive;
   font-size: 17px;
   font-weight: 800;
   border: none;
 }
+.module-delete{
+  margin-left: 680px;
+}
+
 .image-button{
   display: flex;
   margin-left: 20px;
@@ -122,8 +125,8 @@ body{
   //border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   border-top:dashed 2px #8a8884;
   align-content: left;
-  width: 900px;
-  margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 30px;
   padding-bottom: 5px;
   .module-title{
     padding-left: 5px;
@@ -137,4 +140,100 @@ body{
   width: 10px;
   margin-left: 500px;
 }
+}
+
+#view{
+  //background-image: url(./view-background.jpg);
+  background-repeat: round;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  font-family: 'Comic Sans MS';
+
+  .container{
+    position: relative;
+    //display: inline-block;
+  }
+
+  .setting{
+    position: absolute;
+    text-align: left;
+  .linkButton {
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-family: 'roboto', sans-serif;
+    margin-top: 18px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+    //margin-right: 10px;
+    font-size: 15px;
+    .fa{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  .generate-button{
+    margin-top: 10px;
+  }
+
+}
+
+  .content{
+    position: absolute;
+    margin-top: 60px;
+    width: 100%;
+
+    .section-group{
+    list-style:none;
+    display: inline-block;
+    padding-bottom: 12px;
+    .item{
+      //display: inline-block;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+  }
+  }
+
+  .section{
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  .module{
+    display: inline-block;
+    width: 86%;
+    //background-image: url(./bg.gif);
+    background-size: 120%;
+    h2{
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .text{
+      float:left;
+      //text-align: center;
+      width: 50%;
+      //background-color: violet;
+    }
+
+    .media{
+      float:right;
+      width: 40%;
+      display: inline-block;
+      .image{
+        margin-bottom: 15px;
+      }
+    }
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    i{
+      padding-left: 10px;
+    }
+  }
+
+
 }

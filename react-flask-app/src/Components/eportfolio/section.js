@@ -137,20 +137,24 @@ class Section extends React.Component {
  
         return (
           
-            
-                <div className = "section">
+            <div id="edit">
+                <div class = "section">
                     { this.state.loading ? <Spinner animation="border"/> :
                     <div>
-				    <button type="button" onClick = {this.sectionTitleSaveHandler}>Save section title</button>
+				    
                         <div class="section-title">
                             <input class="input" type = "text"
                                 name = 'Sectiontitle'
                                 value={this.state.sectionTitle}
                                 onChange = {this.sectionTitleChangeHandler}
                                 placeholder="Enter section title"/>
-                        
-                            <button class="button delete-button" onClick = {this.deleteThisSectionHandler.bind(this, this.state.sectionID)}>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+
+                        <button class="button" onClick = {this.sectionTitleSaveHandler}>
+                        Save title<i class="fa fa-check" aria-hidden="true"></i>
+                        </button>
+
+                            <button class="button" onClick = {this.deleteThisSectionHandler.bind(this, this.state.sectionID)}>
+                               Delete section <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </div>
 
@@ -165,7 +169,7 @@ class Section extends React.Component {
                     </div> 
                         }
                 </div>
-
+</div>
 
         )  
     }  
