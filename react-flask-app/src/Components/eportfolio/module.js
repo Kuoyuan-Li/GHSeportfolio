@@ -162,7 +162,7 @@ class Module extends React.Component{
         fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
         
-		
+		this.setState({message: '.'})
         fetch ('http://localhost:5000/saveModule',{
             mode: 'cors',
             method : 'POST',
@@ -178,16 +178,21 @@ class Module extends React.Component{
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: if upload files susccessfully, return success message
-			console.log(response)
-            if(response.success){
-                this.setState({
-                    message : 'Successfully saved the edited module' 
-                })                
-            }
+			if(response.success){ 
+				setTimeout(() => {
+					
+				    this.setState({
+                        message : 'Successfully saved this module'
+					})
+				}, 700)
+			}                
+            
             console.log(this.state.message)
 			
         })
     }
+	
+	
 
     deleteThisModuleHandler(){
         //console.log('deleteThisModuleHandler '+this.state.id)
@@ -232,12 +237,28 @@ class Module extends React.Component{
 							   </button>
 						   </div>
 						  
+		/*
 		let message_render = this.state.message === '' ? 
-		                     null :
+		                     <Spinner animation = "border"/> :
 							 <div class="warning-message">
                                  <i class="fa fa-heart" aria-hidden="true"></i>
                                  {this.state.message}
                              </div>
+		*/
+							 
+		let message_render
+		if (this.state.message === '') {
+			message_render = null
+		} else if (this.state.message === '.') {
+			message_render = <div>
+			                     <Spinner animation = "border"/>
+						     </div>
+		} else {
+			message_render = <div class="warning-message">
+                                 <i class="fa fa-heart" aria-hidden="true"></i>
+                                 {this.state.message}
+                             </div>
+		}
 
         return (
             <div class="module">
