@@ -20,7 +20,7 @@ describe ('login page test', () => {
     });
 
     test('redirect to index page when click : Back to Index Page', () => {
-        wrapper.find('button.backToIndex').simulate('click');       
+        wrapper.find('button').at('1').simulate('click');       
         expect(historyMock.push.mock.calls[0]).toEqual(['/']);
     });
 
