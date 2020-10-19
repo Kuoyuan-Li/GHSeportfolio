@@ -30,7 +30,8 @@
     "react-simple-month-picker": "^0.2.3",
     "react-year-month-picker": "^1.0.1",
     "react-year-picker": "^0.3.7",
-    "reactjs-popup": "^2.0.4"
+    "reactjs-popup": "^2.0.4",
+    "sinon": "^9.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

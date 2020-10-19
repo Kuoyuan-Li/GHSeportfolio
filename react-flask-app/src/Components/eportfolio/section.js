@@ -149,16 +149,13 @@ class Section extends React.Component {
                                 onChange = {this.sectionTitleChangeHandler}
                                 placeholder="Enter section title"/>
 
-                        <button class="button" onClick = {this.sectionTitleSaveHandler}>
-                        Save title<i class="fa fa-check" aria-hidden="true"></i>
-                        </button>
-
+                            <button class="button" onClick = {this.sectionTitleSaveHandler}>
+                            Save title<i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
                             <button class="button" onClick = {this.deleteThisSectionHandler.bind(this, this.state.sectionID)}>
                                Delete section <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
-                        </div>
-
-                       
+                        </div>                      
                             <div>
                             {moduleItems}   
                             <button class="button add-button" onClick = {this.addModuleHandler}>
@@ -169,7 +166,7 @@ class Section extends React.Component {
                     </div> 
                         }
                 </div>
-</div>
+            </div>
 
         )  
     }  

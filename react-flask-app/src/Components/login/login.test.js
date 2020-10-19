@@ -15,21 +15,20 @@ describe ('login page test', () => {
         global.fetch = jest.fn();
     });
 
-    beforeEach(() => {
-        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
-    });
-
-    test('redirect to forget password page when click : Forget Password?', () => {
-        wrapper.find('button').at(1).simulate('click');       
-        expect(historyMock.push.mock.calls[0]).toEqual(['/forgetPassword']);
-    });
-
     test('redirect to index page when click : Back to Index Page', () => {
+        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
         wrapper.find('button').at(2).simulate('click');       
         expect(historyMock.push.mock.calls[0]).toEqual(['/']);
     });
 
+    test('redirect to forget password page when click :forget password', () => {
+        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
+        wrapper.find('button').at(1).simulate('click');       
+        expect(historyMock.push.mock.calls[1]).toEqual(['/forgetPassword']);
+    });
+
     test('Input incomplete login Info, miss username and password' , ()=>{
+        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
         const form = wrapper.find('form.loginForm');
         form.simulate('submit', {
             preventDefault: () => {},
@@ -44,6 +43,7 @@ describe ('login page test', () => {
     });
 
     test('Input incomplete login Info, miss username' , ()=>{
+        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
         const form = wrapper.find('form.loginForm');
         form.simulate('submit', {
             preventDefault: () => {},
@@ -58,6 +58,7 @@ describe ('login page test', () => {
     });
 
     test('Input incomplete login Info, miss password' , ()=>{
+        wrapper = shallow(<Login history = {historyMock} onSubmit={onMock}/>); 
         const form = wrapper.find('form.loginForm');
         form.simulate('submit', {
             preventDefault: () => {},
@@ -70,37 +71,6 @@ describe ('login page test', () => {
         });
         expect(wrapper.state('message')).toEqual('Please enter all required information');      
     });
-
-
-    test('Input complete login Info' , () => {
-        const form = wrapper.find('form.loginForm');
-        form.simulate('submit', {
-            preventDefault: () => {},
-            target: {
-                elements: {
-                    username: { value: '1' },
-                    password: { value: '1' }
-                } 
-            }
-        });       
-        expect(wrapper.state('message')).toEqual('');      
-
-    });
-
-    test ('Api fetch success, push to profile',()=>{
-        const fakeApiResponse1 = {'validity':'True','message':''}
-        const fakeApiResponse2 = {'validity':'False','message':'Invalid username or password'}
-        var {getByTestLogin} = render(<Index />)
-        var apiFunc = jest.spyOn(global, 'onSubmit').mockImplementationOnce(() => {
-            return Promise.resolve({
-              json: () => Promise.resolve(fakeApiResponse1)
-            })
-        })    
-        const text = await getByTestId("ptag")
-        expect(text).toHaveTextContent(fakeUserResponse['data'])
-
-    })
-    
     /*
     test('renders correctly', () => {
         const tree = renderer.create(<Login />).toJSON();
