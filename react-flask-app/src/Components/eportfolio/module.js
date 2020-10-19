@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import {Spinner} from 'react-bootstrap'
 import ReactHtmlParser from "react-html-parser"
 import { Form } from 'react-bootstrap'
-import './style.scss'
+import './style.css'
 
 class Module extends React.Component{
     constructor(props){

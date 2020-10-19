@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
-import './style.scss'
+import './style.css'
 
 class ResetPassword extends Component {
     

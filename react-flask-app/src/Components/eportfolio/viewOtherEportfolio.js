@@ -2,6 +2,7 @@ import React from 'react';
 import SectionView from './sectionView'
 import SectionNavbar from './sectionNavbar'
 import { Spinner } from 'react-bootstrap';
+import "./style.css"
 
 class ViewOtherEportfolio extends React.Component {
 

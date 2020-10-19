@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss'
+import './style.css'
 
 export class Login extends React.Component {
     constructor() {
@@ -97,7 +97,7 @@ export class Login extends React.Component {
                 <div class="row">
                         <form noValidate onSubmit={this.onSubmit} className = 'loginForm'>                                                                                             
                             {warning}
-                        <div className="form form1">    
+                        <div className="form" style={{marginTop: 100}}>    
                             <div className="form-group">
                                 <input type="username"
                                     name="username"

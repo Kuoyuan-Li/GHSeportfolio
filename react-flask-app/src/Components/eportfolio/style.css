@@ -1,0 +1,203 @@
+body {
+  color: #41403e;
+}
+#edit .container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  padding-top: 10px;
+}
+#edit .first-section {
+  margin-bottom: 2px;
+}
+#edit .section {
+  padding-top: 30px;
+}
+#edit .section .section-title {
+  padding-bottom: 10px;
+}
+#edit .section-group {
+  list-style: none;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+#edit .section-group .item {
+  display: inline-block;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+#edit .button {
+  align-self: center;
+  background: transparent;
+  padding: 5px 5px;
+  margin: 0 1px;
+  transition: all 0.5s ease;
+  color: #41403e;
+  font-size: 12px;
+  letter-spacing: 1px;
+  outline: none;
+  box-shadow: 20px 38px 34px -26px rgba(0, 0, 0, .2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+#edit .button:hover {
+  box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, .3);
+}
+#edit .section-button {
+  font-family: 'Patrick Hand SC', cursive;
+  border: solid 2px #41403e;
+}
+#edit .add-button {
+  padding: 2px 2px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 11px;
+  font-weight: 800;
+  border: dashed 2px #41403e;
+}
+#edit .add-button .fa.fa-plus {
+  padding-right: 5px;
+}
+#edit .delete-button {
+  color: #41403e;
+  padding: 2px 2px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+}
+#edit .module-delete {
+  margin-left: 680px;
+}
+#edit .image-button {
+  display: flex;
+  margin-left: 20px;
+  width: 150px;
+  height: 30px;
+  align-content: center;
+  font-family: 'Patrick Hand SC', cursive;
+  border: solid 2px #41403e;
+}
+#edit .image-button .fa {
+  padding-left: 5px;
+  padding-right: 20px;
+}
+#edit .linkButton {
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  font-family: 'roboto', sans-serif;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+#edit .input {
+  align-self: center;
+  background: transparent;
+  padding: 5px 5px;
+  padding-right: 45px;
+  margin: 0 0px;
+  color: #41403e;
+  font-size: 12px;
+  letter-spacing: 1px;
+  box-shadow: 20px 38px 34px -26px rgba(0, 0, 0, .2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  font-family: 'Patrick Hand SC', cursive;
+  border: 0;
+  border-bottom: solid 2px #41403e;
+}
+#edit .module {
+  border-top: dashed 2px #8a8884;
+  align-content: left;
+  width: 100%;
+  margin-bottom: 30px;
+  padding-bottom: 5px;
+}
+#edit .module .module-title {
+  padding-left: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+}
+#edit .editor {
+  width: 10px;
+  margin-left: 500px;
+}
+#edit .ck-editor__editable {
+  max-width: 900px;
+}
+#view {
+  background-repeat: round;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  font-family: 'Comic Sans MS';
+}
+#view .container {
+  position: relative;
+}
+#view .setting {
+  position: absolute;
+  text-align: left;
+}
+#view .setting .linkButton {
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  font-family: 'roboto', sans-serif;
+  margin-top: 18px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+  font-size: 15px;
+}
+#view .setting .linkButton .fa {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#view .setting .generate-button {
+  margin-top: 10px;
+}
+#view .content {
+  position: absolute;
+  margin-top: 60px;
+  width: 100%;
+}
+#view .content .section-group {
+  list-style: none;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+#view .content .section-group .item {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+#view .section {
+  margin-left: 0px;
+  width: 100%;
+}
+#view .module {
+  display: inline-block;
+  width: 86%;
+  background-size: 120%;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+#view .module h2 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#view .module .text {
+  float: left;
+  width: 50%;
+}
+#view .module .media {
+  float: right;
+  width: 40%;
+  display: inline-block;
+}
+#view .module .media .image {
+  margin-bottom: 15px;
+}
+#view .module i {
+  padding-left: 10px;
+}

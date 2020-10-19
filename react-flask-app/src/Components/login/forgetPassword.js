@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss'
+import './style.css'
 
 export class ForgetPassword extends React.Component {
     constructor() {
@@ -126,19 +126,17 @@ export class ForgetPassword extends React.Component {
 
                         <div className="form-group">
                             <input type="username"
-                                className="form-control"
                                 name="username"
                                 placeholder="Type your user name"
                                 value={this.state.username}
                                 onChange={this.onChange} />
-							<button onClick={this.onSendCaptcha}>Send verification code</button>
+							<button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         
 						
 						<div className="form-group">
                             <input type="captcha"
-                                className="form-control"
                                 name="userCaptcha"
                                 placeholder="Type your received verification code"
                                 value={this.state.userCaptcha}
@@ -148,7 +146,6 @@ export class ForgetPassword extends React.Component {
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password"
                                 placeholder="Type your password"
                                 value={this.state.password}
@@ -157,7 +154,6 @@ export class ForgetPassword extends React.Component {
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password2"
                                 placeholder="Re-enter password"
                                 value={this.state.password2}

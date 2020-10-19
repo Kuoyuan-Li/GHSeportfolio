@@ -3,7 +3,7 @@ import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ReactHtmlParser from "react-html-parser"
 import { Form } from 'react-bootstrap'
-import './style.scss'
+import './style.css'
 
 class ModuleView extends React.Component{
     constructor(props){
@@ -169,8 +169,8 @@ class ModuleView extends React.Component{
 				</h6>
 				
 				<hr style={{height:2}} />
-				<div class="text" style={{width: this.state.image_name === '' ? 900 : 550, 
-			        textAlign: this.state.image_name === '' ? "center" : "left"}}>
+				<div class="text" style={{width: (this.state.image_name === '' && this.state.video_name === '') ? 900 : 550, 
+			        textAlign: (this.state.image_name === '' && this.state.video_name === '') ? "center" : "left"}}>
 				<p>
 				    {ReactHtmlParser(this.state.text)}
                 </p>         

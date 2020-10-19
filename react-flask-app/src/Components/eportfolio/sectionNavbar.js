@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import {Breadcrumb, Button} from 'react-bootstrap';
-import './style.scss'
+import './style.css'
 
 
 class SectionNavbar extends React.Component {

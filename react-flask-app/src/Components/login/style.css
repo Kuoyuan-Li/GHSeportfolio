@@ -1,0 +1,129 @@
+#login {
+    background-image: url(./paper.jpg);
+    background-repeat: round;
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+#login .container {
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    text-align: center;
+}
+#login h3 {
+    padding-top: 120px;
+    padding-bottom: 20px;
+    color: #000;
+    text-align: center;
+    font-family: "Times New Roman";
+    font-size: 30px;
+}
+#login .col-md-12 {
+    padding: 10px 0px;
+}
+#login .row {
+    padding-bottom: 25px;
+}
+#login .button {
+    text-align: center;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 320px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+#login .button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: -2;
+}
+#login .button:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    transition: all 0.3s;
+    border-radius: 10px;
+    z-index: -1;
+}
+#login .button:hover:before {
+    width: 100%;
+}
+#login .button1 {
+    background-color: #7b9649;
+    color: #fff;
+}
+#login .button1:before {
+    background-color: #507e3e;
+}
+#login .button1:hover {
+    color: #fff;
+}
+#login .button2 {
+    background-color: #e5e7de;
+    color: #000;
+}
+#login .button2:before {
+    background-color: #e8f7d0;
+}
+#login .button2:hover {
+    color: #000;
+}
+#login .linkButton {
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-family: 'roboto', sans-serif;
+}
+#login .warning-message {
+    color: #fff;
+    background-color: #ff7c7c;
+    font-family: 'DINPro-Medium';
+    border: 5px solid;
+    margin: 10px 0px;
+    padding: 5px;
+    width: 320px;
+}
+#login .form .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+#login .form .form-group input {
+    margin-top: 6px;
+    min-width: 18em;
+    height: 40px;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-family: 'roboto', sans-serif;
+    background-color: #f3f3f3;
+    width: 320px;
+    border: 0;
+    border-radius: 4px;
+    transition: all 250ms ease-in-out;
+}
+#login .form .form-group input:focus {
+    box-shadow: 0 0 8px rgb(39, 35, 3);
+}

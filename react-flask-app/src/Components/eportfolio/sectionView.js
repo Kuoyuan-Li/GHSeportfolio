@@ -1,7 +1,7 @@
 import React from 'react';
 import ModuleView from './moduleView'
 import { Route , withRouter} from 'react-router-dom';
-import './style.scss'
+import './style.css'
 
 class SectionView extends React.Component {
 
