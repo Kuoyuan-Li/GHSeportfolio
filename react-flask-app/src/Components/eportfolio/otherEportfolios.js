@@ -1,7 +1,7 @@
 import React from 'react'
 import OtherEportfolioSelect from './otherEportfolioSelect'
 //import pesudoUsers from './pseudoUsers'
-import './style.scss'
+import './style.css'
 
 class OtherEportfolio extends React.Component {
     constructor(props){

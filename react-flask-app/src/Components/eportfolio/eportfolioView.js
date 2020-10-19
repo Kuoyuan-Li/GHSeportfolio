@@ -3,8 +3,9 @@ import SectionView from './sectionView'
 import SectionNavbar from './sectionNavbar'
 import copy from 'copy-to-clipboard'
 import Popup from 'reactjs-popup'
-import 'reactjs-popup/dist/index.css'
+//import 'reactjs-popup/dist/index.css'
 import { Spinner } from 'react-bootstrap';
+import "./style.css"
 
 class EportfolioView extends React.Component {
 

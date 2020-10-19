@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './style.scss'
+import './style.css'
 
 class Index extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class Index extends Component {
 
     render () {
         return (
-            <div id="login">
+            <body id="login">
                 <div class="container">
                     <div class="col-md-12">
                         <h3>Eportfolio System</h3>
@@ -45,7 +45,7 @@ class Index extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </body>
         )
     }
 

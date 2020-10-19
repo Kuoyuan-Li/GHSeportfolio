@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss'
+import './style.css'
 
 export class Register extends React.Component {
     constructor() {
@@ -130,11 +130,10 @@ export class Register extends React.Component {
                 <div class="row">
                 <form noValidate className = 'registerForm' onSubmit={this.onSubmit}>                           
                     {warning}
-                    <div className="form form2">
+                    <div className="form">
 
                         <div className="form-group">
                             <input type="username"
-                                className="form-control"
                                 name="username"
                                 placeholder="Type your user name"
                                 value={this.state.username}
@@ -143,7 +142,6 @@ export class Register extends React.Component {
 						
 						<div className="form-group">
                             <input type="email"
-                                className="form-control"
                                 name="email"
                                 placeholder="Type your email address"
                                 value={this.state.email}
@@ -154,17 +152,15 @@ export class Register extends React.Component {
                         
 						<div className="form-group">
                             <input type="captcha"
-                                className="form-control"
                                 name="userCaptcha"
                                 placeholder="Type the verification code sent to your email"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
-						    <button onClick={this.onSendCaptcha}>Send verification code</button>
+						    <button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password"
                                 placeholder="Type your password"
                                 value={this.state.password}
@@ -173,7 +169,6 @@ export class Register extends React.Component {
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password2"
                                 placeholder="Re-enter password"
                                 value={this.state.password2}

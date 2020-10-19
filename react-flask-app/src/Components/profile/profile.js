@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from "./navbar.js"
 import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
-import './style.scss'
+import './style.css'
 
 class Profile extends Component {
     constructor() {
@@ -48,7 +48,7 @@ class Profile extends Component {
 
     render () {
         return (
-          <div id="profile">
+          <body id="profile">
             <div className="container">
                 
 				<Navbar />           
@@ -87,7 +87,7 @@ class Profile extends Component {
                 
                 
             </div>
-          </div>
+          </body>
         )
     }
 }

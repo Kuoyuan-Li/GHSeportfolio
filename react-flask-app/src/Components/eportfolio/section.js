@@ -2,7 +2,7 @@ import React from 'react';
 import Module from './module'
 import { Route , withRouter} from 'react-router-dom';
 import {Spinner} from 'react-bootstrap'
-import './style.scss'
+import './style.css'
 
 class Section extends React.Component {
 

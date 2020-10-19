@@ -19,11 +19,13 @@ class Navbar extends Component {
 				<Nav variant="pills" defaultActiveKey="#first">
 
                  <Nav.Item>
-                        <Nav.Link href="/resetPassword">Reset password</Nav.Link>
+                        <Nav.Link href="/resetPassword">
+                        <i class="fa fa-undo" aria-hidden="true"></i>Reset password</Nav.Link>
                     </Nav.Item>
 					
 					<Nav.Item>
-                        <Nav.Link href="/logout">Log out</Nav.Link>
+                        <Nav.Link href="/logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>Log out</Nav.Link>
                     </Nav.Item>
                     
                 </Nav>

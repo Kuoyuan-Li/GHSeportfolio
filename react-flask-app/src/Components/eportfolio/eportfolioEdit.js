@@ -2,7 +2,7 @@ import React from 'react'
 import Section from './section'
 import SectionNavbar from './sectionNavbar'
 import {Spinner} from 'react-bootstrap'
-import './style.scss'
+import './style.css'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 
 class EportfolioEdit extends React.Component {
