@@ -48,8 +48,9 @@ class SectionNavbar extends React.Component {
 	    
 		
 		return (
+			<div id="edit">
 		    <div class="section-list">
-				{sectionItems}</div>
+				{sectionItems}</div></div>
 		)
 		
 	}

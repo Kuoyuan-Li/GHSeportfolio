@@ -152,13 +152,16 @@ class EportfolioEdit extends React.Component {
 
         return (
             
-            <div id="edit">
+            <div id="eportfolio">
                 <div className="container">
-                    <button class="linkButton" onClick={this.backProfile}>
-                        Back to Home Page
-                    </button>
+                <div class="setting">
+                GHS
+                <button class="linkButton" onClick={this.backProfile}>
+                <i class="fa fa-arrow-circle-o-left"></i>
+                    Back to Home Page
+                </button> </div>
                     { this.state.loading ?  <Spinner animation = "border"/> :
-                    <div>
+                    <div class="content">
                     <SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                     <button class="button add-button" onClick = {this.addSectionHandler}>
                     <i class="fa fa-plus" aria-hidden="true"></i>

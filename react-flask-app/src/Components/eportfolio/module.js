@@ -241,25 +241,25 @@ class Module extends React.Component{
 						  
 		let image_name_render = this.state.image_name === '' ?
 		                        null:
-								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
                                     {this.state.image_name}
 								</button>
 								
 		let file_name_render = this.state.file_name === '' ?
 		                        null:
-								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
                                     {this.state.file_name}
 								</button>
 								
 		let audio_name_render = this.state.audio_name === '' ?
 		                        null:
-								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
                                     {this.state.audio_name}
 								</button>
 								
 		let video_name_render = this.state.video_name === '' ?
 		                        null:
-								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
                                     {this.state.video_name}
 								</button>
 								

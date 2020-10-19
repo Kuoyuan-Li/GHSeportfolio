@@ -15,7 +15,7 @@ body {
   text-align: left;
   width: 100%;
   background: transparent;
-  padding-left: 20px;
+  padding-left: 30px;
 }
 #eportfolio .setting .linkButton {
   text-decoration: underline;
@@ -48,16 +48,33 @@ body {
   padding-left: 3px;
   padding-right: 3px;
 }
-
-#edit{
-  background-image: url(./Background.jpg);
-  background-size: 100%;
-  background-repeat: round;
-  min-height: 618px;
-  width: 100%;
-  font-family: 'Comic Sans MS';
-
+#eportfolio .button {
+  align-self: center;
+  background: transparent;
+  padding: 5px 5px;
+  margin: 0 1px;
+  transition: all 0.5s ease;
+  color: #41403e;
+  font-size: 12px;
+  letter-spacing: 1px;
+  outline: none;
+  box-shadow: 20px 38px 34px -26px rgba(0, 0, 0, .2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
+#eportfolio .button:hover {
+  box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, .3);
+}
+#eportfolio .add-button {
+  padding: 2px 2px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 11px;
+  font-weight: 800;
+  border: dashed 2px #41403e;
+}
+#eportfolio .add-button .fa {
+  padding-right: 5px;
+}
+
 #edit .container {
   height: 100%;
   width: 100%;
@@ -72,7 +89,12 @@ body {
 }
 #edit .section {
   padding-top: 30px;
+  padding-left: 180px;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
 }
 #edit .section .section-title {
   padding-bottom: 10px;
@@ -114,7 +136,7 @@ body {
   font-weight: 800;
   border: dashed 2px #41403e;
 }
-#edit .add-button .fa.fa-plus {
+#edit .add-button .fa {
   padding-right: 5px;
 }
 #edit .delete-button {
@@ -140,6 +162,15 @@ body {
 #edit .image-button .fa {
   padding-left: 5px;
   padding-right: 20px;
+}
+#edit .name-button {
+  display: flex;
+  margin-left: 20px;
+  width: 150px;
+  height: 30px;
+  align-content: center;
+  font-family: 'Patrick Hand SC', cursive;
+  border: none;
 }
 #edit .linkButton {
   text-decoration: underline;
