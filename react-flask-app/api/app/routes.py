@@ -152,6 +152,17 @@ def get_random_users():
     return jsonify(response), 200
 
 
+@app.route('/getUser', methods=['POST'])
+def get_user():
+    user_id = request.get_json()['user_id']
+    user = User.query.filter_by(user_id=user_id).first()
+    json = user.to_json()
+    json["num_of_sections"] = Section.query.filter_by(user_id=user_id).count()
+    del json["email"]
+    del json["password_hash"]
+    return jsonify(json), 200
+
+
 @app.route('/saveSection', methods=['POST'])
 def save_section():
     section_id = request.get_json()['section_id']
@@ -225,14 +236,14 @@ def save_module():
     else:
         video_new_name = get_new_name(video_name)
         
-        #if module.video_name:
-            #os.remove(os.path.join(base_path, 'static/videos', module.video_name))
+        if module.video_name:
+            os.remove(os.path.join(base_path, 'static/videos', module.video_name))
     if audio_name != '' and audio == '':
         audio_new_name = audio_name
     else:
         audio_new_name = get_new_name(audio_name)
-        #if module.audio_name:
-            #os.remove(os.path.join(base_path, 'static/audios', module.audio_name))
+        if module.audio_name:
+            os.remove(os.path.join(base_path, 'static/audios', module.audio_name))
 
     if image:
         image_path = os.path.join(base_path, 'static/images', secure_filename(image_new_name))
