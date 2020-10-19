@@ -71,21 +71,21 @@
     width: 100%;
 }
 #login .button1 {
-    background-color: #3d3b81;
+    background-color: #7b9649;
     color: #fff;
 }
 #login .button1:before {
-    background-color: #292857;
+    background-color: #507e3e;
 }
 #login .button1:hover {
     color: #fff;
 }
 #login .button2 {
-    background-color: #f5f5fc;
+    background-color: #e5e7de;
     color: #000;
 }
 #login .button2:before {
-    background-color: #e1e1f6;
+    background-color: #e8f7d0;
 }
 #login .button2:hover {
     color: #000;
