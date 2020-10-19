@@ -156,11 +156,18 @@ def get_random_users():
 def get_user():
     user_id = request.get_json()['user_id']
     user = User.query.filter_by(user_id=user_id).first()
-    json = user.to_json()
-    json["num_of_sections"] = Section.query.filter_by(user_id=user_id).count()
-    del json["email"]
-    del json["password_hash"]
-    return jsonify(json), 200
+    if user is not None:
+        json = user.to_json()
+        json["num_of_sections"] = Section.query.filter_by(user_id=user_id).count()
+        del json["email"]
+        del json["password_hash"]
+        return jsonify({"validity": True,
+                        "user": json}
+                       )
+    else:
+        return jsonify({"validity": False,
+                        "nonValidMessage": "The user does not exist"}
+                       )
 
 
 @app.route('/saveSection', methods=['POST'])
