@@ -19,7 +19,8 @@ class Module extends React.Component{
 			// image stuff
             image : null,
 			image_name : props.content.image_name=== null ? '' :props.content.image_name,
-			image_path : props.content.image_path=== null ? '' :props.content.image_path,
+            image_path : props.content.iamge_path=== null ? '' :props.content.image_path,
+
 			// file stuff
             file : null,
 			file_path : props.content.file_path=== null ? '' :props.content.file_path,
@@ -47,7 +48,8 @@ class Module extends React.Component{
 		this.selectAudioHandler = this.selectAudioHandler.bind(this)
 		this.deleteAudioHandler = this.deleteAudioHandler.bind(this)
 		this.selectVideoHandler = this.selectVideoHandler.bind(this)
-		this.deleteVideoHandler = this.deleteVideoHandler.bind(this)
+        this.deleteVideoHandler = this.deleteVideoHandler.bind(this)
+        this.deleteThisModuleHandler = this.deleteThisModuleHandler.bind(this)
     }
 	
 	
@@ -287,7 +289,7 @@ class Module extends React.Component{
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 				
-				<button class="button delete-button module-delete" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
+				<button class="button delete-button module-delete" onClick={this.deleteThisModuleHandler}>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
                 </div>
