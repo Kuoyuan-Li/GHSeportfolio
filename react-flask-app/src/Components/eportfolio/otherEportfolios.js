@@ -16,6 +16,8 @@ class OtherEportfolio extends React.Component {
         this.backToProfile = this.backToProfile.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
         this.refetchRandom = this.refetchRandom.bind(this)
+		this.onChange = this.onChange.bind(this)
+		this.onSubmit = this.onSubmit.bind(this)
     }
 
     async componentDidMount(){
@@ -50,6 +52,7 @@ class OtherEportfolio extends React.Component {
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: a list of sectionID + sectionTitle
+			console.log(response)
             this.setState({eportfolios: response});	          		
         })
         //window.location.reload(false)   
@@ -60,8 +63,10 @@ class OtherEportfolio extends React.Component {
     }
 	
 	onSubmit (e) {
+		console.log(this.state.username)
+		e.preventDefault()
 		// url tbd
-		fetch ('http://localhost:5000/getRandomUsers',{
+		fetch ('http://localhost:5000/getUser',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -77,7 +82,8 @@ class OtherEportfolio extends React.Component {
             if (response.validity !== true) {
                 this.setState({ message : response.nonValidMessage })
 			} else {
-                this.setState({ eportfolios: response})
+				console.log(response.user)
+                this.setState({ eportfolios: response.user})
 			}        		
         })
 		
@@ -98,8 +104,8 @@ class OtherEportfolio extends React.Component {
         }
 		
 		
-		const SelectionList = this.state.eportfolios.map(
-            content =>   <div>
+		let SelectionList = this.state.eportfolios.map(
+            content =>   <div key = {content.userID}>
 
                              {content.username}
                              {content.num_of_sections}
@@ -126,21 +132,21 @@ class OtherEportfolio extends React.Component {
                 </button>
 				
 				
-				<form noValidate onSubmit={this.onSubmit}>
-				    <div>
+				
+				    
                         <input type="username"
                                name="username"
                                placeholder="Enter Username"
                                value={this.state.username}
                                onChange={this.onChange} />
-                    </div>
+                    
 					
-					<div className="form-group">
-                        <button type="submit">
+					
+                        <button onClick={this.onSubmit}>
                             Search
                         </button>
-                    </div>
-				</form>
+                    
+				
 				
 				{warning}
 				
@@ -155,7 +161,8 @@ class OtherEportfolio extends React.Component {
 				    </div>
                     {SelectionList}
                 </div>
-            </div></div>
+            </div>
+			</div>
 
         )
     }

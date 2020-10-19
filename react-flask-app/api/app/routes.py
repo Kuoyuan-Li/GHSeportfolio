@@ -138,8 +138,8 @@ def get_all_modules():
 def get_random_users():
     num_of_users = User.query.count()
     response = []
-    if num_of_users > 2:
-        random_numbers = random.sample(range(1, num_of_users+1), 2)
+    if num_of_users > 10:
+        random_numbers = random.sample(range(1, num_of_users+1), 10)
     else:
         random_numbers = range(1, num_of_users+1)
     for i in random_numbers:
@@ -154,7 +154,7 @@ def get_random_users():
 
 @app.route('/getUser', methods=['POST'])
 def get_user():
-    user_id = request.get_json()['user_id']
+    user_id = request.get_json()['username']
     user = User.query.filter_by(user_id=user_id).first()
     if user is not None:
         json = user.to_json()
@@ -162,8 +162,8 @@ def get_user():
         del json["email"]
         del json["password_hash"]
         return jsonify({"validity": True,
-                        "user": json}
-                       )
+                "user": [json]}
+               )
     else:
         return jsonify({"validity": False,
                         "nonValidMessage": "The user does not exist"}

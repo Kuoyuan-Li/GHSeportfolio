@@ -102,7 +102,8 @@ class ModuleView extends React.Component{
     render (){
 		let url = "http://localhost:5000/downloadImage/" + this.state.image_name
 		let url_file = "http://localhost:5000/downloadFile/" + this.state.file_name
-        let image_render = this.state.image_name === '' ? 
+		
+		let image_render = this.state.image_name === '' ? 
 		                   null : 
 						   <div class="image">
 		                        <img style={{height:200, width:300}} 
