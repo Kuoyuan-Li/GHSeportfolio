@@ -19,7 +19,7 @@ class Module extends React.Component{
 			// image stuff
             image : null,
 			image_name : props.content.image_name=== null ? '' :props.content.image_name,
-			image_path : '',
+			image_path : props.content.image_path=== null ? '' :props.content.image_path,
 			// file stuff
             file : null,
 			file_path : props.content.file_path=== null ? '' :props.content.file_path,
@@ -237,15 +237,30 @@ class Module extends React.Component{
 							   </button>
 						   </div>
 						  
-		/*
-		let message_render = this.state.message === '' ? 
-		                     <Spinner animation = "border"/> :
-							 <div class="warning-message">
-                                 <i class="fa fa-heart" aria-hidden="true"></i>
-                                 {this.state.message}
-                             </div>
-		*/
-							 
+		let image_name_render = this.state.image_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+                                    {this.state.image_name}
+								</button>
+								
+		let file_name_render = this.state.file_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+                                    {this.state.file_name}
+								</button>
+								
+		let audio_name_render = this.state.audio_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+                                    {this.state.audio_name}
+								</button>
+								
+		let video_name_render = this.state.video_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button image-button">
+                                    {this.state.video_name}
+								</button>
+								
 		let message_render
 		if (this.state.message === '') {
 			message_render = null
@@ -304,8 +319,9 @@ class Module extends React.Component{
                 ref = {(imageInput) => {this.imageInput = imageInput}}/>
                 <button class="button image-button" onClick = {() => this.imageInput.click()}>
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                    Choose image {this.state.image_name}</button>
-						{image_render}					
+                    Choose image </button>
+				{image_name_render}
+					{image_render}					
                 
                 <hr/>
                 <input 
@@ -315,7 +331,8 @@ class Module extends React.Component{
                 ref = {(fileInput) => this.fileInput = fileInput}/>
                 <button class="button image-button" onClick = {() => this.fileInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
-                Choose file {this.state.file_name}</button> 
+                Choose file </button>
+				{file_name_render}
 					{file_render}				
                 
                 <hr/>
@@ -327,7 +344,8 @@ class Module extends React.Component{
                 ref = {(audioInput) => this.audioInput = audioInput}/>
                 <button class="button image-button" onClick = {() => this.audioInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
-                Choose audio {this.state.audio_name}</button> 
+                Choose audio </button>
+				{audio_name_render}
 					{audio_render}
 				
 				<hr/>
@@ -339,7 +357,8 @@ class Module extends React.Component{
                 ref = {(videoInput) => this.videoInput = videoInput}/>
                 <button class="button image-button" onClick = {() => this.videoInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
-                Choose video {this.state.video_name}</button> 
+                Choose video </button>
+				{video_name_render}
 					{video_render}				
                 
                 <hr/>

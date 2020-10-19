@@ -7,25 +7,35 @@ class OtherEportfolioSelect extends React.Component {
         this.state = {
             userID : this.props.content.user_id,
             username : this.props.content.username,
-            sectionNumber : this.props.content.num_of_sections
+            sectionNumber : this.props.content.num_of_sections,
+			eportfolios: this.props.eportfolios
         }
         this.viewHandler = this.viewHandler.bind(this)
 
     }
 
-    componentDidMount(){
+    /*
+	componentDidMount(){
         this.setState({
             userID : this.props.content.user_id,
             username : this.props.content.username,
-            sectionNumber : this.props.content.num_of_sections
+            sectionNumber : this.props.content.num_of_sections,
+			eportfolios: this.props.eportfolios
         })
     }
+	*/
     
     viewHandler () {
        this.props.viewOther(this.state.userID)
     }
 
-	 
+	componentDidUpdate(prevProps, prevState) {
+        if (prevState.eportfolios !== this.props.eportfolios) {
+            this.setState({eportfolios: this.props.eportfolios})
+        }
+		
+    }
+	
 	
 	
     render(){

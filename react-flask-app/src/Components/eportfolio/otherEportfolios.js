@@ -7,8 +7,10 @@ class OtherEportfolio extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+			username: '',
             eportfolios : [],
-            lists : []
+			message: ''
+            //lists : []
         }
         this.viewOtherHandler = this.viewOtherHandler.bind(this)
         this.backToProfile = this.backToProfile.bind(this)
@@ -31,8 +33,9 @@ class OtherEportfolio extends React.Component {
 	
 	
      
-    viewOtherHandler (id) {
-        this.props.history.push('/viewOtherEportfolio/'+ id)
+    viewOtherHandler (e, id) {
+		e.preventDefault()
+		this.props.history.push('/viewOtherEportfolio/'+ id)
     }
 
     backToProfile () {
@@ -50,12 +53,63 @@ class OtherEportfolio extends React.Component {
             this.setState({eportfolios: response});	          		
         })
         //window.location.reload(false)   
-        	
     }
+	
+	onChange (e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+	
+	onSubmit (e) {
+		// url tbd
+		fetch ('http://localhost:5000/getRandomUsers',{
+            mode: 'cors',
+            method : 'POST',
+			headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: this.state.username
+            })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then((response) => {
+            if (response.validity !== true) {
+                this.setState({ message : response.nonValidMessage })
+			} else {
+                this.setState({ eportfolios: response})
+			}        		
+        })
+		
+	}
+	
+	
     
     render(){
-        const SelectionList = this.state.eportfolios.map(
-            content =>   <OtherEportfolioSelect key = {content.userID} content = {content} viewOther = {this.viewOtherHandler}/>
+        let warning;
+        if(this.state.message === ''){
+             warning = <div></div>;
+        } else{
+            warning =
+            <div class="warning-message">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {this.state.message}
+            </div>
+        }
+		
+		
+		const SelectionList = this.state.eportfolios.map(
+            content =>   <div>
+
+                             {content.username}
+                             {content.num_of_sections}
+                
+
+                             <button className="button" onClick={(e) => this.viewOtherHandler(e, content.user_id)}>
+                                 View
+                             </button>
+							 <hr/>
+                         </div>
         )
 		      					
         return (
@@ -70,10 +124,36 @@ class OtherEportfolio extends React.Component {
 				<button class="linkButton" onClick = {this.refetchRandom}>
                     Grab other users!
                 </button>
+				
+				
+				<form noValidate onSubmit={this.onSubmit}>
+				    <div>
+                        <input type="username"
+                               name="username"
+                               placeholder="Enter Username"
+                               value={this.state.username}
+                               onChange={this.onChange} />
+                    </div>
+					
+					<div className="form-group">
+                        <button type="submit">
+                            Search
+                        </button>
+                    </div>
+				</form>
+				
+				{warning}
+				
+				
                 </div>
 
                 <div class="content">
-                {SelectionList}
+				    <div display={{display:'flex'}}>
+					    <p>username</p>
+						<p>#sections</p>
+						<p>click to view</p>
+				    </div>
+                    {SelectionList}
                 </div>
             </div></div>
 
@@ -83,3 +163,7 @@ class OtherEportfolio extends React.Component {
 
 }
 export default OtherEportfolio
+
+/*
+<OtherEportfolioSelect key = {content.userID} eportfolios = {this.state.eportfolios} content = {content} viewOther = {this.viewOtherHandler}/>
+*/
