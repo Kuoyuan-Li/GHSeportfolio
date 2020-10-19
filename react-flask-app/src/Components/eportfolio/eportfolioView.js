@@ -111,7 +111,7 @@ class EportfolioView extends React.Component {
 			})
 
         return (
-            <div id="view">
+            <body id="eportfolio">
             {this.state.loading ? <Spinner animation = "border"/> :
             <div class="container">
                 <div class="setting">
@@ -144,7 +144,7 @@ class EportfolioView extends React.Component {
                 </div>
             </div>
             }
-            </div>
+            </body>
         )  
     }  
 }
