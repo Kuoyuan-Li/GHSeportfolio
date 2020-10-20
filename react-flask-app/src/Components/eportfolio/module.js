@@ -271,7 +271,7 @@ class Module extends React.Component{
 			                     <Spinner animation = "border"/>
 						     </div>
 		} else {
-			message_render = <div class="warning-message">
+			message_render = <div class="notification-message">
                                  <i class="fa fa-heart" aria-hidden="true"></i>
                                  {this.state.message}
                              </div>
@@ -285,7 +285,7 @@ class Module extends React.Component{
                 type = "text"
                 name = 'title'
                 value={this.state.title}
-                placeholder = "Module title (e.g. Personal Info)"
+                placeholder = "Module title"
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 				
@@ -300,7 +300,7 @@ class Module extends React.Component{
                 type = "text"
                 name = 'time'
                 value={this.state.time}
-                placeholder = "Time (e.g. 2020-02-20)"
+                placeholder = "Time (e.g. 2020-02)"
                 onChange = {this.TimeChangeHandler}/>
                 
                 

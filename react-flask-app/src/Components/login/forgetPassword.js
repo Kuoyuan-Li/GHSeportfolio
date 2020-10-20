@@ -133,7 +133,7 @@ export class ForgetPassword extends React.Component {
 							
                         </div>
                         <div>
-                            <button class="button button1" onClick={this.onSendCaptcha}>Send verification code</button>
+                            <button class="Button" onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 						
 						<div className="form-group">

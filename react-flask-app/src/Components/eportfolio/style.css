@@ -44,7 +44,7 @@ body {
   margin-right: 150px;
 }
 #eportfolio .warning-message {
-    color: #fff;
+    color: rgba(255, 255, 255, 0);
     background-color: #ff7c7c;
     font-family: 'DINPro-Medium';
     margin: 10px 0px;
@@ -53,6 +53,19 @@ body {
     font-size: 14px;
     margin-left: 360px;
 }
+#eportfolio .notification-message {
+  color: hsl(110, 86%, 16%);
+  font-family: 'DINPro-Medium';
+  margin: 10px 0px;
+  padding: 5px;
+  width: 320px;
+  font-size: 14px;
+  margin-left: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #eportfolio .content {
   width: 100%;
   text-align: center;

@@ -150,13 +150,13 @@ export class Register extends React.Component {
                         </div>
 
                         
-						<div className="form-group">
+						<div className="form-group" style={{alignItems:'center'}}>
                             <input type="captcha"
                                 name="userCaptcha"
                                 placeholder="Type the verification code sent to your email"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
-						    <button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
+						    <button class="Button" onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         <div className="form-group">
