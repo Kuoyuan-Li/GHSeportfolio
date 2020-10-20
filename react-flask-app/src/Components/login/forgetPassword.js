@@ -130,10 +130,11 @@ export class ForgetPassword extends React.Component {
                                 placeholder="Type your user name"
                                 value={this.state.username}
                                 onChange={this.onChange} />
-							<button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
+							
                         </div>
-
-                        
+                        <div>
+                            <button class="button button1" onClick={this.onSendCaptcha}>Send verification code</button>
+                        </div>
 						
 						<div className="form-group">
                             <input type="captcha"

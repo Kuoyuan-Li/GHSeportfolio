@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Navbar from "./navbar.js"
 import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
 import './style.css'
+import e3 from './e3.jpg'
 
 class Profile extends Component {
     constructor() {
@@ -57,28 +58,28 @@ class Profile extends Component {
                             
               
 				<div className="card-group">
-				    <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/100"/>
+				    <div className='card'> 
+            <Card.Img src={e3}/>
 					      <p>View your eportfolio</p>
-						    <h3>-- You can view your own eportfolio here</h3>
+						    <h3>You can view your own eportfolio here</h3>
                 <Button onClick={this.jumpToView}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>
 
             <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/300"/>
+            <Card.Img src="https://maxcdn.icons8.com/app/uploads/2016/10/edit2.png"/>
 					      <p>Edit your eportfolio</p>
-						    <h3>-- You can edit your own eportfolio here</h3>
+						    <h3>You can edit your own eportfolio here</h3>
                 <Button onClick={this.jumpToEdit}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>
 
             <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/200"/>
+					      <Card.Img src="https://www.lifewire.com/thmb/2fUa5PN6ORjBQJGvjFXE1yVlqnk=/5160x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/row-of-red-work-files-with-one-yellow-one-110953663-57ab2a733df78cf45974949c.jpg"/>
 					      <p>View others' eportfolio</p>
-						    <h3>-- You can view others' eportfolio here</h3>
+						    <h3>You can view others' eportfolio here</h3>
                 <Button onClick={this.jumpToOtherEportfolio}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
