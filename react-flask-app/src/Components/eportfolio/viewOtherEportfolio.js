@@ -98,25 +98,27 @@ class ViewOtherEportfolio extends React.Component {
 			})
        
         return (
-            <div className="container">
+            <body id="eportfolio">
+                <div class="setting">
+                GHS
+                <button class="linkButton" onClick={this.backViewList}>
+                <i class="fa fa-arrow-circle-o-left"></i>
+                    View Others Eportfolio
+                </button> </div>
+
+            <div class="content">
                 {this.state.loading ? <Spinner animation = "border"/> :
                     <div>
-                    <button onClick={this.backViewList}>
-                        View Others Eportfolio
-                    </button>
                     <SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />		
-                    <div className="row">
-                        <div className="col-md-6 mt-5 mx-auto">
+                    
                             <div className = "section-list">                                      
                                 
                                 {sectionItems}
                                     
                             </div>
-                        </div>
-                    </div>
                     </div>
                 }
-            </div>
+            </div></body>
         )  
     }  
 }

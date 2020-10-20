@@ -105,13 +105,13 @@ class OtherEportfolio extends React.Component {
 		
 		
 		let SelectionList = this.state.eportfolios.map(
-            content =>   <div key = {content.userID}>
+            content =>   <div class="list" key = {content.userID}>
 
-                             {content.username}
-                             {content.num_of_sections}
+                             <p>{content.username}</p>
+                             <p class="center">{content.num_of_sections}</p>
                 
 
-                             <button className="button" onClick={(e) => this.viewOtherHandler(e, content.user_id)}>
+                             <button class="button" onClick={(e) => this.viewOtherHandler(e, content.user_id)}>
                                  View
                              </button>
 							 <hr/>
@@ -119,7 +119,7 @@ class OtherEportfolio extends React.Component {
         )
 		      					
         return (
-            <div id="view">
+            <div id="eportfolio">
                 <div class="container">
                     <div class="setting">
                 GHS
@@ -127,38 +127,36 @@ class OtherEportfolio extends React.Component {
                 <i class="fa fa-arrow-circle-o-left"></i>
                     Back To Profile
                 </button>
-				<button class="linkButton" onClick = {this.refetchRandom}>
-                    Grab other users!
-                </button>
 				
 				
 				
 				    
-                        <input type="username"
-                               name="username"
-                               placeholder="Enter Username"
-                               value={this.state.username}
-                               onChange={this.onChange} />
+                    <input type="username"
+                        name="username"
+                        placeholder="Search by username"
+                        value={this.state.username}
+                        onChange={this.onChange} />
                     
-					
-					
-                        <button onClick={this.onSubmit}>
-                            Search
-                        </button>
+                    <button class="searchButton" onClick={this.onSubmit}>
+                        <i class="fa fa-search"></i>
+                    </button>
                     
 				
-				
+				<button class="linkButton" onClick = {this.refetchRandom}>
+                <i class="fa fa-refresh"></i>
+                    Grab other users!
+                </button>
+				</div>
+
 				{warning}
-				
-				
-                </div>
 
                 <div class="content">
-				    <div display={{display:'flex'}}>
-					    <p>username</p>
-						<p>#sections</p>
-						<p>click to view</p>
+				    <div class="title">
+					    <p>Username</p>
+                        <p class="center">#sections</p>
+						<p>Click to view</p>
 				    </div>
+                        <hr style={{height:2}} />
                     {SelectionList}
                 </div>
             </div>
