@@ -33,8 +33,8 @@ class ModuleView extends React.Component{
 			video_name : props.content.video_name=== null ? '' :props.content.video_name,
             message : ''
         }
-        this.showImage = this.showImage.bind(this)
-		/*this.showVideo = this.showVideo.bind(this)*/
+        //this.showImage = this.showImage.bind(this)
+		//this.showVideo = this.showVideo.bind(this)
 		this.showAudio = this.showAudio.bind(this)
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.downloadImage = this.downloadImage.bind(this)
@@ -43,17 +43,18 @@ class ModuleView extends React.Component{
 	
 	
 	async componentDidMount(){
-        this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
-		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showAudio/' + this.state.audio_name})
-		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showVideo/' + this.state.video_name})
+        this.setState({image_path:'http://localhost:5000/showImage/' + this.state.image_name})
+		this.setState({audio_path:'http://localhost:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path:'http://localhost:5000/showVideo/' + this.state.video_name})
 	}
 	
-    // show image in new tab
+	/*
 	showImage(e) {
 		const url = 'http://localhost:5000/showImage/' + this.state.image_name
         
         window.open(url)
 	}
+	*/
 	
 	// show video in new tab
 	/*
@@ -109,7 +110,6 @@ class ModuleView extends React.Component{
 		                        <img style={{height:200, width:300}} 
 								 src={this.state.image_path} 
 								 alt={this.state.image_name} 
-								 onClick={this.showImage} 
 								/>
 								
 								<a href={url}
