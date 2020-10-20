@@ -77,8 +77,11 @@ def register():
     db.session.add(contact_me)
     db.session.commit()
 
-    user_info = Module(title = "basic information", section_id = about_me.section_id)
-    contact_info = Module(title = "contact information", section_id = contact_me.section_id)
+    text1 = "<p>family name :&nbsp;</p><p>first name :&nbsp;</p><p>gender :&nbsp;</p><p>date of birth :&nbsp;</p><p>self-introduction:</p>"
+    text2 = "<p>phone number :&nbsp;</p><p>contact email :&nbsp;</p><p>linkedin :</p>",
+
+    user_info = Module(title="basic information", text=text1, image_name="portrait.jpg", section_id=about_me.section_id)
+    contact_info = Module(title="contact information", text=text2, section_id=contact_me.section_id)
     db.session.add(user_info)
     db.session.add(contact_info)
     db.session.commit()
@@ -126,9 +129,7 @@ def get_all_sections():
 
 @app.route('/getModules', methods=['POST'])
 def get_all_modules():
-    
     section_id = request.get_json()['section_id']
-    print(section_id)
     modules = Module.query.filter_by(section_id = section_id).all()
     modules_json = convert_to_json(modules)
     return modules_json
@@ -154,11 +155,11 @@ def get_random_users():
 
 @app.route('/getUser', methods=['POST'])
 def get_user():
-    user_id = request.get_json()['username']
-    user = User.query.filter_by(user_id=user_id).first()
+    username = request.get_json()['username']
+    user = User.query.filter_by(username=username).first()
     if user is not None:
         json = user.to_json()
-        json["num_of_sections"] = Section.query.filter_by(user_id=user_id).count()
+        json["num_of_sections"] = Section.query.filter_by(user_id=user.user_id).count()
         del json["email"]
         del json["password_hash"]
         return jsonify({"validity": True,
@@ -226,12 +227,16 @@ def save_module():
     # get the base path
     base_path = os.path.dirname(__file__)
 
+    # have image in module and don't change it
     if image_name != '' and image == '':
         image_new_name = image_name
     else:
         image_new_name = get_new_name(image_name)
         if module.image_name:
-            os.remove(os.path.join(base_path, 'static/images', module.image_name))
+            if module.image_name == "portrait.jpg":
+                pass
+            else:
+                os.remove(os.path.join(base_path, 'static/images', module.image_name))
     if file_name != '' and file == '':
         file_new_name = file_name
     else:
@@ -506,7 +511,6 @@ def email_captcha():
     try:
         mail.send(message)
     except:
-        
         return jsonify({"validity": False,
                     "nonValidMessage": "Non-valid email address"})
     
