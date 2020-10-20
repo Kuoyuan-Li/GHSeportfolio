@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import os
+import sys
+sys.path.append(os.path.abspath(".."))
 from flask import request
 from flask import render_template, jsonify, make_response, send_from_directory
 from app import app, db, mail
 from app.models import User, Section, Module
 from werkzeug.utils import secure_filename
-import os
+
 import datetime
 import random
 import uuid
@@ -12,11 +15,11 @@ from flask_mail import Message
 
 db.create_all()
 db.session.commit()
+client = app.test_client()
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 
 @app.route('/login', methods=["POST"])
@@ -126,7 +129,7 @@ def get_all_sections():
 
 @app.route('/getModules', methods=['POST'])
 def get_all_modules():
-    
+
     section_id = request.get_json()['section_id']
     print(section_id)
     modules = Module.query.filter_by(section_id = section_id).all()
@@ -242,7 +245,7 @@ def save_module():
         video_new_name = video_name
     else:
         video_new_name = get_new_name(video_name)
-        
+
         if module.video_name:
             os.remove(os.path.join(base_path, 'static/videos', module.video_name))
     if audio_name != '' and audio == '':
@@ -485,9 +488,9 @@ def download_audio(audio_name):
 
 @app.route('/emailCaptcha', methods=['POST'])
 def email_captcha():
-    
+
     email = request.get_json()['email']
-    
+
     if not email:
         return jsonify({"validity": False,
                         "nonValidMessage": "No email address entered"}
@@ -506,10 +509,10 @@ def email_captcha():
     try:
         mail.send(message)
     except:
-        
+
         return jsonify({"validity": False,
                     "nonValidMessage": "Non-valid email address"})
-    
+
     return jsonify({"validity": True,
                     "nonValidMessage": "The verification code is successfully sent...",
                     "captcha": captcha})
@@ -562,3 +565,7 @@ def email_captcha2():
     return jsonify({"validity": True,
                     "nonValidMessage": "The verification code is successfully sent...",
                     "captcha": captcha})
+
+if __name__ == '__main__':
+
+    app.run()

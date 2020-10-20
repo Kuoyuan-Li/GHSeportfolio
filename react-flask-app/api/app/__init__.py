@@ -18,4 +18,4 @@ mail = Mail(app)
 loginMngr = LoginManager(app)  # login feature
 CORS(app)
 
-from app import routes, models  #models define the structure of DB
+#from app import routes, models  #models define the structure of DB
