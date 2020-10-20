@@ -73,17 +73,27 @@ def register():
 
     about_me = Section(title="about me", user_id=user.user_id)
     contact_me = Section(title="contact me", user_id=user.user_id)
+    education = Section(title="education background", user_id=user.user_id)
+    internship = Section(title="internship experience", user_id=user.user_id)
     db.session.add(about_me)
     db.session.add(contact_me)
+    db.session.add(education)
+    db.session.add(internship)
     db.session.commit()
 
     text1 = "<p>family name :&nbsp;</p><p>first name :&nbsp;</p><p>gender :&nbsp;</p><p>date of birth :&nbsp;</p><p>self-introduction:</p>"
     text2 = "<p>phone number :&nbsp;</p><p>contact email :&nbsp;</p><p>linkedin :</p>",
+    text3 = "put the detail of your education background here"
+    text4 = "put the detail of your internship experience here"
 
     user_info = Module(title="basic information", text=text1, image_name="portrait.jpg", section_id=about_me.section_id)
     contact_info = Module(title="contact information", text=text2, section_id=contact_me.section_id)
+    education_info = Module(title="education background 1", data="e.g. 1.1.2000-1.1.2020", text=text3, section_id=education.section_id)
+    internship_info = Module(title="internship experience 1", data="e.g. 1.1.2000-1.1.2020", text=text4, section_id=internship.section_id)
     db.session.add(user_info)
     db.session.add(contact_info)
+    db.session.add(education_info)
+    db.session.add(internship_info)
     db.session.commit()
     return jsonify({"validity": True,
                     "nonValidMessage": ""}
