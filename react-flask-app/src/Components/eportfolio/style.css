@@ -234,7 +234,8 @@ body {
 }
 #view .module .text {
   float: left;
-  width: 50%;
+  word-wrap: break-word;
+  width: 300px;
 }
 #view .module .media {
   float: right;
@@ -247,3 +248,4 @@ body {
 #view .module i {
   padding-left: 10px;
 }
+

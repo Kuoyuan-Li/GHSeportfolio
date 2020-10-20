@@ -1,9 +1,14 @@
 #profile {
+    position: center;
+    top: 0;
     background-image: url(./Trees.png);
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    margin: 0;
     height: 100%;
     width: 100%;
+
 }
 #profile .container {
     width: 100%;
