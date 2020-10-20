@@ -100,10 +100,10 @@
     color: #fff;
     background-color: #ff7c7c;
     font-family: 'DINPro-Medium';
-    border: 5px solid;
     margin: 10px 0px;
     padding: 5px;
     width: 320px;
+    font-size: 14px;
 }
 #login .form .form-group {
     display: flex;
