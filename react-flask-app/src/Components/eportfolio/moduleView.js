@@ -56,6 +56,7 @@ class ModuleView extends React.Component{
 	}
 	*/
 	
+	
 	// show video in new tab
 	/*
 	showVideo(e) {
@@ -109,7 +110,8 @@ class ModuleView extends React.Component{
 						   <div class="image">
 		                        <img style={{height:200, width:300}} 
 								 src={this.state.image_path} 
-								 alt={this.state.image_name} 
+								 alt={this.state.image_name}
+                                 								 
 								/>
 								
 								<a href={url}

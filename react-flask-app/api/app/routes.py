@@ -88,8 +88,8 @@ def register():
 
     user_info = Module(title="basic information", text=text1, image_name="portrait.jpg", section_id=about_me.section_id)
     contact_info = Module(title="contact information", text=text2, section_id=contact_me.section_id)
-    education_info = Module(title="education background 1", data="e.g. 1.1.2000-1.1.2020", text=text3, section_id=education.section_id)
-    internship_info = Module(title="internship experience 1", data="e.g. 1.1.2000-1.1.2020", text=text4, section_id=internship.section_id)
+    education_info = Module(title="education background 1", date="e.g. 1.1.2000-1.1.2020", text=text3, section_id=education.section_id)
+    internship_info = Module(title="internship experience 1", date="e.g. 1.1.2000-1.1.2020", text=text4, section_id=internship.section_id)
     db.session.add(user_info)
     db.session.add(contact_info)
     db.session.add(education_info)

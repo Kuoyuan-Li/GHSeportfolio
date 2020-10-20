@@ -112,7 +112,7 @@ class EportfolioView extends React.Component {
 
         return (
             <body id="eportfolio">
-            {this.state.loading ? <Spinner animation = "border"/> :
+            
             <div class="container">
                 <div class="setting">
                 GHS
@@ -131,8 +131,9 @@ class EportfolioView extends React.Component {
                     <div>The generated URL is copied to your clipboard!</div>
                 </Popup>
                 </div>
-			    
+			    {this.state.loading ? <Spinner style={{marginLeft:500}} animation = "border"/> :
                 <div class="content">
+				
 				<SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
                 
 				
@@ -142,8 +143,9 @@ class EportfolioView extends React.Component {
                                    
                         </div>
                 </div>
+				}
             </div>
-            }
+            
             </body>
         )  
     }  

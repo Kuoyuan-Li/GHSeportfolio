@@ -146,7 +146,7 @@ export class Register extends React.Component {
                                 placeholder="Type your email address"
                                 value={this.state.email}
                                 onChange={this.onChange} />
-						    
+						    <button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
                         </div>
 
                         
@@ -156,7 +156,7 @@ export class Register extends React.Component {
                                 placeholder="Type the verification code sent to your email"
                                 value={this.state.userCaptcha}
                                 onChange={this.onChange} />
-						    <button class="linkButton" onClick={this.onSendCaptcha}>Send verification code</button>
+						    
                         </div>
 
                         <div className="form-group">
