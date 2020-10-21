@@ -1,9 +1,14 @@
 #profile {
+    position: center;
+    top: 0;
     background-image: url(./Trees.png);
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    margin: 0;
     height: 100%;
     width: 100%;
+
 }
 #profile .container {
     width: 100%;
@@ -25,7 +30,7 @@
     letter-spacing: 2px;
 }
 #profile .card-group .card {
-    background-color: rgba(255, 255, 255, 0.692);
+    background-color: rgba(255, 255, 255, 0.24);
     width: 290px;
     height: 330px;
     margin-left: 4px;
@@ -33,12 +38,12 @@
     text-align: center;
 }
 #profile .card-group .card img {
-    height: 160px;
+    height: 200px;
 }
 #profile .card-group .card p {
     color: #000;
-    font-size: 26px;
-    font-family: "Times New Roman";
+    font-size: 20px;
+    font-family: 'Comic Sans MS';
     padding-top: 5px;
     padding-bottom: 6px;
 }

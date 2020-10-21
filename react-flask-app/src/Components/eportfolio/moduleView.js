@@ -174,9 +174,9 @@ class ModuleView extends React.Component{
 				<hr style={{height:2}} />
 				<div class="text" style={{width: (this.state.image_name === '' && this.state.video_name === '') ? 900 : 550, 
 			        textAlign: (this.state.image_name === '' && this.state.video_name === '') ? "center" : "left"}}>
-				<p>
-				    {ReactHtmlParser(this.state.text)}
-                </p>         
+					<p>
+						{ReactHtmlParser(this.state.text)}
+					</p>         
                 </div>
 				{/*<hr style={{height:2}} />*/}
                 <div class="media">
