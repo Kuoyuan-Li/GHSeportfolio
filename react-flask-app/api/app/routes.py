@@ -580,6 +580,3 @@ def email_captcha2():
                     "nonValidMessage": "The verification code is successfully sent...",
                     "captcha": captcha})
 
-if __name__ == '__main__':
-
-    app.run()

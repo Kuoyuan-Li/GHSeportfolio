@@ -44,7 +44,7 @@ body {
   margin-right: 150px;
 }
 #eportfolio .warning-message {
-    color: rgba(255, 255, 255, 0);
+    color: rgb(255, 255, 255);
     background-color: #ff7c7c;
     font-family: 'DINPro-Medium';
     margin: 10px 0px;
