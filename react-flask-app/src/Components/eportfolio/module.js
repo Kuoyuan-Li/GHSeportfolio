@@ -1,9 +1,10 @@
 import React from 'react'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import {Spinner} from 'react-bootstrap'
 import ReactHtmlParser from "react-html-parser"
 import { Form } from 'react-bootstrap'
-import './style.scss'
+import './style.css'
 
 class Module extends React.Component{
     constructor(props){
@@ -15,13 +16,25 @@ class Module extends React.Component{
             time : props.content.date=== null ? '' :props.content.date,
             text : props.content.text=== null ? '' :props.content.text,
             // use {ReactHtmlParser(this.state.text)} to read the text
+			// image stuff
             image : null,
 			image_name : props.content.image_name=== null ? '' :props.content.image_name,
-			image_path : '',
+            image_path : props.content.iamge_path=== null ? '' :props.content.image_path,
+
+			// file stuff
             file : null,
 			file_path : props.content.file_path=== null ? '' :props.content.file_path,
 			file_name : props.content.file_name=== null ? '' :props.content.file_name,
-            message : ''
+			// audio stuff
+			audio : null,
+			audio_path : props.content.audio_path=== null ? '' :props.content.audio_path,
+			audio_name : props.content.audio_name=== null ? '' :props.content.audio_name,
+			// video stuff
+			video : null,
+			video_path : props.content.video_path=== null ? '' :props.content.video_path,
+			video_name : props.content.video_name=== null ? '' :props.content.video_name,
+            message : '',
+            loading : true
         }
         this.TitleChangeHandler = this.TitleChangeHandler.bind(this)     
         this.TimeChangeHandler = this.TimeChangeHandler.bind(this)
@@ -32,12 +45,18 @@ class Module extends React.Component{
 		this.componentDidMount = this.componentDidMount.bind(this)
 		this.deleteImageHandler = this.deleteImageHandler.bind(this)
 		this.deleteFileHandler = this.deleteFileHandler.bind(this)
+		this.selectAudioHandler = this.selectAudioHandler.bind(this)
+		this.deleteAudioHandler = this.deleteAudioHandler.bind(this)
+		this.selectVideoHandler = this.selectVideoHandler.bind(this)
+        this.deleteVideoHandler = this.deleteVideoHandler.bind(this)
+        this.deleteThisModuleHandler = this.deleteThisModuleHandler.bind(this)
     }
 	
 	
 	async componentDidMount(){
         this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
-		
+		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showVideo/' + this.state.video_name})
 	}
 	
 
@@ -83,6 +102,34 @@ class Module extends React.Component{
             file_path: ''			
         })
     }
+	
+	selectAudioHandler = (event) => {
+        this.setState({audio:event.target.files[0]})
+		this.setState({audio_name:event.target.files[0].name})
+		this.setState({audio_path:URL.createObjectURL(event.target.files[0])})
+    }
+
+    deleteAudioHandler = () =>{
+        this.setState({
+            audio: null,
+            audio_name: '',
+            audio_path: ''			
+        })
+    }
+	
+	selectVideoHandler = (event) => {
+        this.setState({video:event.target.files[0]})
+		this.setState({video_name:event.target.files[0].name})
+		this.setState({video_path:URL.createObjectURL(event.target.files[0])})
+    }
+
+    deleteVideoHandler = () =>{
+        this.setState({
+            video: null,
+            video_name: '',
+            video_path: ''			
+        })
+    }
     
     saveModuleHandler = (e) =>{
         //fetch api and send data to backend
@@ -91,19 +138,33 @@ class Module extends React.Component{
         const fileData = new FormData();
         fileData.append("section_id",  this.state.parentSection)
         fileData.append("module_id",  this.state.id)
-        if (this.state.image !== null) {
+        
+		if (this.state.image !== null) {
 		    fileData.append('image',this.state.image)
 		}
         fileData.append('image_name',this.state.image_name)
+		
 		if (this.state.file !== null) {
             fileData.append('file',this.state.file)
 		}
         fileData.append('file_name',this.state.file_name)
+		
+		if (this.state.audio !== null) {
+            fileData.append('audio',this.state.audio)
+		}
+        fileData.append('audio_name',this.state.audio_name)
+		
+		if (this.state.video !== null) {
+            fileData.append('video',this.state.video)
+		}
+        fileData.append('video_name',this.state.video_name)
+		
+		
         fileData.append('title',this.state.title)
         fileData.append('time',this.state.time)
         fileData.append('text',this.state.text)
         
-		
+		this.setState({message: '.'})
         fetch ('http://localhost:5000/saveModule',{
             mode: 'cors',
             method : 'POST',
@@ -119,16 +180,21 @@ class Module extends React.Component{
         .catch(error => console.error('Error:', error))
         .then((response) => {
             //response: if upload files susccessfully, return success message
-			console.log(response)
-            if(response.success){
-                this.setState({
-                    message : 'Successfully saved the edited module' 
-                })                
-            }
+			if(response.success){ 
+				setTimeout(() => {
+					
+				    this.setState({
+                        message : 'Successfully saved this module'
+					})
+				}, 700)
+			}                
+            
             console.log(this.state.message)
 			
         })
     }
+	
+	
 
     deleteThisModuleHandler(){
         //console.log('deleteThisModuleHandler '+this.state.id)
@@ -154,9 +220,66 @@ class Module extends React.Component{
                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
 							   </button>
 						  </div>
+						  
+		let video_render = this.state.video_name === '' ? 
+		                   null : 
+						   <div>
+		                       <video style={{height:200, width:300}} src={this.state.video_path} controls="controls"/>
+							   <button class="button delete-button" onClick = {this.deleteVideoHandler}>
+                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+							   </button>
+						   </div>
+						   
+		let audio_render = this.state.audio_name === '' ? 
+		                   null : 
+						   <div>
+		                       <audio style={{height:50, width:300}} src={this.state.audio_path} controls="controls"/>
+							   <button class="button delete-button" onClick = {this.deleteAudioHandler}>
+                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+							   </button>
+						   </div>
+						  
+		let image_name_render = this.state.image_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
+                                    {this.state.image_name}
+								</button>
+								
+		let file_name_render = this.state.file_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
+                                    {this.state.file_name}
+								</button>
+								
+		let audio_name_render = this.state.audio_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
+                                    {this.state.audio_name}
+								</button>
+								
+		let video_name_render = this.state.video_name === '' ?
+		                        null:
+								<button style={{textOverflow: 'ellipsis', width:170}} class="button name-button">
+                                    {this.state.video_name}
+								</button>
+								
+		let message_render
+		if (this.state.message === '') {
+			message_render = null
+		} else if (this.state.message === '.') {
+			message_render = <div>
+			                     <Spinner animation = "border"/>
+						     </div>
+		} else {
+			message_render = <div class="notification-message">
+                                 <i class="fa fa-heart" aria-hidden="true"></i>
+                                 {this.state.message}
+                             </div>
+		}
 
         return (
             <div class="module">
+                
                 <div class="module-title">
                 <input class="input"
                 type = "text"
@@ -166,7 +289,7 @@ class Module extends React.Component{
                 onChange = {this.TitleChangeHandler}/>
                 <br/>
 				
-				<button class="button delete-button" onClick={this.deleteThisModuleHandler.bind(this, this.state.id)}>
+				<button class="button delete-button module-delete" onClick={this.deleteThisModuleHandler}>
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
                 </div>
@@ -177,7 +300,7 @@ class Module extends React.Component{
                 type = "text"
                 name = 'time'
                 value={this.state.time}
-                placeholder = "Time"
+                placeholder = "Time (e.g. 2020-02)"
                 onChange = {this.TimeChangeHandler}/>
                 
                 
@@ -187,7 +310,8 @@ class Module extends React.Component{
                     data={this.state.text}        
                     onChange = {this.handleTextInput}
                 />             
-                <br/>
+                
+				<hr/>
                 <input  
                 style={{display:'none'}}
                 class="input"
@@ -197,11 +321,11 @@ class Module extends React.Component{
                 ref = {(imageInput) => {this.imageInput = imageInput}}/>
                 <button class="button image-button" onClick = {() => this.imageInput.click()}>
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                    Choose  image {this.state.image_name}</button>
-						{image_render}					
+                    Choose image </button>
+				{image_name_render}
+					{image_render}					
                 
-                
-                <br/>
+                <hr/>
                 <input 
                 style={{display:'none'}}
                 type = "file"            
@@ -209,21 +333,45 @@ class Module extends React.Component{
                 ref = {(fileInput) => this.fileInput = fileInput}/>
                 <button class="button image-button" onClick = {() => this.fileInput.click()}>
                 <i class="fa fa-file-o" aria-hidden="true"></i>
-                Choose file {this.state.file_name}</button> 
+                Choose file </button>
+				{file_name_render}
 					{file_render}				
                 
-                <br/>
+                <hr/>
+				<input 
+                style={{display:'none'}}
+                type = "file" 
+                accept="audio/*"				
+                onChange = {this.selectAudioHandler}
+                ref = {(audioInput) => this.audioInput = audioInput}/>
+                <button class="button image-button" onClick = {() => this.audioInput.click()}>
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                Choose audio </button>
+				{audio_name_render}
+					{audio_render}
+				
+				<hr/>
+				<input 
+                style={{display:'none'}}
+                type = "file" 
+                accept="video/*"				
+                onChange = {this.selectVideoHandler}
+                ref = {(videoInput) => this.videoInput = videoInput}/>
+                <button class="button image-button" onClick = {() => this.videoInput.click()}>
+                <i class="fa fa-file-o" aria-hidden="true"></i>
+                Choose video </button>
+				{video_name_render}
+					{video_render}				
+                
+                <hr/>
 
                 <button class="button save-button" onClick = {this.saveModuleHandler}>
                 Save<i class="fa fa-check" aria-hidden="true"></i>
                 </button>
 				
-				<div class="warning-message">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    {this.state.message}
-                </div>
+				{message_render}
                 <br/>
-                              
+                      
             </div>
             
             

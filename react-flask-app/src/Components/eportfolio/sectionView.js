@@ -1,7 +1,7 @@
 import React from 'react';
 import ModuleView from './moduleView'
 import { Route , withRouter} from 'react-router-dom';
-import './style.scss'
+import './style.css'
 
 class SectionView extends React.Component {
 
@@ -20,9 +20,13 @@ class SectionView extends React.Component {
             (content => <ModuleView key={content.module_id} content={content} parentSectionID = {this.state.sectionID} />)
        
         return (
-            <div className = "section">
-			    {moduleItems}
-            </div>
+            <div id="view">
+            <div class = "section">
+			    {this.state.modules.length === 0 ?
+				 <p>No modules in this section...</p> :
+				 moduleItems
+				}
+            </div></div>
         )  
     }  
 }

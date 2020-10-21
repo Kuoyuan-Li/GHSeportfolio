@@ -1,9 +1,11 @@
 import React from 'react';
 import SectionView from './sectionView'
 import SectionNavbar from './sectionNavbar'
-import AboutMe from './aboutMe'
-import './style.scss'
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import copy from 'copy-to-clipboard'
+import Popup from 'reactjs-popup'
+//import 'reactjs-popup/dist/index.css'
+import { Spinner } from 'react-bootstrap';
+import "./style.css"
 
 class EportfolioView extends React.Component {
 
@@ -12,13 +14,12 @@ class EportfolioView extends React.Component {
         this.state = {
             eportfolioOwner : localStorage.getItem('user'),
             sectionIDTitle :[],
-            //infoSection: '',
             sections :[],   
             currentSectionID : 0,
-            message : ''
+            message : '',
+            loading : true
         }
-        this.componentDidMount = this.componentDidMount.bind(this)
-        
+        this.componentDidMount = this.componentDidMount.bind(this)    
 		this.handleSwitch = this.handleSwitch.bind(this)
 		this.backProfile = this.backProfile.bind(this)
 		
@@ -26,7 +27,7 @@ class EportfolioView extends React.Component {
 
     async componentDidMount(){
         const userID = localStorage.getItem('userID')
-        await fetch ('http://localhost:5000/sectionIDs',{
+        await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -54,7 +55,7 @@ class EportfolioView extends React.Component {
                 sectionTitle : thisTitle,
                 modules : null
             }
-            await fetch ('http://localhost:5000/getSection',{
+            await fetch ('http://localhost:5000/getModules',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{
@@ -75,12 +76,19 @@ class EportfolioView extends React.Component {
             })
             
         }
+
+        this.setState({
+            loading : false
+        })
 		
        
     }
     
 
-    
+    generateLink () {
+        const userID = localStorage.getItem('userID')
+        copy( 'http://localhost:3000/viewOtherEportfolio/'+ userID)
+    }
 	
 	handleSwitch (id) {
 		this.setState({currentSectionID: id})
@@ -103,18 +111,42 @@ class EportfolioView extends React.Component {
 			})
 
         return (
-            <div id="edit">
-			    <div className="container">
-				    <button class="linkButton" onClick={this.backProfile}>
-                        Back to Home Page
-                    </button>
-
-                    
-
-				    <SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
-				    {sectionItems}
-				</div>
-			</div>
+            <body id="eportfolio">
+            
+            <div class="container">
+                <div class="setting">
+                GHS
+                <button class="linkButton" onClick={this.backProfile}>
+                <i class="fa fa-arrow-circle-o-left"></i>
+                    Back to Home Page
+                </button> 
+          
+                <Popup
+                    trigger = {<button class="linkButton generate-button">
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                            Generate URL of your eportfolio
+                        </button>}
+                    position="right center"
+                    onOpen = {this.generateLink}>
+                    <div>The generated URL is copied to your clipboard!</div>
+                </Popup>
+                </div>
+			    {this.state.loading ? <Spinner style={{marginLeft:500}} animation = "border"/> :
+                <div class="content">
+				
+				<SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
+                
+				
+                        <div className = "section-list">                                      
+                            
+							{sectionItems}
+                                   
+                        </div>
+                </div>
+				}
+            </div>
+            
+            </body>
         )  
     }  
 }

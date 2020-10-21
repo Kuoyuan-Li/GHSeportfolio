@@ -1,0 +1,151 @@
+#profile {
+    position: center;
+    top: 0;
+    background-image: url(./Trees.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+}
+#profile .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    padding-top: 25px;
+    padding-bottom: 105px;
+}
+#profile h1 {
+    padding-top: 10px;
+    padding-bottom: 50px;
+    color: #435257;
+    text-align: center;
+    font-family: 'Comic Sans MS';
+    font-size: 42px;
+    letter-spacing: 2px;
+}
+#profile .card-group .card {
+    background-color: rgba(255, 255, 255, 0.24);
+    width: 290px;
+    height: 330px;
+    margin-left: 4px;
+    margin-right: 4px;
+    text-align: center;
+}
+#profile .card-group .card img {
+    height: 200px;
+}
+#profile .card-group .card p {
+    color: #000;
+    font-size: 20px;
+    font-family: 'Comic Sans MS';
+    padding-top: 5px;
+    padding-bottom: 6px;
+}
+#profile .card-group .card h3 {
+    color: #000;
+    font-size: 14px;
+    font-family: 'roboto', sans-serif;
+    padding-bottom: 4px;
+    margin-bottom: 0px;
+}
+#profile .card-group .card button {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    padding: 4px 6px;
+    width: 76px;
+    color: #fff;
+    background: #00bcd4;
+    transition: 0.4s;
+}
+#profile .card-group .card button:hover {
+    background: #1a92a1;
+}
+#profile .form {
+    margin-top: 150px;
+}
+#profile .form .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+#profile .form .form-group input {
+    margin-top: 6px;
+    min-width: 18em;
+    height: 40px;
+    padding: 0px 10px;
+    font-size: 16px;
+    font-family: 'roboto', sans-serif;
+    background-color: #f3f3f3;
+    width: 320px;
+    border: 0;
+    border-radius: 4px;
+    transition: all 250ms ease-in-out;
+}
+#profile .form .form-group input:focus {
+    outline: none;
+    box-shadow: 0px 0px 12px 0.8px #0e81ce 96;
+}
+#profile .form .button {
+    text-align: center;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 320px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #f5f5fc;
+    color: #000;
+}
+#profile .form .button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: -2;
+}
+#profile .form .button:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    transition: all 0.3s;
+    border-radius: 10px;
+    z-index: -1;
+}
+#profile .form .button:hover:before {
+    width: 100%;
+}
+#profile .form .button:before {
+    background-color: #e1e1f6;
+}
+#profile .form .button:hover {
+    color: #000;
+}
+#profile .linkButton {
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-family: 'roboto', sans-serif;
+}

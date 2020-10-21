@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss'
+import './style.css'
 
 export class Register extends React.Component {
     constructor() {
@@ -7,11 +7,13 @@ export class Register extends React.Component {
         this.state = {
             username: '',
             email: '',
-            password: '',
+			password: '',
             password2 :'',
+			captcha:'',
+			userCaptcha:'',
             message :''
         }
-
+        this.onSendCaptcha = this.onSendCaptcha.bind(this)
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.backIndex = this.backIndex.bind(this)
@@ -28,11 +30,42 @@ export class Register extends React.Component {
     onChange (e) {
         this.setState({ [e.target.name]: e.target.value })
     }
+	
+	onSendCaptcha(e) {
+		
+		e.preventDefault()
+		fetch ('http://localhost:5000/emailCaptcha',{
+                mode: 'cors',
+                method : 'POST',
+                headers :{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: this.state.email
+                })
+        }).then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            if (response.validity !== true) {
+                this.setState({ message : response.nonValidMessage })
+				
+            } else {
+                this.setState({captcha: response.captcha})
+				this.setState({message: response.nonValidMessage })
+            }
+
+	    })
+	}
 
     onSubmit (e) {
         e.preventDefault()
         
-        if (this.state.username !== '' && this.state.email !== '' && this.state.password !== '' && this.state.password2 !== '')  {
+        if (this.state.username !== '' && 
+		    this.state.email !== '' && 
+			this.state.password !== '' && 
+			this.state.password2 !== '' &&
+		    this.state.captcha === this.state.userCaptcha)  {
             
             const newUser = {
                 username: this.state.username,
@@ -59,16 +92,21 @@ export class Register extends React.Component {
             .then(response => {
                 if (response.validity !== true) {
                     this.setState({ message : response.nonValidMessage })
-                }
-                else {
+                } else {
                     this.props.history.push(`/login`)
                 }
 
             })
 
-         }else{
-            this.setState({message:'Please enter all required information'})
-         }     
+        }else{
+
+			if (this.state.captcha !== this.state.userCaptcha) {
+				this.setState({message:'Please enter the right code'})
+
+			} else {
+				this.setState({message:'Please enter all required information'})
+			}
+		}     
     }
 
     backIndex(e){
@@ -92,30 +130,36 @@ export class Register extends React.Component {
                 <div class="row">
                 <form noValidate className = 'registerForm' onSubmit={this.onSubmit}>                           
                     {warning}
-                    <div className="form form2">
+                    <div className="form">
 
                         <div className="form-group">
                             <input type="username"
-                                className="form-control"
                                 name="username"
                                 placeholder="Type your user name"
                                 value={this.state.username}
                                 onChange={this.onChange} />
-
                         </div>
-
-                        <div className="form-group">
+						
+						<div className="form-group" style={{alignItems:'center'}}>
                             <input type="email"
-                                className="form-control"
                                 name="email"
                                 placeholder="Type your email address"
                                 value={this.state.email}
+                                onChange={this.onChange} />
+						    <button class="Button" onClick={this.onSendCaptcha}>Send verification code</button>
+                        </div>
+
+                        
+						<div className="form-group">
+                            <input type="captcha"
+                                name="userCaptcha"
+                                placeholder="Type the verification code sent to your email"
+                                value={this.state.userCaptcha}
                                 onChange={this.onChange} />
                         </div>
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password"
                                 placeholder="Type your password"
                                 value={this.state.password}
@@ -124,7 +168,6 @@ export class Register extends React.Component {
 
                         <div className="form-group">
                             <input type="password"
-                                className="form-control"
                                 name="password2"
                                 placeholder="Re-enter password"
                                 value={this.state.password2}
@@ -139,6 +182,7 @@ export class Register extends React.Component {
 
                     </div>
                 </form>
+				
                 </div>
                 
                 <button class="linkButton" onClick={this.backIndex}>

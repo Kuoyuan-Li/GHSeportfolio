@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss'
+import './style.css'
 
 export class Login extends React.Component {
     constructor() {
@@ -15,6 +15,7 @@ export class Login extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
         this.backIndex = this.backIndex.bind(this)
+		this.forgetPassword = this.forgetPassword.bind(this)
     }
 
     componentDidMount () {
@@ -74,7 +75,11 @@ export class Login extends React.Component {
     backIndex(e){
         this.props.history.push(`/`)
     }
-
+	
+	forgetPassword(e) {
+		this.props.history.push(`/forgetPassword`)
+    }
+    
     render () {
         let warning;
         if(this.state.message === ''){
@@ -92,7 +97,7 @@ export class Login extends React.Component {
                 <div class="row">
                         <form noValidate onSubmit={this.onSubmit} className = 'loginForm'>                                                                                             
                             {warning}
-                        <div className="form form1">    
+                        <div className="form" style={{marginTop: 100}}>    
                             <div className="form-group">
                                 <input type="username"
                                     name="username"
@@ -118,6 +123,10 @@ export class Login extends React.Component {
                         </form>
                 </div>
                 
+                <button class="linkButton" onClick={this.forgetPassword}>
+                    Forget Password?
+                </button>
+
                 <button class="linkButton" onClick={this.backIndex}>
                     Back to Index Page
                 </button>

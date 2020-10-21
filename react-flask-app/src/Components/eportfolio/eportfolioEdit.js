@@ -1,8 +1,8 @@
 import React from 'react'
 import Section from './section'
 import SectionNavbar from './sectionNavbar'
-import AboutMe from './aboutMe'
-import './style.scss'
+import {Spinner} from 'react-bootstrap'
+import './style.css'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 
 class EportfolioEdit extends React.Component {
@@ -15,7 +15,8 @@ class EportfolioEdit extends React.Component {
             //infoSection: '',
             sections :[],   
             currentSectionID : 0,
-            message : ''
+            message : '',
+            loading : true
         }
         this.componentDidMount = this.componentDidMount.bind(this)
         this.addSectionHandler = this.addSectionHandler.bind(this)
@@ -27,7 +28,7 @@ class EportfolioEdit extends React.Component {
 
     async componentDidMount(){
         const userID = localStorage.getItem('userID')
-        await fetch ('http://localhost:5000/sectionIDs',{
+        await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -44,42 +45,23 @@ class EportfolioEdit extends React.Component {
             this.setState({sectionIDTitle: response.list});							
         })
         
-
-
         for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
-            var thisID = this.state.sectionIDTitle[i].section_id
-			
+            var thisID = this.state.sectionIDTitle[i].section_id			
             var thisTitle = this.state.sectionIDTitle[i].title
             //section structure
             var thisSection = {
                 sectionID : thisID,
                 sectionTitle : thisTitle,
-                modules : null
+                modules : []
             }
-            await fetch ('http://localhost:5000/getSection',{
-                mode: 'cors',
-                method : 'POST',
-				headers :{
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    section_id : thisID
-                })
-            }).then(response => response.json())
-            .catch(error => console.error('Error:', error))
-            .then((response) => {
-				
-                //response: a list of sectionIDs
-                thisSection.modules = response.list
-                this.setState({           
-                    sections: [...this.state.sections , thisSection]
-                })
-            })
-            
+            this.setState({           
+                sections: [...this.state.sections , thisSection]
+            })           
         }
-		
-       
+        
+        this.setState({
+            loading : false
+        })
     }
     
 
@@ -148,7 +130,6 @@ class EportfolioEdit extends React.Component {
 	
 	handleSwitch (id) {
 		this.setState({currentSectionID: id})
-		console.log(this.state.currentSectionID)
 	}
 	
 	backProfile(e){
@@ -170,25 +151,27 @@ class EportfolioEdit extends React.Component {
 			})
 
         return (
-            <div id="edit">
-            <div className="container">
-			    <button class="linkButton" onClick={this.backProfile}>
+            
+            <div id="eportfolio">
+                <div className="container">
+                <div class="setting">
+                GHS
+                <button class="linkButton" onClick={this.backProfile}>
+                <i class="fa fa-arrow-circle-o-left"></i>
                     Back to Home Page
-                </button>
-
-                <div class="first-section">
-				<button class="button section-button" onClick={this.editAboutMe}>
-                    Edit your basic info
-                </button>
+                </button> </div>
+                    { this.state.loading ?  <Spinner animation = "border"/> :
+                    <div class="content">
+                    <SectionNavbar currentSectionID={this.state.currentSectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
+                    <button class="button add-button" onClick = {this.addSectionHandler}>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add new section</button>
+                    
+                        {sectionItems}
+                    </div>
+                    }
                 </div>
-
-				<SectionNavbar currentSectionID={this.state.sectionID} sections={this.state.sections} handleSwitch={this.handleSwitch} />
-                <button class="button add-button" onClick = {this.addSectionHandler}>
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add new section</button>
-				
-					{sectionItems}
-            </div></div>
+            </div>
         )  
     }  
 }

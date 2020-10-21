@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Navbar from "./navbar.js"
 import {NavBar, Nav, NavDropdown, Breadcrumb, Button, Card} from 'react-bootstrap';
-import './style.scss'
+import './style.css'
+import e3 from './e3.jpg'
 
 class Profile extends Component {
     constructor() {
@@ -12,7 +13,7 @@ class Profile extends Component {
 
 
         this.componentDidMount = this.componentDidMount.bind(this)
-        this.jump = this.jump.bind(this)
+        this.jumpToOtherEportfolio= this.jumpToOtherEportfolio.bind(this)
         this.jumpToEdit= this.jumpToEdit.bind(this)
         this.jumpToView = this.jumpToView.bind(this)
     }
@@ -39,8 +40,8 @@ class Profile extends Component {
         this.props.history.push('/eportfolioEdit')
     }
 
-    jump(e){
-        
+    jumpToOtherEportfolio(e){
+      this.props.history.push('/otherEportfolio')
     }
 
     
@@ -48,38 +49,38 @@ class Profile extends Component {
 
     render () {
         return (
-          <div id="profile">
+          <body id="profile">
             <div className="container">
                 
 				<Navbar />           
-                <h1>Welcome to your profile page!{this.state.profileOwner}</h1>
+                <h1>Welcome to your profile page, {this.state.profileOwner}!</h1>
 				
                             
               
 				<div className="card-group">
-				    <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/100"/>
+				    <div className='card'> 
+            <Card.Img src={e3}/>
 					      <p>View your eportfolio</p>
-						    <h3>-- You can view your own eportfolio here</h3>
+						    <h3>You can view your own eportfolio here</h3>
                 <Button onClick={this.jumpToView}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>
 
             <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/300"/>
+            <Card.Img src="https://maxcdn.icons8.com/app/uploads/2016/10/edit2.png"/>
 					      <p>Edit your eportfolio</p>
-						    <h3>-- You can edit your own eportfolio here</h3>
+						    <h3>You can edit your own eportfolio here</h3>
                 <Button onClick={this.jumpToEdit}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>
 
             <div className='card'>
-					      <Card.Img src="https://picsum.photos/200/200"/>
+					      <Card.Img src="https://www.lifewire.com/thmb/2fUa5PN6ORjBQJGvjFXE1yVlqnk=/5160x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/row-of-red-work-files-with-one-yellow-one-110953663-57ab2a733df78cf45974949c.jpg"/>
 					      <p>View others' eportfolio</p>
-						    <h3>-- You can view others' eportfolio here</h3>
-                <Button onClick={this.jumpToView}>
+						    <h3>You can view others' eportfolio here</h3>
+                <Button onClick={this.jumpToOtherEportfolio}>
                   <i class="fa fa-chevron-right"></i> Go
                 </Button>
 					  </div>
@@ -87,7 +88,7 @@ class Profile extends Component {
                 
                 
             </div>
-          </div>
+          </body>
         )
     }
 }

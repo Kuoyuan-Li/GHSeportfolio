@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import {Breadcrumb, Button} from 'react-bootstrap';
-import './style.scss'
+import './style.css'
 
 
 class SectionNavbar extends React.Component {
@@ -11,7 +11,9 @@ class SectionNavbar extends React.Component {
 			sections: this.props.sections,
 			currentSectionID: this.props.currentSectionID
 		}
+		this.componentDidUpdate = this.componentDidUpdate.bind(this)
 	}
+	
 	
 	componentDidUpdate(prevProps, prevState) {
         if (prevState.sections !== this.props.sections) {
@@ -22,16 +24,18 @@ class SectionNavbar extends React.Component {
         }
 		
     }
+	
 
 	render () {
 		const sectionItems = this.state.sections.map(content => {  
-			const sectionColor = (content.sectionID === this.state.currentSectionID ? 'red' : 'white')
+			
 			return (
 			    <div class="section-group">
 				    <div class="item">
 			            <button class="button section-button"
 						    key={content.sectionID}
-					        //style={{color: content.sectionID === this.state.currentSectionID ? 'red' : 'white'}}
+					        style={{backgroundColor: content.sectionID === this.state.currentSectionID ? '#41403E' : "transparent",
+							        color: content.sectionID === this.state.currentSectionID ? 'white' : "#41403E"}}
 						    onClick={(event) => this.props.handleSwitch(content.sectionID)}
 						    //className="btn btn-lg btn-primary btn-block"
 							>
@@ -44,8 +48,9 @@ class SectionNavbar extends React.Component {
 	    
 		
 		return (
+			<div id="edit">
 		    <div class="section-list">
-				{sectionItems}</div>
+				{sectionItems}</div></div>
 		)
 		
 	}

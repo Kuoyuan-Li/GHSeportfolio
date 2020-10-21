@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
-import './style.scss'
+import './style.css'
 
 class ResetPassword extends Component {
     
@@ -63,23 +63,36 @@ class ResetPassword extends Component {
 
             })
 
-         }else{
+        }else{
             this.setState({message:'Please enter all required information'})
-         }     
+        }     
     }
 	
 	render () {
-        return (
+		let warning;
+        if(this.state.message === ''){
+            warning = <div></div>;
+        } else if (this.state.message === "You've successfully changed your password!") {
+		    warning =
+            <div class="warning-message">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            {this.state.message}
+            </div>
+		
+	    } else {
+			
+            warning =
+            <div class="warning-message">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {this.state.message}
+            </div>
+        }
+		return (
             <div id="profile">
             <div className="container">
 			    <div class="row">
                 <form noValidate onSubmit={this.onSubmit}>
-                            
-                    <div class="warning-message">
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        {this.state.message}
-                    </div>
-
+                    {warning}    
                     <div className="form">
 
                         <div className="form-group">
