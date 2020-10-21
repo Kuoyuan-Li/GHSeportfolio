@@ -40,6 +40,11 @@ class ViewOtherEportfolio extends React.Component {
             this.setState({sectionIDTitle: response.list});							
         })
         console.log(this.state.sectionIDTitle)
+        if (this.state.sectionIDTitle.length > 0){
+            this.setState({
+                currentSectionID:this.state.sectionIDTitle[0].section_id
+            })
+        }
 
         for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
             var thisID = this.state.sectionIDTitle[i].section_id

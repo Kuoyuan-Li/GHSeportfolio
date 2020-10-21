@@ -45,6 +45,9 @@ class OtherEportfolio extends React.Component {
     }
 	
 	async refetchRandom() {
+        this.setState({ 
+            message : ''
+        })
 		await fetch ('http://localhost:5000/getRandomUsers',{
             mode: 'cors',
             method : 'POST'
@@ -82,8 +85,10 @@ class OtherEportfolio extends React.Component {
             if (response.validity !== true) {
                 this.setState({ message : response.nonValidMessage })
 			} else {
-				console.log(response.user)
-                this.setState({ eportfolios: response.user})
+                this.setState({ 
+                    eportfolios: response.user,
+                    message : ''
+                })
 			}        		
         })
 		
