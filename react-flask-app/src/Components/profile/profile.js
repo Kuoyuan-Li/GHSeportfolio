@@ -25,11 +25,10 @@ class Profile extends Component {
 	  
       if (loginguser){
         this.setState ({profileOwner : loginguser })
-      }/*else{
+      }else{
         this.props.history.push('/login')
-      }*/
-      console.log(localStorage.getItem('userID'))
-	}
+      }
+	  }
 
 
     jumpToView (e){

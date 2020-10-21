@@ -10,7 +10,8 @@ export class ForgetPassword extends React.Component {
             password2 :'',
 			captcha:'',
 			userCaptcha:'',
-            message :''
+            message :'',
+            notifyMessage : ''
         }
         this.onSendCaptcha = this.onSendCaptcha.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -47,9 +48,16 @@ export class ForgetPassword extends React.Component {
         .catch(error => console.error('Error:', error))
         .then(response => {
             if (response.validity !== true) {
-                this.setState({ message : response.nonValidMessage })
+                this.setState({ 
+                    message : response.nonValidMessage,
+                    notifyMessage:''
+                })
             } else {
-                this.setState({captcha: response.captcha})
+                this.setState({
+                    captcha: response.captcha,
+                    notifyMessage: response.nonValidMessage,
+                    message:''
+                })
 			}
 
 	    })
@@ -107,13 +115,19 @@ export class ForgetPassword extends React.Component {
 
     render () {
         let warning;
-        if(this.state.message === ''){
+        if(this.state.message === '' && this.state.notifyMessage === ''){
              warning = <div></div>;
-        } else{
+        } else if (this.state.message != ''){
             warning =
             <div class="warning-message">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
             {this.state.message}
+            </div>
+        } else if (this.state.notifyMessage != ''){
+            warning =
+            <div class="notification-message">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            {this.state.notifyMessage}
             </div>
         }
         return (

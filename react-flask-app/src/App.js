@@ -47,14 +47,12 @@ class App extends React.Component {
                         <Route exact path="/login" component={Login} />
 						<Route exact path="/forgetPassword" component={ForgetPassword} />
                         <Route exact path="/profile" component={Profile} />
-                        <Route exact path="/navbar" component={NavBar} />
                         <Route exact path="/logout" component={Logout} />
                         <Route exact path="/eportfolioEdit" component={EportfolioEdit} />
 						<Route exact path="/eportfolioView" component={EportfolioView} />
 						<Route exact path="/resetPassword" component={ResetPassword} />
                         <Route exact path="/otherEportfolio" component={OtherEportfolio} />
-                        <Route exact path="/viewOtherEportfolio/:id" component={ViewOtherEportfolio} />
-                        
+                        <Route exact path="/viewOtherEportfolio/:id" component={ViewOtherEportfolio} />                       
                 </div>            
             </div>
 

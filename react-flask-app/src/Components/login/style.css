@@ -106,6 +106,14 @@
     width: 320px;
     font-size: 14px;
 }
+#login .notification-message {
+    color: rgb(255, 0, 0);
+    font-family: 'DINPro-Medium';
+    margin: 10px 0px;
+    padding: 5px;
+    width: 320px;
+    font-size: 14px;
+}
 #login .form .form-group {
     display: flex;
     flex-direction: column;

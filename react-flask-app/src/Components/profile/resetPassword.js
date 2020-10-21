@@ -16,8 +16,12 @@ class ResetPassword extends Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.backProfile = this.backProfile.bind(this)
     }
-	
-	
+	componentDidMount(){
+        const loginguser = localStorage.getItem('user')  
+            if (!loginguser){
+                this.props.history.push('/login')
+            }
+    }
 	backProfile(e){
         this.props.history.push(`/profile`)
     }

@@ -54,9 +54,9 @@ class Module extends React.Component{
 	
 	
 	async componentDidMount(){
-        this.setState({image_path : this.props.content.image_path=== null ? '' :'http://localhost:5000/showImage/' + this.state.image_name})
-		this.setState({audio_path : this.props.content.audio_path=== null ? '' :'http://localhost:5000/showAudio/' + this.state.audio_name})
-		this.setState({video_path : this.props.content.video_path=== null ? '' :'http://localhost:5000/showVideo/' + this.state.video_name})
+        this.setState({image_path : 'http://localhost:5000/showImage/' + this.state.image_name})
+		this.setState({audio_path : 'http://localhost:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path : 'http://localhost:5000/showVideo/' + this.state.video_name})
 	}
 	
 
@@ -271,7 +271,7 @@ class Module extends React.Component{
 			                     <Spinner animation = "border"/>
 						     </div>
 		} else {
-			message_render = <div class="notification-message">
+			message_render = <div class="notification-message" >
                                  <i class="fa fa-heart" aria-hidden="true"></i>
                                  {this.state.message}
                              </div>

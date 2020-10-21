@@ -26,6 +26,11 @@ class EportfolioView extends React.Component {
     }
 
     async componentDidMount(){
+        const loginguser = localStorage.getItem('user')  
+        if (!loginguser){
+          this.props.history.push('/login')
+        }
+
         const userID = localStorage.getItem('userID')
         await fetch ('http://localhost:5000/getSections',{
             mode: 'cors',
@@ -44,7 +49,11 @@ class EportfolioView extends React.Component {
             this.setState({sectionIDTitle: response.list});							
         })
         console.log(this.state.sectionIDTitle)
-
+        if (this.state.sectionIDTitle.length > 0){
+            this.setState({
+                currentSectionID:this.state.sectionIDTitle[0].section_id
+            })
+        }
 
         for (var i = 0; i < this.state.sectionIDTitle.length; i++) {
             var thisID = this.state.sectionIDTitle[i].section_id
