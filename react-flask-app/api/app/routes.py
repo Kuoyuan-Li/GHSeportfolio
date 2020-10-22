@@ -84,7 +84,8 @@ def register():
     db.session.add(internship)
     db.session.commit()
 
-    text1 = "<p>family name :&nbsp;</p><p>first name :&nbsp;</p><p>gender :&nbsp;</p><p>date of birth :&nbsp;</p><p>self-introduction:</p>"
+    text1 = "<p>Hello, and welcome to my eportfolio! My name is \"YOUR NAME\". &nbsp;</p><p>I am from \"COUNTRY/CITY\". I am a \"OCCUPATION\" working/studying at \"INSTITUTION\".&nbsp;</p><p>At this eportfolio you will find my education background, previous working experience, programs that I participated, \"OTHER SECTIONS\".&nbsp;</p><p>Don't be hesitate to contact me! My contact details can be found on \"Contact Me\".</p>"
+
     text2 = "<p>phone number :&nbsp;</p><p>contact email :&nbsp;</p><p>linkedin :</p>",
     text3 = "put the detail of your education background here"
     text4 = "put the detail of your internship experience here"
