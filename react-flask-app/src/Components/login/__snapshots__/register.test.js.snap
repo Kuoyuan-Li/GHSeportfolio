@@ -17,13 +17,12 @@ exports[`login page test renders correctly 1`] = `
       >
         <div />
         <div
-          className="form form2"
+          className="form"
         >
           <div
             className="form-group"
           >
             <input
-              className="form-control"
               name="username"
               onChange={[Function]}
               placeholder="Type your user name"
@@ -33,13 +32,34 @@ exports[`login page test renders correctly 1`] = `
           </div>
           <div
             className="form-group"
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
           >
             <input
-              className="form-control"
               name="email"
               onChange={[Function]}
               placeholder="Type your email address"
               type="email"
+              value=""
+            />
+            <button
+              class="Button"
+              onClick={[Function]}
+            >
+              Send verification code
+            </button>
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              name="userCaptcha"
+              onChange={[Function]}
+              placeholder="Type the verification code sent to your email"
+              type="captcha"
               value=""
             />
           </div>
@@ -47,7 +67,6 @@ exports[`login page test renders correctly 1`] = `
             className="form-group"
           >
             <input
-              className="form-control"
               name="password"
               onChange={[Function]}
               placeholder="Type your password"
@@ -59,7 +78,6 @@ exports[`login page test renders correctly 1`] = `
             className="form-group"
           >
             <input
-              className="form-control"
               name="password2"
               onChange={[Function]}
               placeholder="Re-enter password"
@@ -82,7 +100,6 @@ exports[`login page test renders correctly 1`] = `
     </div>
     <button
       class="linkButton"
-      className="backToIndex"
       onClick={[Function]}
     >
       Back to Index Page

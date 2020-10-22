@@ -13,11 +13,11 @@ describe ('profile page test', () => {
         const button = wrapper.find(Button)   
         expect(button.length).toEqual(3);   
         button.at(0).simulate('click'); 
-        expect(historyMock.push.mock.calls[0]).toEqual(['/eportfolioView']);
+        expect(historyMock.push.mock.calls[1]).toEqual(['/eportfolioView']);
         button.at(1).simulate('click'); 
-        expect(historyMock.push.mock.calls[1]).toEqual(['/eportfolioEdit']);
+        expect(historyMock.push.mock.calls[2]).toEqual(['/eportfolioEdit']);
         button.at(2).simulate('click'); 
-        expect(historyMock.push.mock.calls[2]).toEqual(['/otherEportfolio']);
+        expect(historyMock.push.mock.calls[3]).toEqual(['/otherEportfolio']);
     });
 
 });

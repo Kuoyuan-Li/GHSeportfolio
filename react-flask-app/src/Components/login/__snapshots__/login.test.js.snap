@@ -17,7 +17,12 @@ exports[`login page test renders correctly 1`] = `
       >
         <div />
         <div
-          className="form form1"
+          className="form"
+          style={
+            Object {
+              "marginTop": 100,
+            }
+          }
         >
           <div
             className="form-group"
@@ -43,7 +48,6 @@ exports[`login page test renders correctly 1`] = `
           </div>
           <button
             class="button button1"
-            className="login"
             type="submit"
           >
             Log in
@@ -53,7 +57,12 @@ exports[`login page test renders correctly 1`] = `
     </div>
     <button
       class="linkButton"
-      className="backToIndex"
+      onClick={[Function]}
+    >
+      Forget Password?
+    </button>
+    <button
+      class="linkButton"
       onClick={[Function]}
     >
       Back to Index Page
