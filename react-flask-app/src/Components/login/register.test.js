@@ -87,10 +87,10 @@ describe ('login page test', () => {
         });
         expect(wrapper.state('message')).toEqual('Please enter all required information');      
     });
-    /*
+    
     test('renders correctly', () => {
         const tree = renderer.create(<Register />).toJSON();
         expect(tree).toMatchSnapshot();
       });
-    */
+    
 });

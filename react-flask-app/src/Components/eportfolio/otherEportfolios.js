@@ -112,8 +112,8 @@ class OtherEportfolio extends React.Component {
 		let SelectionList = this.state.eportfolios.map(
             content =>   <div class="list" key = {content.userID}>
 
-                             <p>{content.username}</p>
-                             <p class="center">{content.num_of_sections}</p>
+                             <div style={{float:"left", width:"33%"}}>{content.username}</div>
+                             <div style={{float:"left", width:"33%"}}>{content.num_of_sections}</div>
                 
 
                              <button class="button" onClick={(e) => this.viewOtherHandler(e, content.user_id)}>

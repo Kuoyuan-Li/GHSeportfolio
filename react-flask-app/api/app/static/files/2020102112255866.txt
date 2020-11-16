@@ -1,0 +1,5 @@
+sudo /etc/init.d/mysql start
+mysql -u root -p
+sudo /etc/init.d/mysql stop
+mysqld_safe --skip-grant-tables &
+mysql -u root mysql

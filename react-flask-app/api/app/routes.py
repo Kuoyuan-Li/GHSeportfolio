@@ -3,11 +3,10 @@ import os
 import sys
 sys.path.append(os.path.abspath(".."))
 from flask import request
-from flask import render_template, jsonify, make_response, send_from_directory
+from flask import jsonify, make_response, send_from_directory
 from app import app, db, mail
 from app.models import User, Section, Module
 from werkzeug.utils import secure_filename
-
 import datetime
 import random
 import uuid
@@ -16,10 +15,6 @@ from flask_mail import Message
 db.create_all()
 db.session.commit()
 client = app.test_client()
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
 
 
 @app.route('/login', methods=["POST"])
@@ -84,7 +79,8 @@ def register():
     db.session.add(internship)
     db.session.commit()
 
-    text1 = "<p>family name :&nbsp;</p><p>first name :&nbsp;</p><p>gender :&nbsp;</p><p>date of birth :&nbsp;</p><p>self-introduction:</p>"
+    text1 = "<p>Hello, and welcome to my eportfolio! My name is \"YOUR NAME\". &nbsp;</p><p>I am from \"COUNTRY/CITY\". I am a \"OCCUPATION\" working/studying at \"INSTITUTION\".&nbsp;</p><p>At this eportfolio you will find my education background, previous working experience, programs that I participated, \"OTHER SECTIONS\".&nbsp;</p><p>Don't be hesitate to contact me! My contact details can be found on \"Contact Me\".</p>"
+
     text2 = "<p>phone number :&nbsp;</p><p>contact email :&nbsp;</p><p>linkedin :</p>",
     text3 = "put the detail of your education background here"
     text4 = "put the detail of your internship experience here"
@@ -102,22 +98,6 @@ def register():
                     "nonValidMessage": ""}
                    )
 
-
-'''
-@app.route('/profile', methods=['GET','POST'])
-def profile():
-    if current_user.is_authenticated:
-        username = current_user.username
-        return jsonify({"currentUser": username})
-    else:
-        return jsonify({"currentUser": ""})
-
-
-@app.route('/logout', methods=['GET','POST'])
-def logout():
-    logout_user()
-    return jsonify({"success": True})
-'''
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp', 'gif'])
 
@@ -352,7 +332,7 @@ def add_section():
     db.session.add(section)
     db.session.commit()
     return jsonify({"success": True,
-                    "section_id" : section.section_id})
+                    "section_id": section.section_id})
 
 
 @app.route('/addModule', methods=['POST'])
@@ -390,61 +370,6 @@ def reset_password():
     return jsonify({"validity": True,
                     "nonValidMessage": ""}
                    )
-
-
-@app.route('/saveInformation', methods=['POST'])
-def save_information():
-
-    user_id = request.form.get('user_id')
-
-    family_name = request.form.get('family_name')
-    first_name = request.form.get('first_name')
-    gender = request.form.get('gender')
-    date_of_birth = request.form.get('date_of_birth')
-    address = request.form.get('address')
-    phone_number = request.form.get('phone_number')
-    contact_email = request.form.get('contact_email')
-    linkedin = request.form.get('linkedin')
-    introduction = request.form.get('introduction')
-    user_image = request.files['image_path']
-    image_name = request.form.get('image_name')
-    user = User.query.filter_by(user_id=user_id).first()
-
-    image_path = ''
-
-    # get the basepath
-    base_path = os.path.dirname(__file__)
-
-    # os.remove(os.path.join(base_path, module.image))
-    # os.remove(os.path.join(base_path, module.file))
-
-    if user_image:
-        image_path = os.path.join(base_path, 'static/user_images', secure_filename(image_name))
-        # save image in path
-        user_image.save(image_path)
-
-    user.image_path = image_path
-    user.image_name = image_name
-    user.family_name = family_name
-    user.first_name = first_name
-    user.gender = gender
-    user.date_of_birth = date_of_birth
-    user.address = address
-    user.phone_number = phone_number
-    user.contact_email = contact_email
-    user.linkedin = linkedin
-    user.introduction = introduction
-    db.session.commit()
-
-    return jsonify({"success": True})
-
-
-@app.route('/showInformation', methods=['POST'])
-def show_information():
-    user_id = request.form.get('user_id')
-    user = User.query.filter_by(user_id=user_id).first()
-    response = user.convert_to_dict()
-    return response
 
 
 @app.route('/showImage/<string:image_name>', methods=['GET'])

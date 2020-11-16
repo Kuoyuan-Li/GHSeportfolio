@@ -1,7 +1,5 @@
 from app import db, loginMngr
-from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 
 
 class User(db.Model):
@@ -9,19 +7,6 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    '''
-    family_name = db.Column(db.String(64))
-    first_name = db.Column(db.String(64))
-    gender = db.Column(db.String(25))
-    date_of_birth = db.Column(db.Time)
-    address = db.Column(db.String(200))
-    phone_number = db.Column(db.String(45))
-    contact_email = db.Column(db.String(120), index=True, unique=True)
-    linkedin = db.Column(db.String(200))
-    introduction = db.Column(db.String(500))
-    image_path = db.Column(db.String(300))
-    image_name = db.Column(db.String(100))
-    '''
     sections = db.relationship('Section', backref='sections', lazy='dynamic')
 
     # set password
@@ -61,7 +46,6 @@ class Section(db.Model):
             else:
                 result[key] = getattr(self, key)
         return result
-
 
 
 class Module(db.Model):
