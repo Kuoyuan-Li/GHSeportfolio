@@ -43,9 +43,9 @@ class ModuleView extends React.Component{
 	
 	
 	async componentDidMount(){
-        this.setState({image_path:'http://localhost:5000/showImage/' + this.state.image_name})
-		this.setState({audio_path:'http://localhost:5000/showAudio/' + this.state.audio_name})
-		this.setState({video_path:'http://localhost:5000/showVideo/' + this.state.video_name})
+        this.setState({image_path:'http://47.115.90.152:5000/showImage/' + this.state.image_name})
+		this.setState({audio_path:'http://47.115.90.152:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path:'http://47.115.90.152:5000/showVideo/' + this.state.video_name})
 	}
 	
 	/*
@@ -67,7 +67,7 @@ class ModuleView extends React.Component{
 	*/
 	
 	showAudio(e) {
-		const url = 'http://localhost:5000/showAudio/' + this.state.audio_name
+		const url = 'http://47.115.90.152:5000/showAudio/' + this.state.audio_name
         window.open(url)
 		
 	}
@@ -76,7 +76,7 @@ class ModuleView extends React.Component{
         var element = document.createElement("a");
         var file = new Blob(
           [
-            "http://localhost:5000/downloadImage/" + this.state.image_name
+            "http://47.115.90.152:5000/downloadImage/" + this.state.image_name
           ],
           { type: "image/*" }
         );
@@ -89,7 +89,7 @@ class ModuleView extends React.Component{
         var element = document.createElement("a");
         var file = new Blob(
           [
-            "http://localhost:5000/downloadFile/" + this.state.file_name
+            "http://47.115.90.152:5000/downloadFile/" + this.state.file_name
           ],
           { type:"application/*" }
         );
@@ -102,8 +102,8 @@ class ModuleView extends React.Component{
    
 
     render (){
-		let url = "http://localhost:5000/downloadImage/" + this.state.image_name
-		let url_file = "http://localhost:5000/downloadFile/" + this.state.file_name
+		let url = "http://47.115.90.152:5000/downloadImage/" + this.state.image_name
+		let url_file = "http://47.115.90.152:5000/downloadFile/" + this.state.file_name
 		
 		let image_render = this.state.image_name === '' ? 
 		                   null : 

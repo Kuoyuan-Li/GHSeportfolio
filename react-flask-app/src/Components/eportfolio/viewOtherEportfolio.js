@@ -23,7 +23,7 @@ class ViewOtherEportfolio extends React.Component {
 
     async componentDidMount(){
         const userID =  this.state.eportfolioOwnerID
-        await fetch ('http://localhost:5000/getSections',{
+        await fetch ('http://47.115.90.152:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -55,7 +55,7 @@ class ViewOtherEportfolio extends React.Component {
                 sectionTitle : thisTitle,
                 modules : null
             }
-            await fetch ('http://localhost:5000/getModules',{
+            await fetch ('http://47.115.90.152:5000/getModules',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{

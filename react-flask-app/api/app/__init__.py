@@ -17,3 +17,9 @@ loginMngr = LoginManager(app)  # login feature
 CORS(app)
 
 from app import routes, models  #models define the structure of DB
+
+
+if __name__ == "__main__":
+    app.run()
+    
+    #host="47.115.90.152",port=5000

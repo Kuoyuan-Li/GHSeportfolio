@@ -21,7 +21,7 @@ class Section extends React.Component {
 
 
     async componentDidMount () {
-        await fetch ('http://localhost:5000/getModules',{
+        await fetch ('http://47.115.90.152:5000/getModules',{
             mode: 'cors',
             method : 'POST',
             headers :{
@@ -46,7 +46,7 @@ class Section extends React.Component {
     //initialize a blank module and add to the present modules list
     addModuleHandler = () => {   
         const section_id = this.state.sectionID    
-		fetch ('http://localhost:5000/addModule',{
+		fetch ('http://47.115.90.152:5000/addModule',{
             mode: 'cors',
             method : 'POST',
             headers :{
@@ -70,7 +70,7 @@ class Section extends React.Component {
     }
     
     sectionTitleSaveHandler = () =>{
-            fetch ('http://localhost:5000/saveSection',{
+            fetch ('http://47.115.90.152:5000/saveSection',{
             mode: 'cors',
             method : 'POST',            
             headers :{
@@ -109,7 +109,7 @@ class Section extends React.Component {
         }));
         //inform backend delete module: sectionID XXX, moduleID: XXx
         
-        fetch ('http://localhost:5000/deleteModule',{
+        fetch ('http://47.115.90.152:5000/deleteModule',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

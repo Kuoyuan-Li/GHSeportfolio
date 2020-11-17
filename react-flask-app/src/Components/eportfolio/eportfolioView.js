@@ -32,7 +32,7 @@ class EportfolioView extends React.Component {
         }
 
         const userID = localStorage.getItem('userID')
-        await fetch ('http://localhost:5000/getSections',{
+        await fetch ('http://47.115.90.152:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -64,7 +64,7 @@ class EportfolioView extends React.Component {
                 sectionTitle : thisTitle,
                 modules : null
             }
-            await fetch ('http://localhost:5000/getModules',{
+            await fetch ('http://47.115.90.152:5000/getModules',{
                 mode: 'cors',
                 method : 'POST',
 				headers :{
@@ -96,7 +96,7 @@ class EportfolioView extends React.Component {
 
     generateLink () {
         const userID = localStorage.getItem('userID')
-        copy( 'http://http://47.115.90.152:3000/viewOtherEportfolio/'+ userID)
+        copy( 'http://47.115.90.152:3000/viewOtherEportfolio/'+ userID)
     }
 	
 	handleSwitch (id) {
