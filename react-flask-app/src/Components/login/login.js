@@ -39,7 +39,7 @@ export class Login extends React.Component {
             }
             this.setState({message:''})
 
-            fetch ('http://localhost:5000/login',{
+            fetch ('http://47.115.90.152:5000/login',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

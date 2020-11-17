@@ -96,7 +96,7 @@ class EportfolioView extends React.Component {
 
     generateLink () {
         const userID = localStorage.getItem('userID')
-        copy( 'http://localhost:3000/viewOtherEportfolio/'+ userID)
+        copy( 'http://http://47.115.90.152:3000/viewOtherEportfolio/'+ userID)
     }
 	
 	handleSwitch (id) {

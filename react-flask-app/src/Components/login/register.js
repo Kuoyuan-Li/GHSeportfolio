@@ -35,7 +35,7 @@ export class Register extends React.Component {
 	onSendCaptcha(e) {
 		
 		e.preventDefault()
-		fetch ('http://localhost:5000/emailCaptcha',{
+		fetch ('http://47.115.90.152:5000/emailCaptcha',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{
@@ -80,7 +80,7 @@ export class Register extends React.Component {
                 password2 : this.state.password2
             }
             this.setState({message:''})
-            fetch ('http://localhost:5000/register',{
+            fetch ('http://47.115.90.152:5000/register',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{
