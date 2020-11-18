@@ -46,15 +46,15 @@ Sprint 1
  
 	6. edit Module: Each “Module” has a module title, time, textbox, image, file, audio and video. These contents are all optional and users are not required to complete all of them. Users can edit (including delete) all of them. 
 	
-	6.1 store text: Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
+	7. store text: Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
 		
-	6.2 store images: Users could upload an image. If an image already exists, the new image will replace the old one (i.e. only one image is allowed in each module). Users can also delete the existing image. There is a preview of that image. Files, audios and videos are stored and manipulated the same as images.
+	8. store images: Users could upload an image. If an image already exists, the new image will replace the old one (i.e. only one image is allowed in each module). Users can also delete the existing image. There is a preview of that image. Files, audios and videos are stored and manipulated the same as images.
 
-	6.3 store files: Same as above (store images)
+	9. store files: Same as above (store images)
 
-	6.4 store audios: Same as above (store images)
+	10. store audios: Same as above (store images)
 
-	6.5 store videos: Same as above (store images)
+	11. store videos: Same as above (store images)
 		
 7. view your eportfolio: Show all sections (one section at a time, but users could switch using the navbar) and the modules in each section.
 	
