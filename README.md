@@ -1,47 +1,52 @@
 # GHSeportfolio
 This is the repo for GHS eportfolio, Unimelb, COMP30022 IT Project
 
+## Project overview
+
+This project is a web application, which builds a personal ePortfolio system that provides a custom platform for users to collect and display electronic evidences. Each user can be regarded as the owner of a digital portfolio where he can express himself by stating his stories and showing his achievements. In this web application, the account holder can customize the layouts and contents in the ePortfolio according to his own need and make it as a reflection on his personal abilities. To support user’s statements, the system accepts electronic evidences including input texts as the descriptions of the models and media files as further demonstration of the topics. Users can add electronic evidences by editing texts and uploading files whenever they want so that the ePortfolio can be a long-term record of user’s experiences. For the purpose of learning from other user’s ePortfolio or introducing the user himself to someone else, people can view other’s ePortfolio by randomly grabbing, directly searching or entering through shared link. Through the interaction between frontend, backend and database, the web application is able to ensure the user experiences and guarantee the integrity and security of account information.
+ 
+This project is based on the requirements from clients who are Masters students studying SWEN90016 and implemented by GHS team for IT Project COMP30022.
+
 ## website link
-Temporary website http://47.115.90.152:3000/
-Final website (still applying) 
+Temporary website https://47.115.90.152:3000/
+Final website (still applying) https://ghsitproject.top/
 
 
 ## Features 
+
 Sprint 1
-1. Register
 
-New users could register with an identical username, identical email address and a password. If the username or email address has existed, there will be a warning that tells the user to use another username or email address.
+1. Register: New users could register with an identical username, identical email address and a password. If the username or email address has existed, there will be a warning that tells the user to use another username or email address.
 
-  1. email validation
-  
-Before registering, the user should enter his email address. He would receive a verification code sent by our official email address. The user needs to enter the correct verification code to register successfully.
- 1.2 doublecheck password
-User should enter his password twice. If the two passwords are different, there will be a warning that tells the user to check the passwords he entered.
- 2. login
-Users could log in to an existing account. If the login information he entered is incorrect, a warning will raise on screen.
- 3. reset password
-User can reset his password after logging in. User needs to enter his new password twice. If the two passwords are different, there will be a warning that tells the user to check the passwords he entered. The new password needs to be different from the old one or a warning will raise.
- 4. profile page
-After login, the user will jump to the profile page, where he can choose to edit eportfolio, view eportfolio and view others eportfolio. Users can also manipulate the account in the profile page such as reset password and logout.
- 5. logout
-If the user does not log out, the account will remain logged in. When the user logs out successfully, it will jump to the login page.
- 6. edit your eportfolio
-There are several “Sections” under the user's eportfolio and several “Modules” under each “Section”. Users can add, delete and edit “Sections” and the “Modules” in the section.
- 6.1 add Section
-Add a new empty “Section” with name “new section”
- 6.2 delete Section
-Delete one specific section
- 6.3 edit Section
-User can change the name of “Section”, add or delete the modules in that section
- 6.4 add Module
-Add a new empty “Module” with the name “new module” in one section.
- 6.5 delete Module
-Delete one specific module in one section
- 6.6 edit Module
-Each “Module” has a module title, time, textbox, image, file, audio and video. These contents are all optional and users are not required to complete all of them. Users can edit (including delete) all of them. 
- 6.6.1 store text
-Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
- 6.6.2 store images
+	1. email validation: Before registering, the user should enter his email address. He would receive a verification code sent by our official email address. The user needs to enter the correct verification code to register successfully.
+	
+	2. doublecheck password: User should enter his password twice. If the two passwords are different, there will be a warning that tells the user to check the passwords he entered.
+	
+2. login: Users could log in to an existing account. If the login information he entered is incorrect, a warning will raise on screen.
+
+3. reset password: User can reset his password after logging in. User needs to enter his new password twice. If the two passwords are different, there will be a warning that tells the user to check the passwords he entered. The new password needs to be different from the old one or a warning will raise.
+ 
+4. profile page: After login, the user will jump to the profile page, where he can choose to edit eportfolio, view eportfolio and view others eportfolio. Users can also manipulate the account in the profile page such as reset password and logout.
+ 
+5. logout: If the user does not log out, the account will remain logged in. When the user logs out successfully, it will jump to the login page.
+ 
+6. edit your eportfolio: There are several “Sections” under the user's eportfolio and several “Modules” under each “Section”. Users can add, delete and edit “Sections” and the “Modules” in the section.
+ 
+	1 add Section: Add a new empty “Section” with name “new section”
+	
+	2 delete Section: Delete one specific section
+
+	3 edit Section: User can change the name of “Section”, add or delete the modules in that section
+
+	4 add Module: Add a new empty “Module” with the name “new module” in one section.
+ 
+	5 delete Module: Delete one specific module in one section
+ 
+	6 edit Module: Each “Module” has a module title, time, textbox, image, file, audio and video. These contents are all optional and users are not required to complete all of them. Users can edit (including delete) all of them. 
+	
+		1 store text: Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
+		
+		2 store images
 Users could upload an image. If an image already exists, the new image will replace the old one (i.e. only one image is allowed in each module). Users can also delete the existing image. There is a preview of that image. Files, audios and videos are stored and manipulated the same as images.
  Sprint 2
  6.6.3 store files
