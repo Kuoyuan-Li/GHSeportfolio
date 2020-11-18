@@ -7,6 +7,12 @@ This product is a web application, which builds a personal ePortfolio system tha
  
 This project is based on the requirements from clients who are Masters students studying SWEN90016 and implemented by GHS team for IT Project COMP30022.
 
+## website link
+
+Temporary website https://47.115.90.152:3000/
+
+Final website (the domain is still in apply) https://ghsitproject.top/
+
 ## Technical requirements
 
 Our website has been deployed successfully using the Alibaba cloud server. Users can access and use our web application through the PC browsers such as Chrome, IE and firefox. Current version does not support devices other than computers (or laptops) such as smartphones or tablets. Using smartphones or tablets to visit our website may lead to unexpected problems such as irregular website layouts.
@@ -100,13 +106,6 @@ Email address for email validator:
 Username:GHSeportfolio@126.com
 
 Password:ghs12345
-
-## website link
-
-Temporary website https://47.115.90.152:3000/
-
-Final website (the domain is still in apply) https://ghsitproject.top/
-
 
 ## Features 
 
