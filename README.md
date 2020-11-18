@@ -109,8 +109,6 @@ Password:ghs12345
 
 ## Features 
 
-Sprint 1
-
 1. Register: New users could register with an identical username, identical email address and a password. If the username or email address has existed, there will be a warning that tells the user to use another username or email address.
 
 	1. email validation: Before registering, the user should enter his email address. He would receive a verification code sent by our official email address. The user needs to enter the correct verification code to register successfully.
