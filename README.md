@@ -8,9 +8,12 @@ Final website (still applying)
 
 ## Features 
 Sprint 1
-- 1. Register
-  -New users could register with an identical username, identical email address and a password. If the username or email address has existed, there will be a warning that tells the user to use another username or email address.
- 1.1 email validation
+1. Register
+
+New users could register with an identical username, identical email address and a password. If the username or email address has existed, there will be a warning that tells the user to use another username or email address.
+
+  1. email validation
+  
 Before registering, the user should enter his email address. He would receive a verification code sent by our official email address. The user needs to enter the correct verification code to register successfully.
  1.2 doublecheck password
 User should enter his password twice. If the two passwords are different, there will be a warning that tells the user to check the passwords he entered.
@@ -104,7 +107,7 @@ Sprint 1
 
 - Create the database for storing eportfolio and users info [database]
 
-## React Test cases
+## React test cases
 
 - Logout: Simulate clicking the logout button on the profile page, expecting the program will jump to the login page.
 
