@@ -8,8 +8,10 @@ This project is a web application, which builds a personal ePortfolio system tha
 This project is based on the requirements from clients who are Masters students studying SWEN90016 and implemented by GHS team for IT Project COMP30022.
 
 ## website link
+
 Temporary website https://47.115.90.152:3000/
-Final website (still applying) https://ghsitproject.top/
+
+Final website (the domain is still in apply) https://ghsitproject.top/
 
 
 ## Features 
@@ -46,33 +48,33 @@ Sprint 1
 	
 		1 store text: Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
 		
-		2 store images
-Users could upload an image. If an image already exists, the new image will replace the old one (i.e. only one image is allowed in each module). Users can also delete the existing image. There is a preview of that image. Files, audios and videos are stored and manipulated the same as images.
- Sprint 2
- 6.6.3 store files
-Same as above (store images)
- 6.6.4 store audios
-Same as above (store images)
- 6.6.5 store videos
-Same as above (store images)
- 7. view your eportfolio
-Show all sections (one section at a time, but users could switch using the navbar) and the modules in each section.
- 7.1 download content
-Users can download all the images, files, audios and videos.
- 7.2 different layout
-The layout of content in each “Module” will vary depending on the content. For example, if a “Module” only has an image, then this image will be centered.
- 8. view others’ eportfolio
-Users could select and view other users’ eportfolios. (Viewing modes are the same as themselves.)
- 8.1 user list
-There is a list that contains 10 random users from the database. If the total number of users is less than 10, the list will contain all the users. One user can see the “username” and “number of sections” of other users in the list. He can choose a user and view his eportfolio. Users can also grab another 10 random users again by clicking the button.
- 8.2 search another user
-Users can search for other users by username. Then he can view that user’s eportfolio.
- 9. forget password
-The user can reset his password through the username and email address if he forgets his password. Firstly, the user enters his username. Then the office mailbox will send a verification code to the user’s mailbox. User needs to enter that verification code and a new password twice. If the verification code is correct and the two passwords entered are the same, the password is reset successfully. The new password needs to be different from the old one or a warning will raise.
- 10. generate URL
-Get the URL of the user's eportfolio and automatically save to the clipboard.
- 11. default eportfolio 
-There are four default “Sections” in a new user’s eportfolio which are “about me”, “contact me”, “education background” and “internship experience”. Each of these “Sections” has a default “Module” with some default content. 
+		2 store images: Users could upload an image. If an image already exists, the new image will replace the old one (i.e. only one image is allowed in each module). Users can also delete the existing image. There is a preview of that image. Files, audios and videos are stored and manipulated the same as images.
+ 
+Sprint 2
+
+		3 store files: Same as above (store images)
+
+		4 store audios: Same as above (store images)
+
+		5 store videos: Same as above (store images)
+		
+7. view your eportfolio: Show all sections (one section at a time, but users could switch using the navbar) and the modules in each section.
+	
+	1. download content: Users can download all the images, files, audios and videos.
+
+	2 different layout: The layout of content in each “Module” will vary depending on the content. For example, if a “Module” only has an image, then this image will be centered.
+
+8. view others’ eportfolio: Users could select and view other users’ eportfolios. (Viewing modes are the same as themselves.)
+ 
+	1 user list: There is a list that contains 10 random users from the database. If the total number of users is less than 10, the list will contain all the users. One user can see the “username” and “number of sections” of other users in the list. He can choose a user and view his eportfolio. Users can also grab another 10 random users again by clicking the button.
+	
+	2 search another user: Users can search for other users by username. Then he can view that user’s eportfolio.
+ 
+9. forget password: The user can reset his password through the username and email address if he forgets his password. Firstly, the user enters his username. Then the office mailbox will send a verification code to the user’s mailbox. User needs to enter that verification code and a new password twice. If the verification code is correct and the two passwords entered are the same, the password is reset successfully. The new password needs to be different from the old one or a warning will raise.
+ 
+10. generate URL: Get the URL of the user's eportfolio and automatically save to the clipboard.
+ 
+11. default eportfolio: There are four default “Sections” in a new user’s eportfolio which are “about me”, “contact me”, “education background” and “internship experience”. Each of these “Sections” has a default “Module” with some default content. 
 
 
 ## Changelog
