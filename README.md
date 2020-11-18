@@ -34,17 +34,17 @@ Sprint 1
  
 6. edit your eportfolio: There are several “Sections” under the user's eportfolio and several “Modules” under each “Section”. Users can add, delete and edit “Sections” and the “Modules” in the section.
  
-	1 add Section: Add a new empty “Section” with name “new section”
+	1. add Section: Add a new empty “Section” with name “new section”
 	
-	2 delete Section: Delete one specific section
+	2. delete Section: Delete one specific section
 
-	3 edit Section: User can change the name of “Section”, add or delete the modules in that section
+	3. edit Section: User can change the name of “Section”, add or delete the modules in that section
 
-	4 add Module: Add a new empty “Module” with the name “new module” in one section.
+	4. add Module: Add a new empty “Module” with the name “new module” in one section.
  
-	5 delete Module: Delete one specific module in one section
+	5. delete Module: Delete one specific module in one section
  
-	6 edit Module: Each “Module” has a module title, time, textbox, image, file, audio and video. These contents are all optional and users are not required to complete all of them. Users can edit (including delete) all of them. 
+	6. edit Module: Each “Module” has a module title, time, textbox, image, file, audio and video. These contents are all optional and users are not required to complete all of them. Users can edit (including delete) all of them. 
 	
 	6.1 store text: Users can edit text in a module, including editing the text format such as bold, italic, and creating lists or tables.
 		
@@ -64,9 +64,9 @@ Sprint 1
 
 8. view others’ eportfolio: Users could select and view other users’ eportfolios. (Viewing modes are the same as themselves.)
  
-	1 user list: There is a list that contains 10 random users from the database. If the total number of users is less than 10, the list will contain all the users. One user can see the “username” and “number of sections” of other users in the list. He can choose a user and view his eportfolio. Users can also grab another 10 random users again by clicking the button.
+	1. user list: There is a list that contains 10 random users from the database. If the total number of users is less than 10, the list will contain all the users. One user can see the “username” and “number of sections” of other users in the list. He can choose a user and view his eportfolio. Users can also grab another 10 random users again by clicking the button.
 	
-	2 search another user: Users can search for other users by username. Then he can view that user’s eportfolio.
+	2. search another user: Users can search for other users by username. Then he can view that user’s eportfolio.
  
 9. forget password: The user can reset his password through the username and email address if he forgets his password. Firstly, the user enters his username. Then the office mailbox will send a verification code to the user’s mailbox. User needs to enter that verification code and a new password twice. If the verification code is correct and the two passwords entered are the same, the password is reset successfully. The new password needs to be different from the old one or a warning will raise.
  
