@@ -214,11 +214,12 @@ Password:ghs12345
 	- Run back end
 
 		FLASK_APP = eportfolio.py
+		
 		flask run --host=172.30.162.215
 		
 	- Run front end
 		
-		- “npm start”
+		npm start
 
 - To deploy the database
 
