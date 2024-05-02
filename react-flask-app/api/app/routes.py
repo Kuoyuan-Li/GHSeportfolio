@@ -12,8 +12,9 @@ import random
 import uuid
 from flask_mail import Message
 
-db.create_all()
-db.session.commit()
+with app.app_context():
+    db.create_all()
+    db.session.commit()
 client = app.test_client()
 
 
@@ -21,7 +22,6 @@ client = app.test_client()
 def login():
     username = request.get_json()['username']
     password = request.get_json()['password']
-
     # Select user with his username in the database, and set to user
     user = User.query.filter_by(username=username).first()
     # if the username is not found in db or password incorrect, flash prompt and redirect to login
@@ -42,7 +42,9 @@ def register():
     email = request.get_json()['email']
     password = request.get_json()['password']
     password2 = request.get_json()['password2']
-
+    
+    print("receive username:",username)
+    print("receive email:",email)
     # The two passwords are different
     if password != password2:
         return jsonify({"validity": False,
@@ -428,7 +430,7 @@ def download_audio(audio_name):
 
 @app.route('/emailCaptcha', methods=['POST'])
 def email_captcha():
-
+    print("emailCaptcha request received")
     email = request.get_json()['email']
 
     if not email:

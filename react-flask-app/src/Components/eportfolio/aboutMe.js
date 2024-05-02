@@ -65,7 +65,7 @@ class AboutMe extends React.Component {
         fileData.append('user_image',this.state.image)
 		fileData.append('imagename',this.state.image.name)
         
-		fetch ('http://localhost:5000/saveInformation',{
+		fetch ('http://127.0.0.1:5000/saveInformation',{
             mode: 'cors',
             method : 'POST',
 			/*

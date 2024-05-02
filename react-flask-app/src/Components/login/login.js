@@ -29,7 +29,7 @@ export class Login extends React.Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit (e) {
+    async onSubmit (e) {
         e.preventDefault()
 
         if (this.state.username !== '' && this.state.password !== ''){
@@ -39,7 +39,7 @@ export class Login extends React.Component {
             }
             this.setState({message:''})
 
-            fetch ('http://47.115.90.152:5000/login',{
+            await fetch ('http://127.0.0.1:5000/login',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

@@ -34,7 +34,7 @@ export class ForgetPassword extends React.Component {
 	onSendCaptcha(e) {
 		
 		e.preventDefault()
-		fetch ('http://47.115.90.152:5000/emailCaptcha2',{
+		fetch ('http://127.0.0.1:5000/emailCaptcha2',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{
@@ -77,7 +77,7 @@ export class ForgetPassword extends React.Component {
                 password2 : this.state.password2
             }
             this.setState({message:''})
-            fetch ('http://47.115.90.152:5000/forgetPassword',{
+            fetch ('http://127.0.0.1:5000/forgetPassword',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

@@ -33,7 +33,7 @@ class EportfolioEdit extends React.Component {
         }
 
         const userID = localStorage.getItem('userID')
-        await fetch ('http://47.115.90.152:5000/getSections',{
+        await fetch ('http://127.0.0.1:5000/getSections',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -85,7 +85,7 @@ class EportfolioEdit extends React.Component {
         
         const userID = localStorage.getItem('userID')		
 		//fetch api and store in DB: userID, section
-        fetch ('http://47.115.90.152:5000/addSection',{
+        fetch ('http://127.0.0.1:5000/addSection',{
             mode: 'cors',
             method : 'POST',
 			headers :{
@@ -117,7 +117,7 @@ class EportfolioEdit extends React.Component {
             })
         });
         //inform backend delete module: sectionID XXX, moduleID: XXx
-        fetch ('http://47.115.90.152:5000/deleteSection',{
+        fetch ('http://127.0.0.1:5000/deleteSection',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

@@ -54,9 +54,9 @@ class Module extends React.Component{
 	
 	
 	async componentDidMount(){
-        this.setState({image_path : 'http://47.115.90.152:5000/showImage/' + this.state.image_name})
-		this.setState({audio_path : 'http://47.115.90.152:5000/showAudio/' + this.state.audio_name})
-		this.setState({video_path : 'http://47.115.90.152:5000/showVideo/' + this.state.video_name})
+        this.setState({image_path : 'http://127.0.0.1:5000/showImage/' + this.state.image_name})
+		this.setState({audio_path : 'http://127.0.0.1:5000/showAudio/' + this.state.audio_name})
+		this.setState({video_path : 'http://127.0.0.1:5000/showVideo/' + this.state.video_name})
 	}
 	
 
@@ -165,7 +165,7 @@ class Module extends React.Component{
         fileData.append('text',this.state.text)
         
 		this.setState({message: '.'})
-        fetch ('http://47.115.90.152:5000/saveModule',{
+        fetch ('http://127.0.0.1:5000/saveModule',{
             mode: 'cors',
             method : 'POST',
 			/*

@@ -40,7 +40,7 @@ class ResetPassword extends Component {
                 password2 : this.state.password2
             }
             this.setState({message:''})
-            fetch('http://47.115.90.152:5000/resetPassword',{
+            fetch('http://127.0.0.1:5000/resetPassword',{
                 mode: 'cors',
                 method : 'POST',
                 headers :{

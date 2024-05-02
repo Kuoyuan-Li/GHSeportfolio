@@ -21,7 +21,7 @@ class OtherEportfolio extends React.Component {
     }
 
     async componentDidMount(){
-        await fetch ('http://47.115.90.152:5000/getRandomUsers',{
+        await fetch ('http://127.0.0.1:5000/getRandomUsers',{
             mode: 'cors',
             method : 'POST'
         }).then(response => response.json())
@@ -48,7 +48,7 @@ class OtherEportfolio extends React.Component {
         this.setState({ 
             message : ''
         })
-		await fetch ('http://47.115.90.152:5000/getRandomUsers',{
+		await fetch ('http://127.0.0.1:5000/getRandomUsers',{
             mode: 'cors',
             method : 'POST'
         }).then(response => response.json())
@@ -69,7 +69,7 @@ class OtherEportfolio extends React.Component {
 		console.log(this.state.username)
 		e.preventDefault()
 		// url tbd
-		fetch ('http://47.115.90.152:5000/getUser',{
+		fetch ('http://127.0.0.1:5000/getUser',{
             mode: 'cors',
             method : 'POST',
 			headers :{
