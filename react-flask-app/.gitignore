@@ -27,6 +27,8 @@ yarn-error.log*
 __pycache__/
 *.py[cod]
 .idea/
+*.pyc
+
 
 # vscode
 .vscode/
