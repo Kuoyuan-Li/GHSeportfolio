@@ -12,9 +12,9 @@ class Config(object):
     ## local Server
     
     user = 'root'
-    password = '123456'
+    password = environ.get('MYSQL_PASSWORD') or 'default'
     database = 'eportfolio'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/eportfolio'
+    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{user}:{password}@localhost:3306/{database}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     MAIL_SERVER = "smtp.126.com"
